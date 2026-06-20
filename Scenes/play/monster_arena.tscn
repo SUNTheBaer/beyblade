@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://d0l2riuuwn757"]
+
+[ext_resource type="Script" uid="uid://c1revkqdh4owh" path="res://Scenes/beyblade/player_mecha.gd" id="1_btr1k"]
+[ext_resource type="Script" uid="uid://b7svr4j1qssk8" path="res://Scenes/beyblade/cone_collider.gd" id="1_euxl3"]
+[ext_resource type="Material" uid="uid://b5ydu1v1my6g8" path="res://Scenes/beyblade/std_mat.tres" id="1_sgccy"]
+[ext_resource type="Script" uid="uid://cmt55m44iscgb" path="res://Scenes/beyblade/camera_arm.gd" id="3_144ga"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_7tqxq"]
+
+[sub_resource type="Sky" id="Sky_euxl3"]
+sky_material = SubResource("PhysicalSkyMaterial_7tqxq")
+
+[sub_resource type="Environment" id="Environment_btr1k"]
+sky = SubResource("Sky_euxl3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7tqxq"]
+size = Vector2(10000, 10000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_euxl3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7tqxq"]
+top_radius = 1.5
+bottom_radius = 0.1
+
+[sub_resource type="TorusMesh" id="TorusMesh_7tqxq"]
+outer_radius = 1.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_7tqxq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_144ga"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_144ga"]
+size = Vector3(1, 2, 1)
+
+[node name="MonsterArena" type="Node3D" unique_id=1655547708]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=731926578]
+environment = SubResource("Environment_btr1k")
+
+[node name="Ground2" type="Node3D" parent="." unique_id=787694431]
+
+[node name="Ground" type="MeshInstance3D" parent="Ground2" unique_id=1349192892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.024332047, -0.007950783, -0.0017318726)
+mesh = SubResource("PlaneMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground2" unique_id=1416417232]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D" unique_id=104877101]
+shape = SubResource("WorldBoundaryShape3D_euxl3")
+debug_color = Color(0.84735996, 0.0009660804, 0.9075501, 0.41960785)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=324239537]
+transform = Transform3D(-0.07612742, -0.9970982, 0, 0.8472981, -0.06469034, 0.5271635, -0.5256337, 0.040131588, 0.84976393, 1.3187523, 7.8256655, 0)
+shadow_enabled = true
+
+[node name="CameraArm" type="Node3D" parent="." unique_id=149027115 node_paths=PackedStringArray("mecha", "camera")]
+script = ExtResource("3_144ga")
+mecha = NodePath("../Player")
+camera = NodePath("Camera3D")
+metadata/_custom_type_script = "uid://cmt55m44iscgb"
+
+[node name="Camera3D" type="Camera3D" parent="CameraArm" unique_id=631356464]
+transform = Transform3D(1, 0, 0, 0, 0.975791, 0.21870525, 0, -0.21870525, 0.975791, 0, 3.8625278, 6)
+fov = 45.0
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=919527172 node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_btr1k")
+angular_acceleration = 0.25
+linear_acceleration = 4.0
+axis_acceleration = 0.15
+visuals = NodePath("TopContents")
+
+[node name="ConeCollider" type="Node3D" parent="Player" unique_id=936440817]
+script = ExtResource("1_euxl3")
+metadata/_custom_type_script = "uid://b7svr4j1qssk8"
+
+[node name="TopContents" type="Node3D" parent="Player" unique_id=1621505992]
+
+[node name="Top" type="MeshInstance3D" parent="Player/TopContents" unique_id=2073819913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="Torus" type="MeshInstance3D" parent="Player/TopContents" unique_id=1579309893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("TorusMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="Box" type="MeshInstance3D" parent="Player/TopContents" unique_id=247416202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="Pills" type="Node3D" parent="Player/TopContents" unique_id=741869032]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/TopContents/Pills" unique_id=637528919]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2, 0)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/TopContents/Pills" unique_id=555513633]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 2, 1.5)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/TopContents/Pills" unique_id=1936622781]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.5, 2, 0)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Player/TopContents/Pills" unique_id=1209013567]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 2, -1.5)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1393119320]
+transform = Transform3D(0.95425075, 0, -0.29900748, 0, 1, 0, 0.29900748, 0, 0.95425075, -6.637, 1, -4.105)
+mesh = SubResource("BoxMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=633910991]
+transform = Transform3D(0.9759091, 0, 0.21817732, 0, 1, 0, -0.21817732, 0, 0.9759091, 7.363, 1, 3.895)
+mesh = SubResource("BoxMesh_144ga")
+surface_material_override/0 = ExtResource("1_sgccy")
