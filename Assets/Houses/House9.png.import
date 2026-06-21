@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lc47fsi60pep"
-path="res://.godot/imported/left_arrow.png-b58ed24167673db9cad24254dec6e137.ctex"
+uid="uid://betrq842af8ve"
+path="res://.godot/imported/House9.png-fa8957d5d50060f423e3aeaa499f8070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/left_arrow.png"
-dest_files=["res://.godot/imported/left_arrow.png-b58ed24167673db9cad24254dec6e137.ctex"]
+source_file="res://Assets/Houses/House9.png"
+dest_files=["res://.godot/imported/House9.png-fa8957d5d50060f423e3aeaa499f8070.ctex"]
 
 [params]
 

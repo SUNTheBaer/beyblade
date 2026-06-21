@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dnwm4hilsyqj0"]
 
 [ext_resource type="Script" uid="uid://dv6r72ryldsii" path="res://Scripts/sequence_minigame.gd" id="1_3bl7a"]
-[ext_resource type="Texture2D" uid="uid://cod5h0bf4htbs" path="res://Assets/up_arrow.png" id="2_3bl7a"]
-[ext_resource type="Texture2D" uid="uid://cercc0m2x0vnc" path="res://Assets/down_arrow.png" id="2_ulsc8"]
-[ext_resource type="Texture2D" uid="uid://lc47fsi60pep" path="res://Assets/left_arrow.png" id="3_dw5yf"]
-[ext_resource type="Texture2D" uid="uid://tm02o1do6iyx" path="res://Assets/right_arrow.png" id="4_bu1ro"]
+[ext_resource type="Texture2D" uid="uid://cod5h0bf4htbs" path="res://Assets/Minigame/up_arrow.png" id="2_3bl7a"]
+[ext_resource type="Texture2D" uid="uid://cercc0m2x0vnc" path="res://Assets/Minigame/down_arrow.png" id="2_ulsc8"]
+[ext_resource type="Texture2D" uid="uid://lc47fsi60pep" path="res://Assets/Minigame/left_arrow.png" id="3_dw5yf"]
+[ext_resource type="Texture2D" uid="uid://tm02o1do6iyx" path="res://Assets/Minigame/right_arrow.png" id="4_bu1ro"]
 
 [node name="SequenceMinigame" type="Control" unique_id=398507986]
 layout_mode = 3

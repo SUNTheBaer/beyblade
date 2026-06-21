@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://cdh84l8mtuwak"]
 
 [ext_resource type="Script" uid="uid://dajb451y4bs35" path="res://Scripts/switches_minigame.gd" id="1_3wt5c"]
-[ext_resource type="Texture2D" uid="uid://341otsiixyjj" path="res://Assets/up_switch.png" id="2_3wt5c"]
-[ext_resource type="Texture2D" uid="uid://b4w58nyjkbast" path="res://Assets/green_light.png" id="2_qjafu"]
+[ext_resource type="Texture2D" uid="uid://341otsiixyjj" path="res://Assets/Minigame/up_switch.png" id="2_3wt5c"]
+[ext_resource type="Texture2D" uid="uid://b4w58nyjkbast" path="res://Assets/Minigame/green_light.png" id="2_qjafu"]
 [ext_resource type="Script" uid="uid://ec3enbe05g4q" path="res://Scenes/switch.gd" id="3_qcsqf"]
-[ext_resource type="Texture2D" uid="uid://bwxpqns36fd13" path="res://Assets/neutral_switch.png" id="4_qcsqf"]
-[ext_resource type="Texture2D" uid="uid://da3lg8x747gey" path="res://Assets/down_switch.png" id="6_7i516"]
-[ext_resource type="Texture2D" uid="uid://c2sm48dotrauv" path="res://Assets/red_light.png" id="7_d32cn"]
+[ext_resource type="Texture2D" uid="uid://bwxpqns36fd13" path="res://Assets/Minigame/neutral_switch.png" id="4_qcsqf"]
+[ext_resource type="Texture2D" uid="uid://da3lg8x747gey" path="res://Assets/Minigame/down_switch.png" id="6_7i516"]
+[ext_resource type="Texture2D" uid="uid://c2sm48dotrauv" path="res://Assets/Minigame/red_light.png" id="7_d32cn"]
 
 [node name="SwitchesMinigame" type="Control" unique_id=398507986]
 layout_mode = 3

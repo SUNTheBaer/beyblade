@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://341otsiixyjj"
-path="res://.godot/imported/up_switch.png-613a12089845b72cb4f2ebfd446f0b37.ctex"
+uid="uid://c2sm48dotrauv"
+path="res://.godot/imported/red_light.png-fc0730ed797944216cd15303010e935a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/up_switch.png"
-dest_files=["res://.godot/imported/up_switch.png-613a12089845b72cb4f2ebfd446f0b37.ctex"]
+source_file="res://Assets/Minigame/red_light.png"
+dest_files=["res://.godot/imported/red_light.png-fc0730ed797944216cd15303010e935a.ctex"]
 
 [params]
 
