@@ -8,7 +8,7 @@ extends Node3D
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("switch_view"):
+	if Input.is_action_just_pressed("mecha_switch_view"):
 		top_down = not top_down
 
 
