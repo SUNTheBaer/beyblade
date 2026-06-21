@@ -1,65 +1,104 @@
 class_name PlayerMecha
 extends CharacterBody3D
 
-static var GRAVITY: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") \
-	* ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+static var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@export_group("Axis Rotation")
 @export var angular_acceleration := PI / 32
-@export var angular_velocity := 0.0
+@export var angular_velocity := TAU
 @export var angular_position := 0.0
 
+@export var launch_acceleration := 0.0015
+
 @export var linear_acceleration := 3.0
+@export var axis_acceleration := 0.25
+@export var precession := 0.0
 
-@export var up_vector := Vector3.UP
-
-@export var axis_acceleration: float = 0.025
-@export var axis_momentum: float = 0.0
-@export var axis_angle: float
-
-@export var downward_velocity: Vector3
+@export var linear_velocity: Vector3
+@export var downward_velocity: float
 
 @export_group("Internal")
 @export var visuals: Node3D
+@export var ragdoll_self: PackedScene
+
+@export var angular_velocity_real: float
+@export var precession_real: float
+
+
+func _ready() -> void:
+	linear_velocity = Vector3.FORWARD * 6.0
+	EntityManager.subscribe(self, 16.0)
 
 
 func _physics_process(dt: float) -> void:
-	velocity *= 0.99
+	print(linear_velocity)
+	
+	if is_zero_approx(global_position.y) and linear_velocity.length() > 1.0:
+		linear_velocity *= 0.99
 	if Input.is_action_pressed("mecha_forward"):
-		velocity += Vector3.FORWARD.rotated(Vector3.UP, axis_angle) * dt * linear_acceleration
+		linear_velocity += linear_velocity.normalized() * dt * linear_acceleration
 	
-	downward_velocity += GRAVITY * dt
+	linear_velocity = linear_velocity.rotated(Vector3.UP, precession_real / (18 * TAU))
+	
+	if Input.is_action_pressed("mecha_launch"):
+		downward_velocity += launch_acceleration * dt
+	else:
+		downward_velocity += -GRAVITY * dt
 	angular_velocity += angular_acceleration / (1.0 + angular_velocity) * dt
-	angular_position += angular_velocity * dt
+	angular_position += angular_velocity_real * dt
 	
-	axis_momentum *= 0.99
-	if Input.is_action_pressed("mecha_tilt_left"):
-		axis_momentum = minf(axis_momentum + velocity.length() * dt * axis_acceleration, PI / 2)
-	if Input.is_action_pressed("mecha_tilt_right"):
-		axis_momentum = maxf(axis_momentum - velocity.length() * dt * axis_acceleration, -PI / 2)
+	precession *= 0.995
 	
-	axis_angle += axis_momentum * dt
+	if is_zero_approx(global_position.y):
+		if Input.is_action_pressed("mecha_tilt_left"):
+			precession = precession + velocity.length() * dt * axis_acceleration
+		if Input.is_action_pressed("mecha_tilt_right"):
+			precession = precession - velocity.length() * dt * axis_acceleration
 	
-	print(-axis_momentum / TAU)
 	global_transform = Transform3D.IDENTITY \
 		.looking_at(velocity, Vector3.UP) \
-		.rotated_local(Vector3.FORWARD, -axis_momentum / TAU) \
+		.rotated_local(Vector3.FORWARD, -precession_real / PI) \
+		.rotated_local(Vector3.RIGHT, -sqrt(sqrt(velocity.length())) / TAU) \
 		.translated(global_position)
 	
 	visuals.transform = Transform3D.IDENTITY.rotated(Vector3.UP, angular_position)
 	
-	move_and_slide()
-
-	"""
-	var collision := move_and_collide(downward_velocity, true)
-	if null == collision:
-		global_position += downward_velocity
+	var collision := move_and_collide(velocity * dt)
+	if null != collision:
+		for i in collision.get_collision_count():
+			if collision.get_collider(i) is Monster:
+				angular_velocity = maxf(angular_velocity - velocity.length() / PI, 0.0)
+				ImpactManager.create_impact(velocity.length())
+				var n := collision.get_normal(i)
+				var real_n := Vector3(n.x, 0.0, n.z).normalized()
+				print("REAL_N", real_n)
+				linear_velocity = linear_velocity.bounce(real_n)
+	
+	global_position.y += downward_velocity
+	if global_position.y < 0.0:
+		global_position.y = 0.0
+		downward_velocity = 0.0
+	
+	velocity = lerp(velocity, linear_velocity, 0.5)
+	angular_velocity_real = lerp(angular_velocity_real, angular_velocity, 0.05)
+	precession_real = lerp(precession_real, precession, 0.05)
+	
+	if angular_velocity_real <= 0.0:
+		_swap_with_ragdoll()
 		return
 	
-	print(collision.get_remainder().y)
-	
-	global_position += downward_velocity * collision.get_remainder()
-	for i in collision.get_collision_count():
-		if collision.get_normal() != Vector3(0, 1, 0):
-			continue
-		downward_velocity = -downward_velocity * 0.5
-	"""
+	if absf(precession_real) > angular_velocity_real or absf(precession_real) > 1.85:
+		_swap_with_ragdoll()
+		return
+
+
+func _swap_with_ragdoll() -> void:
+	var target := owner
+	var t := global_transform
+	var ragdoll := ragdoll_self.instantiate() as RigidBody3D
+	ragdoll.linear_velocity = linear_velocity + Vector3(randfn(0.0, 0.5), randfn(0.0, 0.5), randfn(0.0, 0.5))
+	ragdoll.angular_velocity = Vector3(0, angular_velocity_real, 0)
+	get_parent_node_3d().remove_child(self)
+	queue_free()
+	target.add_child(ragdoll)
+	ragdoll.global_transform = t

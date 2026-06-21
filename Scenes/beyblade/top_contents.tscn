@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cer1c7r1jiabg"]
+
+[ext_resource type="Material" uid="uid://b5ydu1v1my6g8" path="res://Scenes/beyblade/std_mat.tres" id="1_6ohwy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7tqxq"]
+top_radius = 4.5
+bottom_radius = 0.1
+height = 6.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_7tqxq"]
+inner_radius = 3.0
+outer_radius = 4.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_7tqxq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_144ga"]
+height = 1.5
+
+[node name="TopContents" type="Node3D" unique_id=1166817661]
+
+[node name="Top" type="MeshInstance3D" parent="." unique_id=1044386798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("CylinderMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="Torus" type="MeshInstance3D" parent="." unique_id=824038619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mesh = SubResource("TorusMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="Box" type="MeshInstance3D" parent="." unique_id=190197727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+mesh = SubResource("BoxMesh_7tqxq")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="Pills" type="Node3D" parent="." unique_id=856162003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Pills" unique_id=2026488822]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 2, 1.5)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Pills" unique_id=1453437790]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.5, 2, 0)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Pills" unique_id=2049401938]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 2, -1.5)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_6ohwy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pills" unique_id=1951945415]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 2, 0)
+mesh = SubResource("CapsuleMesh_144ga")
+surface_material_override/0 = ExtResource("1_6ohwy")
