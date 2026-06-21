@@ -1,0 +1,270 @@
+[gd_scene format=3 uid="uid://cdh84l8mtuwak"]
+
+[ext_resource type="Script" uid="uid://dajb451y4bs35" path="res://Scripts/switches_minigame.gd" id="1_3wt5c"]
+[ext_resource type="Texture2D" uid="uid://341otsiixyjj" path="res://Assets/Minigame/up_switch.png" id="2_3wt5c"]
+[ext_resource type="Texture2D" uid="uid://b4w58nyjkbast" path="res://Assets/Minigame/green_light.png" id="2_qjafu"]
+[ext_resource type="Script" uid="uid://ec3enbe05g4q" path="res://Scenes/switch.gd" id="3_qcsqf"]
+[ext_resource type="Texture2D" uid="uid://bwxpqns36fd13" path="res://Assets/Minigame/neutral_switch.png" id="4_qcsqf"]
+[ext_resource type="Texture2D" uid="uid://da3lg8x747gey" path="res://Assets/Minigame/down_switch.png" id="6_7i516"]
+[ext_resource type="Texture2D" uid="uid://c2sm48dotrauv" path="res://Assets/Minigame/red_light.png" id="7_d32cn"]
+
+[node name="SwitchesMinigame" type="Control" unique_id=398507986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3wt5c")
+timer_time = 8.0
+metadata/_custom_type_script = "uid://br0fpg8bvduxh"
+
+[node name="TimerText" type="Label" parent="." unique_id=110021635]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -252.0
+offset_top = 50.0
+offset_right = -52.0
+offset_bottom = 117.0
+grow_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Timer"
+horizontal_alignment = 1
+
+[node name="Switches" type="HBoxContainer" parent="." unique_id=1644003294]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Switch1" type="VBoxContainer" parent="Switches" unique_id=562226606]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch1" unique_id=1112843985]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch1" unique_id=992490138]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch1" unique_id=828714124]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch1" unique_id=1432544688]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch2" type="VBoxContainer" parent="Switches" unique_id=1869468192]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch2" unique_id=704216215]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch2" unique_id=1300415309]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch2" unique_id=147824144]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch2" unique_id=1518864080]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch3" type="VBoxContainer" parent="Switches" unique_id=1071461]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch3" unique_id=108710470]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch3" unique_id=905496872]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch3" unique_id=150989917]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch3" unique_id=991514918]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch4" type="VBoxContainer" parent="Switches" unique_id=1927724190]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch4" unique_id=1022235103]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch4" unique_id=517381726]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch4" unique_id=1253564578]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch4" unique_id=896114161]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch5" type="VBoxContainer" parent="Switches" unique_id=108817569]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch5" unique_id=85161948]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch5" unique_id=327451919]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch5" unique_id=88190978]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch5" unique_id=1860247562]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch6" type="VBoxContainer" parent="Switches" unique_id=541672545]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch6" unique_id=1490183650]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch6" unique_id=750812880]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch6" unique_id=831109890]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch6" unique_id=265890391]
+layout_mode = 2
+text = "⬇️"
+
+[node name="Switch7" type="VBoxContainer" parent="Switches" unique_id=1929823555]
+layout_mode = 2
+
+[node name="ResultLight" type="TextureRect" parent="Switches/Switch7" unique_id=627025400]
+layout_mode = 2
+texture = ExtResource("2_qjafu")
+
+[node name="UpButton" type="Button" parent="Switches/Switch7" unique_id=950364039]
+layout_mode = 2
+text = "⬆️"
+
+[node name="Switch" type="TextureRect" parent="Switches/Switch7" unique_id=288411870]
+layout_mode = 2
+texture = ExtResource("2_3wt5c")
+script = ExtResource("3_qcsqf")
+possible_positions = {
+"down": ExtResource("6_7i516"),
+"neutral": ExtResource("4_qcsqf"),
+"up": ExtResource("2_3wt5c")
+}
+possible_results = {
+"green": ExtResource("2_qjafu"),
+"red": ExtResource("7_d32cn")
+}
+
+[node name="DownButton" type="Button" parent="Switches/Switch7" unique_id=179095792]
+layout_mode = 2
+text = "⬇️"
+
+[connection signal="pressed" from="Switches/Switch1/UpButton" to="Switches/Switch1/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch1/DownButton" to="Switches/Switch1/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch2/UpButton" to="Switches/Switch2/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch2/DownButton" to="Switches/Switch2/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch3/UpButton" to="Switches/Switch3/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch3/DownButton" to="Switches/Switch3/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch4/UpButton" to="Switches/Switch4/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch4/DownButton" to="Switches/Switch4/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch5/UpButton" to="Switches/Switch5/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch5/DownButton" to="Switches/Switch5/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch6/UpButton" to="Switches/Switch6/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch6/DownButton" to="Switches/Switch6/Switch" method="_on_down_button_pressed"]
+[connection signal="pressed" from="Switches/Switch7/UpButton" to="Switches/Switch7/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="Switches/Switch7/DownButton" to="Switches/Switch7/Switch" method="_on_down_button_pressed"]
