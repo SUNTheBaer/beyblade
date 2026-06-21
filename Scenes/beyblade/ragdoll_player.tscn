@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://2w5j7i3furux"]
+
+[ext_resource type="Script" uid="uid://ytju246pqejn" path="res://Scenes/beyblade/ragdoll_controller.gd" id="1_puhow"]
+[ext_resource type="PackedScene" uid="uid://cer1c7r1jiabg" path="res://Scenes/beyblade/top_contents.tscn" id="2_10aor"]
+[ext_resource type="Script" uid="uid://b7svr4j1qssk8" path="res://Scenes/beyblade/cone_collider.gd" id="2_kc03m"]
+
+[node name="RagdollPlayer" type="RigidBody3D" unique_id=75923911]
+gravity_scale = 64.0
+linear_damp = 0.1
+angular_damp = 0.1
+script = ExtResource("1_puhow")
+
+[node name="ConeCollider" type="Node3D" parent="." unique_id=1831704983]
+script = ExtResource("2_kc03m")
+top_radius = 4.5
+height = 6.0
+metadata/_custom_type_script = "uid://b7svr4j1qssk8"
+
+[node name="TopContents" parent="." unique_id=1166817661 instance=ExtResource("2_10aor")]
