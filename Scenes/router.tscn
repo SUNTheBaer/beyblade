@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://b7qa0lc3u1q8b"]
 
 [ext_resource type="Script" uid="uid://dddah8nsucc7s" path="res://Scenes/router.gd" id="1_2nkap"]
+[ext_resource type="PackedScene" uid="uid://d0l2riuuwn757" path="res://Scenes/play/monster_arena.tscn" id="2_cavi2"]
+[ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/sequence_minigame.tscn" id="3_5oy8s"]
 
-[node name="Router" type="Node" unique_id=678024002]
+[node name="Router" type="Control" unique_id=1352145293]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="Router" type="Node" parent="." unique_id=843824816]
+[node name="Router" type="Node" parent="." unique_id=1292971011]
 script = ExtResource("1_2nkap")
+battle_scene = ExtResource("2_cavi2")
+minigame_scene = ExtResource("3_5oy8s")
 metadata/_custom_type_script = "uid://dddah8nsucc7s"
