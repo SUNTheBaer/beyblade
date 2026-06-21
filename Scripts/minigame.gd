@@ -15,6 +15,8 @@ func _ready() -> void:
 
 func finish_minigame(result: float):
 	emit_signal("minigame_complete", result)
+	# Result screen before removing nodes
+	queue_free()
 
 func _on_timer_timeout():
 	finish_minigame(0.0)

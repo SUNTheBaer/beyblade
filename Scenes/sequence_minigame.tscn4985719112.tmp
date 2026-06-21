@@ -20,7 +20,6 @@ arrow_dict = {
 "right": ExtResource("4_bu1ro"),
 "up": ExtResource("2_3bl7a")
 }
-timer_time = 5.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
 
 [node name="TimerText" type="Label" parent="." unique_id=110021635]

@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://dajb451y4bs35" path="res://Scripts/switches_minigame.gd" id="1_3wt5c"]
 [ext_resource type="Texture2D" uid="uid://341otsiixyjj" path="res://Assets/Minigame/up_switch.png" id="2_3wt5c"]
 [ext_resource type="Texture2D" uid="uid://b4w58nyjkbast" path="res://Assets/Minigame/green_light.png" id="2_qjafu"]
-[ext_resource type="Script" uid="uid://ec3enbe05g4q" path="res://Scenes/switch.gd" id="3_qcsqf"]
+[ext_resource type="Script" uid="uid://ec3enbe05g4q" path="res://Scripts/switch.gd" id="3_qcsqf"]
 [ext_resource type="Texture2D" uid="uid://bwxpqns36fd13" path="res://Assets/Minigame/neutral_switch.png" id="4_qcsqf"]
 [ext_resource type="Texture2D" uid="uid://da3lg8x747gey" path="res://Assets/Minigame/down_switch.png" id="6_7i516"]
 [ext_resource type="Texture2D" uid="uid://c2sm48dotrauv" path="res://Assets/Minigame/red_light.png" id="7_d32cn"]
 
-[node name="SwitchesMinigame" type="Control" unique_id=398507986]
+[node name="SwitchesMinigame" type="Control" unique_id=398507986 node_paths=PackedStringArray("switches")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3wt5c")
+switches = [NodePath("Switches/Switch1/Switch"), NodePath("Switches/Switch2/Switch"), NodePath("Switches/Switch3/Switch"), NodePath("Switches/Switch4/Switch"), NodePath("Switches/Switch5/Switch"), NodePath("Switches/Switch6/Switch"), NodePath("Switches/Switch7/Switch")]
 timer_time = 8.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
 
@@ -255,16 +256,23 @@ layout_mode = 2
 text = "⬇️"
 
 [connection signal="pressed" from="Switches/Switch1/UpButton" to="Switches/Switch1/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch1/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch1/DownButton" to="Switches/Switch1/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch2/UpButton" to="Switches/Switch2/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch2/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch2/DownButton" to="Switches/Switch2/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch3/UpButton" to="Switches/Switch3/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch3/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch3/DownButton" to="Switches/Switch3/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch4/UpButton" to="Switches/Switch4/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch4/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch4/DownButton" to="Switches/Switch4/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch5/UpButton" to="Switches/Switch5/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch5/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch5/DownButton" to="Switches/Switch5/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch6/UpButton" to="Switches/Switch6/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch6/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch6/DownButton" to="Switches/Switch6/Switch" method="_on_down_button_pressed"]
 [connection signal="pressed" from="Switches/Switch7/UpButton" to="Switches/Switch7/Switch" method="_on_up_button_pressed"]
+[connection signal="set_switch_position" from="Switches/Switch7/Switch" to="." method="_on_switch_set_switch_position"]
 [connection signal="pressed" from="Switches/Switch7/DownButton" to="Switches/Switch7/Switch" method="_on_down_button_pressed"]

@@ -1,9 +1,12 @@
 extends Minigame
 
 @onready var full_sequence: HBoxContainer = %FullSequence
+@onready var timer_text: Label = %TimerText
+
+@export var arrow_dict = {}
 
 var sequence_elements: Array[Node]
-@export var arrow_textures: Array[CompressedTexture2D] = []
+var sequence_keys: Array[String] = []
 
 const WRONG_COLOR: Color = Color(Color.FIREBRICK, 0.5)
 const CORRECT_COLOR: Color = Color(Color.FOREST_GREEN, 0.5)
@@ -12,7 +15,30 @@ func _ready() -> void:
 	super._ready()
 	sequence_elements = full_sequence.get_children() as Array[Node]
 	for element in sequence_elements:
-		element.texture = arrow_textures.pick_random()
+		var random_arrow_key = arrow_dict.keys().pick_random() 
+		sequence_keys.append(random_arrow_key)
+		element.texture = arrow_dict[random_arrow_key]
 
-func _physics_process(delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	timer_text.text = "%.2f" % timer.time_left
+	
+	if Input.is_action_just_pressed("up"):
+		_compare_input_to_sequence("up")
+	elif Input.is_action_just_pressed("down"):
+		_compare_input_to_sequence("down")
+	elif Input.is_action_just_pressed("left"):
+		_compare_input_to_sequence("left")
+	elif Input.is_action_just_pressed("right"):
+		_compare_input_to_sequence("right")
+
+func _compare_input_to_sequence(input: String) -> void:
+	var current_key = sequence_keys.pop_front()
+	var current_element = sequence_elements.pop_front()
+	if current_key == input:
+		(current_element.get_child(0) as ColorRect).color = CORRECT_COLOR
+		if sequence_keys.is_empty() and sequence_elements.is_empty():
+			finish_minigame(1.0)
+	else:
+		(current_element.get_child(0) as ColorRect).color = WRONG_COLOR
+		finish_minigame(0.0)
+	
