@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://dnwm4hilsyqj0"]
+
+[ext_resource type="Script" uid="uid://dv6r72ryldsii" path="res://Scripts/sequence_minigame.gd" id="1_3bl7a"]
+[ext_resource type="Texture2D" uid="uid://cod5h0bf4htbs" path="res://Assets/up_arrow.png" id="2_3bl7a"]
+[ext_resource type="Texture2D" uid="uid://cercc0m2x0vnc" path="res://Assets/down_arrow.png" id="2_ulsc8"]
+[ext_resource type="Texture2D" uid="uid://lc47fsi60pep" path="res://Assets/left_arrow.png" id="3_dw5yf"]
+[ext_resource type="Texture2D" uid="uid://tm02o1do6iyx" path="res://Assets/right_arrow.png" id="4_bu1ro"]
+
+[node name="SequenceMinigame" type="Control" unique_id=398507986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3bl7a")
+arrow_textures = Array[CompressedTexture2D]([ExtResource("2_ulsc8"), ExtResource("3_dw5yf"), ExtResource("4_bu1ro"), ExtResource("2_3bl7a")])
+timer_time = null
+metadata/_custom_type_script = "uid://br0fpg8bvduxh"
+
+[node name="TimerText" type="Label" parent="." unique_id=110021635]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -252.0
+offset_top = 50.0
+offset_right = -52.0
+offset_bottom = 117.0
+grow_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Timer"
+horizontal_alignment = 1
+
+[node name="FullSequence" type="HBoxContainer" parent="." unique_id=1135499226]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SequenceElement1" type="TextureRect" parent="FullSequence" unique_id=695133301]
+layout_mode = 2
+texture = ExtResource("2_3bl7a")
+
+[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement1" unique_id=735410804]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.79607844, 0, 0.39607844)
+
+[node name="SequenceElement2" type="TextureRect" parent="FullSequence" unique_id=1300602072]
+layout_mode = 2
+texture = ExtResource("2_3bl7a")
+
+[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement2" unique_id=485972290]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.79607844, 0, 0.39607844)
+
+[node name="SequenceElement3" type="TextureRect" parent="FullSequence" unique_id=346154221]
+layout_mode = 2
+texture = ExtResource("2_3bl7a")
+
+[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement3" unique_id=527113028]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.79607844, 0, 0.39607844)
+
+[node name="SequenceElement4" type="TextureRect" parent="FullSequence" unique_id=1105806217]
+layout_mode = 2
+texture = ExtResource("2_3bl7a")
+
+[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement4" unique_id=359557890]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.79607844, 0, 0.39607844)
+
+[node name="SequenceElement5" type="TextureRect" parent="FullSequence" unique_id=1598613659]
+layout_mode = 2
+texture = ExtResource("2_3bl7a")
+
+[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement5" unique_id=655729998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.79607844, 0, 0.39607844)

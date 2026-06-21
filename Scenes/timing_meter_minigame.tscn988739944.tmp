@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bvl6dyovf8ybl"]
+
+[ext_resource type="Script" uid="uid://b5v7gecfh2vp7" path="res://Scripts/timing_meter_minigame.gd" id="1_1gkby"]
+
+[node name="TimingMeterMinigame" type="Control" unique_id=398507986]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1gkby")
+select_bar_velocity = 500.0
+metadata/_custom_type_script = "uid://br0fpg8bvduxh"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1359173601]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerText" type="Label" parent="VBoxContainer" unique_id=110021635]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Timer"
+horizontal_alignment = 1
+
+[node name="TimingMeter" type="ColorRect" parent="VBoxContainer" unique_id=1624424343]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.49354547, 0.49354553, 0.49354553, 1)
+
+[node name="TargetBar" type="ColorRect" parent="VBoxContainer/TimingMeter" unique_id=566259492]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8390404, 0.1616556, 0.175082, 1)
+
+[node name="SelectBar" type="ColorRect" parent="VBoxContainer/TimingMeter" unique_id=1307162024]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -27.0
+offset_right = 2.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1628688, 0.8243146, 0, 1)
