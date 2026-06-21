@@ -31,8 +31,6 @@ func _ready() -> void:
 
 
 func _physics_process(dt: float) -> void:
-	print(linear_velocity)
-	
 	if is_zero_approx(global_position.y) and linear_velocity.length() > 1.0:
 		linear_velocity *= 0.99
 	if Input.is_action_pressed("mecha_forward"):
@@ -71,7 +69,6 @@ func _physics_process(dt: float) -> void:
 				ImpactManager.create_impact(velocity.length())
 				var n := collision.get_normal(i)
 				var real_n := Vector3(n.x, 0.0, n.z).normalized()
-				print("REAL_N", real_n)
 				linear_velocity = linear_velocity.bounce(real_n)
 	
 	global_position.y += downward_velocity
