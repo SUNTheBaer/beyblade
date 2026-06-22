@@ -12,7 +12,7 @@ config_version=5
 
 config/name="beyblade"
 run/main_scene="uid://b7qa0lc3u1q8b"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]

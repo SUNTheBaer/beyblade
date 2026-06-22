@@ -1,4 +1,7 @@
+class_name Switch
 extends TextureRect
+
+signal set_switch_position
 
 @onready var result_light: TextureRect = $"../ResultLight"
 @onready var up_button: Button = $"../UpButton"
@@ -8,18 +11,14 @@ extends TextureRect
 @export var possible_results = {}
 var starting_position_key: String
 var correct_position_key: String
+var correct_position_bool: bool
 var current_position: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	starting_position_key = possible_positions.keys().pick_random()
-	current_position = starting_position_key
 	correct_position_key = possible_positions.keys().pick_random()
-	texture = possible_positions[starting_position_key]
-	if current_position == correct_position_key:
-		result_light.texture = possible_results["green"]
-	else:
-		result_light.texture = possible_results["red"]
+	_set_switch_position(starting_position_key)
 
 func _on_up_button_pressed() -> void:
 	match current_position:
@@ -40,8 +39,10 @@ func _set_switch_position(position: String) -> void:
 	texture = possible_positions[position]
 	if current_position == correct_position_key:
 		result_light.texture = possible_results["green"]
+		correct_position_bool = true
 	else:
 		result_light.texture = possible_results["red"]
+		correct_position_bool = false
 	match position:
 		"up":
 			up_button.disabled = true
@@ -50,3 +51,4 @@ func _set_switch_position(position: String) -> void:
 			down_button.disabled = false
 		"down":
 			down_button.disabled = true
+	emit_signal("set_switch_position")
