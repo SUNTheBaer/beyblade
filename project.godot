@@ -12,13 +12,18 @@ config_version=5
 
 config/name="beyblade"
 run/main_scene="uid://b7qa0lc3u1q8b"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EntityManager="*uid://c5ibc85uiyhet"
 ImpactManager="*uid://cet7xhqaq2ty7"
+
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=1080
 
 [input]
 
