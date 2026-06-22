@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bqbyxguo7ltbt"]
+
+[ext_resource type="Texture2D" uid="uid://5gd1pkta35i6" path="res://Assets/Progress bars/Velocity under.png" id="1_q7pk6"]
+[ext_resource type="Texture2D" uid="uid://cj2u71ly8c6y6" path="res://Assets/Progress bars/Velocity progress.png" id="2_m78vo"]
+[ext_resource type="Texture2D" uid="uid://b6yeo7d2lqpx1" path="res://Assets/Progress bars/Mini_under.png" id="3_smcll"]
+[ext_resource type="Texture2D" uid="uid://jb5acsvif2tj" path="res://Assets/Progress bars/Minigame progress.png" id="4_ryf15"]
+[ext_resource type="Texture2D" uid="uid://dfsevdk52r3q" path="res://Assets/UI.png" id="5_mmixe"]
+[ext_resource type="Texture2D" uid="uid://6g5w3ll1u7v0" path="res://Assets/Buttons/Pause button.png" id="6_smcll"]
+[ext_resource type="Texture2D" uid="uid://bj7yg28tmo1i4" path="res://Assets/Buttons/Resume button.png" id="7_ryf15"]
+
+[node name="UI" type="Control" unique_id=1038746353]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=40228864]
+layout_mode = 0
+offset_top = 833.0
+offset_right = 431.0
+offset_bottom = 1072.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1716834322]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 867.0
+offset_right = 963.0
+offset_bottom = 1072.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=230779907]
+layout_mode = 0
+offset_left = 1005.0
+offset_top = 815.0
+offset_right = 1435.0
+offset_bottom = 1072.0
+color = Color(0, 0, 0, 1)
+
+[node name="VelocityBar" type="TextureProgressBar" parent="." unique_id=1936611139]
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 78.0
+value = 67.0
+texture_under = ExtResource("1_q7pk6")
+texture_progress = ExtResource("2_m78vo")
+
+[node name="MinigameBar" type="TextureProgressBar" parent="." unique_id=85492641]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 840.0
+offset_right = 1006.0
+offset_bottom = 1056.0
+value = 25.0
+fill_mode = 3
+texture_under = ExtResource("3_smcll")
+texture_progress = ExtResource("4_ryf15")
+
+[node name="Frame" type="TextureRect" parent="." unique_id=1806874882]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_mmixe")
+
+[node name="PauseDim" type="ColorRect" parent="." unique_id=479073634]
+visible = false
+layout_mode = 0
+offset_right = 1471.0
+offset_bottom = 1105.0
+color = Color(0, 0, 0, 0.45882353)
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1490881372]
+layout_mode = 0
+offset_left = 1372.0
+offset_top = 6.0
+offset_right = 1432.0
+offset_bottom = 66.0
+texture_normal = ExtResource("6_smcll")
+texture_pressed = ExtResource("7_ryf15")
