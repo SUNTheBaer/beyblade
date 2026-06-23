@@ -10,4 +10,5 @@ texture_filter = 1
 texture = ExtResource("1_kji61")
 
 [node name="Top" type="Sprite2D" parent="." unique_id=156768074]
+position = Vector2(26, -4)
 texture = ExtResource("2_dlvf5")

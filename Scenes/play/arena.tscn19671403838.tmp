@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c1b4a48fb4sg0"]
+
+[ext_resource type="PackedScene" uid="uid://c7smi24o76y5g" path="res://Scenes/player/player_mech.tscn" id="1_8ndor"]
+[ext_resource type="PackedScene" uid="uid://dnh5rp55g6fym" path="res://Scenes/player/camera_controller.tscn" id="2_qe2ea"]
+[ext_resource type="PackedScene" uid="uid://cedb32p8srw2t" path="res://Scenes/play/skyscraper.tscn" id="3_4x7ej"]
+[ext_resource type="TileSet" uid="uid://s4sjfrai4ovt" path="res://Scenes/play/cityscape_tileset.tres" id="3_dnwwo"]
+[ext_resource type="Script" uid="uid://dhji8hvmkbpfv" path="res://Scenes/play/random_cityscape.gd" id="4_2qg40"]
+[ext_resource type="Texture2D" uid="uid://dfsevdk52r3q" path="res://Assets/UI.png" id="6_2ux56"]
+[ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="7_mche8"]
+[ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="8_26wnd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
+radius = 120.0
+height = 640.0
+
+[node name="Arena" type="Node2D" unique_id=2053573438]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2088551355]
+tile_set = ExtResource("3_dnwwo")
+script = ExtResource("4_2qg40")
+width = 30
+height = 30
+building_scene = ExtResource("3_4x7ej")
+
+[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map") instance=ExtResource("1_8ndor")]
+map = NodePath("../TileMapLayer")
+tilt_acceleration = 0.5
+
+[node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("follow_node") instance=ExtResource("2_qe2ea")]
+follow_node = NodePath("../PlayerMech")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1554159125]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_2ux56")
+expand_mode = 2
+
+[node name="Monster" type="Node2D" parent="." unique_id=1957232234]
+position = Vector2(836, -723)
+rotation = -1.5483657
+
+[node name="Sprite2D" type="Sprite2D" parent="Monster" unique_id=487693795]
+texture = ExtResource("7_mche8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Monster" unique_id=846309350]
+script = ExtResource("8_26wnd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/StaticBody2D" unique_id=1985352788]
+shape = SubResource("CapsuleShape2D_i13qm")

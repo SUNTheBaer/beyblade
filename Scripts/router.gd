@@ -6,6 +6,10 @@ extends Node
 
 
 func _ready() -> void:
+	_route.call_deferred()
+
+
+func _route() -> void:
 	if OS.has_feature("debug_minigame"):
 		get_tree().change_scene_to_packed(minigame_scene)
 	
