@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c7smi24o76y5g"]
+
+[ext_resource type="Script" uid="uid://b2pxcnov7v4c4" path="res://Scenes/player/player_mech.gd" id="1_1jxkn"]
+[ext_resource type="Texture2D" uid="uid://cfvjccth81ykw" path="res://Assets/Beyblade.png" id="2_whpwa"]
+[ext_resource type="Texture2D" uid="uid://cgt1wnq4ebntq" path="res://Assets/Beyblade-hurt.png" id="3_vu0aq"]
+[ext_resource type="Texture2D" uid="uid://cxag80068lyqd" path="res://Assets/Cursor.png" id="4_gqju5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqju5"]
+radius = 128.0
+
+[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "pointer")]
+z_index = 4
+script = ExtResource("1_1jxkn")
+linear_acceleration = 1.0
+linear_velocity = Vector2(1, 0)
+tilt_acceleration = 0.15
+body = NodePath("Body")
+pointer = NodePath("Pointer")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1536957718]
+self_modulate = Color(0, 0, 0, 0.5019608)
+position = Vector2(24, 24)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_whpwa")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1739609277]
+texture = ExtResource("2_whpwa")
+
+[node name="Damage" type="Sprite2D" parent="Body" unique_id=1086640036]
+texture = ExtResource("3_vu0aq")
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=365862665]
+shape = SubResource("CircleShape2D_gqju5")
+
+[node name="Pointer" type="Node2D" parent="." unique_id=2132923722]
+
+[node name="PointerSprite" type="Sprite2D" parent="Pointer" unique_id=745025414]
+position = Vector2(192, 0)
+texture = ExtResource("4_gqju5")

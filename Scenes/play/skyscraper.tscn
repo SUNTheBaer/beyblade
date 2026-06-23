@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cedb32p8srw2t"]
+
+[ext_resource type="Texture2D" uid="uid://26wy07b7yyyw" path="res://Assets/Skyscraper base.png" id="1_2pprx"]
+[ext_resource type="Script" uid="uid://7gthtn5ptx67" path="res://Scenes/play/skyscraper.gd" id="1_sg5sv"]
+[ext_resource type="Texture2D" uid="uid://d3clg1ojj7ngi" path="res://Assets/Skyscraper top.png" id="2_337jk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_337jk"]
+size = Vector2(160, 160)
+
+[node name="Skyscraper" type="Node2D" unique_id=1432227385 node_paths=PackedStringArray("area", "shape")]
+script = ExtResource("1_sg5sv")
+vertical_texture = ExtResource("2_337jk")
+area = NodePath("Area")
+shape = NodePath("Area/CollisionShape2D")
+
+[node name="Base" type="Sprite2D" parent="." unique_id=1352440885]
+texture = ExtResource("1_2pprx")
+
+[node name="Area" type="Area2D" parent="." unique_id=1068313877]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=1653638606]
+shape = SubResource("RectangleShape2D_337jk")

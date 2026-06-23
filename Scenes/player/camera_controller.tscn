@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dnh5rp55g6fym"]
+
+[ext_resource type="Script" uid="uid://fc13xn30b0xn" path="res://Scenes/player/camera_controller.gd" id="1_ovkm4"]
+
+[node name="CameraController" type="Node2D" unique_id=390737956 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_ovkm4")
+camera = NodePath("Camera2D")
+metadata/_custom_type_script = "uid://fc13xn30b0xn"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=119543568]
+zoom = Vector2(0.5, 0.5)

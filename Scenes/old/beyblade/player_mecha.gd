@@ -27,7 +27,6 @@ static var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_grav
 
 func _ready() -> void:
 	linear_velocity = Vector3.FORWARD * 6.0
-	EntityManager.subscribe(self, 16.0)
 
 
 func _physics_process(dt: float) -> void:
