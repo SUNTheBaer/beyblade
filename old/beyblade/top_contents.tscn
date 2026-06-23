@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cer1c7r1jiabg"]
 
-[ext_resource type="Material" uid="uid://b5ydu1v1my6g8" path="res://Scenes/old/beyblade/std_mat.tres" id="1_6ohwy"]
+[ext_resource type="Material" uid="uid://b5ydu1v1my6g8" path="res://old/beyblade/std_mat.tres" id="1_6ohwy"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_7tqxq"]
 top_radius = 4.5

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://domv4bukljbwj"
-path.s3tc="res://.godot/imported/godzilla.jpg-8ba8229301a52bd51d65e333238dc89e.s3tc.ctex"
+uid="uid://bn62ysa60hy68"
+path.s3tc="res://.godot/imported/godzilla2.jpg-d8da4106bc50cd8a1d9deaf146485b82.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Scenes/old/monster/godzilla.jpg"
-dest_files=["res://.godot/imported/godzilla.jpg-8ba8229301a52bd51d65e333238dc89e.s3tc.ctex"]
+source_file="res://old/monster/godzilla2.jpg"
+dest_files=["res://.godot/imported/godzilla2.jpg-d8da4106bc50cd8a1d9deaf146485b82.s3tc.ctex"]
 
 [params]
 

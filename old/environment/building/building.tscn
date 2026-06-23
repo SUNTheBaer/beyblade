@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfqbqk00lsjje"]
 
-[ext_resource type="Script" uid="uid://cyjl2crijmnn6" path="res://Scenes/old/environment/building/building.gd" id="1_0x2wy"]
+[ext_resource type="Script" uid="uid://cyjl2crijmnn6" path="res://old/environment/building/building.gd" id="1_0x2wy"]
 
 [node name="Building" type="Node3D" unique_id=1261910535 node_paths=PackedStringArray("mesh_instance", "collider", "area")]
 script = ExtResource("1_0x2wy")

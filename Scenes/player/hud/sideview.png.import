@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn62ysa60hy68"
-path.s3tc="res://.godot/imported/godzilla2.jpg-5ca3ee9dfc6e406b65bb183d490edc8f.s3tc.ctex"
+uid="uid://qld00opv8r2h"
+path="res://.godot/imported/sideview.png-01f4b77ffa7a5a97249b597328a79306.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/old/monster/godzilla2.jpg"
-dest_files=["res://.godot/imported/godzilla2.jpg-5ca3ee9dfc6e406b65bb183d490edc8f.s3tc.ctex"]
+source_file="res://Scenes/player/hud/sideview.png"
+dest_files=["res://.godot/imported/sideview.png-01f4b77ffa7a5a97249b597328a79306.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
