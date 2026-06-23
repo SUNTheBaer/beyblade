@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://s4sjfrai4ovt" path="res://Scenes/play/cityscape_tileset.tres" id="1_nmfdq"]
 [ext_resource type="Texture2D" uid="uid://cfvjccth81ykw" path="res://Assets/Beyblade.png" id="2_nmfdq"]
 [ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="3_cki1o"]
-[ext_resource type="PackedScene" uid="uid://04a8tpxa87ji" path="res://Scenes/old/environment/skyscraper.tscn" id="4_nmfdq"]
+[ext_resource type="PackedScene" uid="uid://04a8tpxa87ji" path="res://old/environment/skyscraper.tscn" id="4_nmfdq"]
 
 [node name="Map" type="Node2D" unique_id=2097437058]
 texture_filter = 1

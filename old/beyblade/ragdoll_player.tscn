@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://2w5j7i3furux"]
 
-[ext_resource type="Script" uid="uid://ytju246pqejn" path="res://Scenes/old/beyblade/ragdoll_controller.gd" id="1_puhow"]
-[ext_resource type="PackedScene" uid="uid://cer1c7r1jiabg" path="res://Scenes/old/beyblade/top_contents.tscn" id="2_10aor"]
-[ext_resource type="Script" uid="uid://b7svr4j1qssk8" path="res://Scenes/old/beyblade/cone_collider.gd" id="2_kc03m"]
+[ext_resource type="Script" uid="uid://ytju246pqejn" path="res://old/beyblade/ragdoll_controller.gd" id="1_puhow"]
+[ext_resource type="PackedScene" uid="uid://cer1c7r1jiabg" path="res://old/beyblade/top_contents.tscn" id="2_10aor"]
+[ext_resource type="Script" uid="uid://b7svr4j1qssk8" path="res://old/beyblade/cone_collider.gd" id="2_kc03m"]
 
 [node name="RagdollPlayer" type="RigidBody3D" unique_id=75923911]
 gravity_scale = 64.0

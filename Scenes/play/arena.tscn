@@ -6,8 +6,13 @@
 [ext_resource type="TileSet" uid="uid://s4sjfrai4ovt" path="res://Scenes/play/cityscape_tileset.tres" id="3_dnwwo"]
 [ext_resource type="Script" uid="uid://dhji8hvmkbpfv" path="res://Scenes/play/random_cityscape.gd" id="4_2qg40"]
 [ext_resource type="Texture2D" uid="uid://dfsevdk52r3q" path="res://Assets/UI.png" id="6_2ux56"]
+[ext_resource type="Script" uid="uid://bfdfccplo0d2o" path="res://Scenes/player/hud/hud.gd" id="6_f1x7d"]
+[ext_resource type="Script" uid="uid://qbalepf37i73" path="res://Scenes/player/hud/sharp_progress_bar.gd" id="6_sqf1t"]
 [ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="7_mche8"]
+[ext_resource type="Script" uid="uid://b6aq7te8xv2ju" path="res://Scenes/player/hud/precession.gd" id="8_1klcq"]
 [ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="8_26wnd"]
+[ext_resource type="Texture2D" uid="uid://qld00opv8r2h" path="res://Scenes/player/hud/sideview.png" id="9_0w22j"]
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="10_t6dfd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
 radius = 120.0
@@ -23,15 +28,113 @@ height = 30
 building_scene = ExtResource("3_4x7ej")
 
 [node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map") instance=ExtResource("1_8ndor")]
+position = Vector2(-3, -2)
 map = NodePath("../TileMapLayer")
-linear_acceleration = 60.0
-linear_velocity = Vector2(120, 0)
-tilt_acceleration = 24.0
+angular_acceleration = 0.393
+angular_velocity = 3.142
+linear_acceleration = 64.0
+linear_velocity = Vector2(128, 0)
+tilt_acceleration = 512.0
 
 [node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("follow_node") instance=ExtResource("2_qe2ea")]
 follow_node = NodePath("../PlayerMech")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=142871095 node_paths=PackedStringArray("player", "progress", "potential_progress")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_f1x7d")
+player = NodePath("../../PlayerMech")
+progress = NodePath("AngularVelocity")
+potential_progress = NodePath("PotentialAngularVelocity")
+
+[node name="PotentialAngularVelocity" type="Control" parent="CanvasLayer/HUD" unique_id=693602558]
+anchors_preset = 0
+offset_left = 43.0
+offset_top = 24.0
+offset_right = 830.0
+offset_bottom = 73.0
+script = ExtResource("6_sqf1t")
+progress = 0.8
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+metadata/_custom_type_script = "uid://qbalepf37i73"
+
+[node name="AngularVelocity" type="Control" parent="CanvasLayer/HUD" unique_id=1126095835]
+anchors_preset = 0
+offset_left = 43.0
+offset_top = 24.0
+offset_right = 830.0
+offset_bottom = 73.0
+script = ExtResource("6_sqf1t")
+metadata/_custom_type_script = "uid://qbalepf37i73"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/HUD" unique_id=2018671470]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 830.0
+offset_right = 420.0
+offset_bottom = 1074.0
+
+[node name="HUDPrecession" type="Control" parent="CanvasLayer/HUD" unique_id=1718864513 node_paths=PackedStringArray("player", "player_icon", "alert_notifier", "fall_progress")]
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 856.0
+offset_right = 393.0
+offset_bottom = 1051.0
+script = ExtResource("8_1klcq")
+player = NodePath("../../../PlayerMech")
+player_icon = NodePath("PlayerSideView")
+alert_notifier = NodePath("VBoxContainer/Label")
+fall_progress = NodePath("VBoxContainer/ProgressBar")
+metadata/_custom_type_script = "uid://b6aq7te8xv2ju"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HUDPrecession" unique_id=626557790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/HUD/HUDPrecession/VBoxContainer" unique_id=980764059]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_t6dfd")
+max_value = 1.0
+step = 0.0
+value = 0.5
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/HUDPrecession/VBoxContainer" unique_id=634046808]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.79482806, 0.794828, 0.794828, 1)
+theme_override_fonts/font = ExtResource("10_t6dfd")
+theme_override_font_sizes/font_size = 32
+text = "WARNING AXIAL TILT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerSideView" type="TextureRect" parent="CanvasLayer/HUD/HUDPrecession" unique_id=869885094]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -128.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("9_0w22j")
+expand_mode = 2
+stretch_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1554159125]
 anchors_preset = 15
@@ -42,22 +145,22 @@ grow_vertical = 2
 texture = ExtResource("6_2ux56")
 expand_mode = 2
 
-[node name="Monster" type="Node2D" parent="." unique_id=1957232234]
+[node name="Monster" type="StaticBody2D" parent="." unique_id=846309350 node_paths=PackedStringArray("player", "shadow")]
 position = Vector2(836, -723)
 rotation = -1.5483657
+script = ExtResource("8_26wnd")
+player = NodePath("../PlayerMech")
+shadow = NodePath("Shadow")
 
 [node name="Shadow" type="Sprite2D" parent="Monster" unique_id=1591309558]
 self_modulate = Color(0, 0, 0, 0.5019608)
-position = Vector2(32, 32)
-scale = Vector2(1.2, 1.2)
+position = Vector2(32.00006, 32)
+scale = Vector2(1.2000002, 1.2000002)
 texture = ExtResource("7_mche8")
 
 [node name="Monster" type="Sprite2D" parent="Monster" unique_id=487693795]
 z_index = 8
 texture = ExtResource("7_mche8")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Monster" unique_id=846309350]
-script = ExtResource("8_26wnd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/StaticBody2D" unique_id=1985352788]
+[node name="Shape" type="CollisionShape2D" parent="Monster" unique_id=1985352788]
 shape = SubResource("CapsuleShape2D_i13qm")

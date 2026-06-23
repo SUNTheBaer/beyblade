@@ -8,14 +8,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqju5"]
 radius = 128.0
 
-[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "pointer")]
+[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "damaged", "pointer", "shadow")]
 z_index = 4
 script = ExtResource("1_1jxkn")
-linear_acceleration = 1.0
-linear_velocity = Vector2(1, 0)
-tilt_acceleration = 0.15
 body = NodePath("Body")
+damaged = NodePath("Body/Damage")
 pointer = NodePath("Pointer")
+shadow = NodePath("Shadow")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1536957718]
 self_modulate = Color(0, 0, 0, 0.5019608)

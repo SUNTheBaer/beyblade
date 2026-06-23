@@ -1,4 +1,4 @@
-class_name HUD
+class_name HUDold
 extends Control
 
 @export var player: PlayerMecha
