@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cedb32p8srw2t" path="res://Scenes/play/skyscraper.tscn" id="3_4x7ej"]
 [ext_resource type="TileSet" uid="uid://s4sjfrai4ovt" path="res://Scenes/play/cityscape_tileset.tres" id="3_dnwwo"]
 [ext_resource type="Script" uid="uid://dhji8hvmkbpfv" path="res://Scenes/play/random_cityscape.gd" id="4_2qg40"]
-[ext_resource type="Texture2D" uid="uid://dfsevdk52r3q" path="res://Assets/UI.png" id="6_2ux56"]
 [ext_resource type="Script" uid="uid://bfdfccplo0d2o" path="res://Scenes/player/hud/hud.gd" id="6_f1x7d"]
 [ext_resource type="Script" uid="uid://qbalepf37i73" path="res://Scenes/player/hud/sharp_progress_bar.gd" id="6_sqf1t"]
 [ext_resource type="Script" uid="uid://b6aq7te8xv2ju" path="res://Scenes/player/hud/precession.gd" id="8_1klcq"]
@@ -30,6 +29,7 @@
 [ext_resource type="StyleBox" uid="uid://bj1iep4518tc3" path="res://Scenes/player/hud/panel.tres" id="17_ehees"]
 [ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/minigames/sequence_minigame.tscn" id="18_w6icr"]
 [ext_resource type="Script" uid="uid://lox87x7jj012" path="res://Scenes/player/hud/explosion.gd" id="19_c53b8"]
+[ext_resource type="Texture2D" uid="uid://7dacngo750p8" path="res://Assets/New Ui.png" id="27_6somp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
 radius = 120.0
@@ -168,12 +168,12 @@ offset_top = 856.0
 offset_right = 393.0
 offset_bottom = 1051.0
 script = ExtResource("8_1klcq")
-exceed_timer = 4.0
-alert_display_text = "SAFE AXIAL TILT EXCEEDED SLOW DOWN"
 player = NodePath("../../../PlayerMech")
+exceed_timer = 4.0
 player_icon = NodePath("PlayerSideView")
 alert_notifier = NodePath("VBoxContainer/Label")
 fall_progress = NodePath("VBoxContainer/ProgressBar")
+alert_display_text = "SAFE AXIAL TILT EXCEEDED SLOW DOWN"
 metadata/_custom_type_script = "uid://b6aq7te8xv2ju"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HUDPrecession" unique_id=626557790]
@@ -422,7 +422,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_2ux56")
+texture = ExtResource("27_6somp")
 expand_mode = 2
 
 [node name="HUDAlertController" type="Control" parent="CanvasLayer" unique_id=1728738171 node_paths=PackedStringArray("hud")]
