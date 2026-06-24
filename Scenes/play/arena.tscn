@@ -5,12 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://cedb32p8srw2t" path="res://Scenes/play/skyscraper.tscn" id="3_4x7ej"]
 [ext_resource type="TileSet" uid="uid://s4sjfrai4ovt" path="res://Scenes/play/cityscape_tileset.tres" id="3_dnwwo"]
 [ext_resource type="Script" uid="uid://dhji8hvmkbpfv" path="res://Scenes/play/random_cityscape.gd" id="4_2qg40"]
+[ext_resource type="Texture2D" uid="uid://buhu0mw0k7tyv" path="res://Assets/Houses/House1.png" id="4_xoutb"]
+[ext_resource type="Texture2D" uid="uid://drxmvduoq83h" path="res://Assets/Houses/House2.png" id="5_wudtk"]
+[ext_resource type="Texture2D" uid="uid://qjv5pu24hqgr" path="res://Assets/Houses/House3.png" id="6_30cvy"]
 [ext_resource type="Script" uid="uid://bfdfccplo0d2o" path="res://Scenes/player/hud/hud.gd" id="6_f1x7d"]
 [ext_resource type="Script" uid="uid://qbalepf37i73" path="res://Scenes/player/hud/sharp_progress_bar.gd" id="6_sqf1t"]
+[ext_resource type="Texture2D" uid="uid://ph8g7iaf4te0" path="res://Assets/Houses/House4.png" id="7_f75ig"]
 [ext_resource type="Script" uid="uid://b6aq7te8xv2ju" path="res://Scenes/player/hud/precession.gd" id="8_1klcq"]
 [ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="8_26wnd"]
+[ext_resource type="Texture2D" uid="uid://cf36ot4hphlsy" path="res://Assets/Houses/House5.png" id="8_sbwgi"]
 [ext_resource type="Texture2D" uid="uid://qld00opv8r2h" path="res://Scenes/player/hud/sideview.png" id="9_0w22j"]
+[ext_resource type="Texture2D" uid="uid://bfgcm7cx6qdlv" path="res://Assets/Houses/House6.png" id="9_il6c6"]
 [ext_resource type="Script" uid="uid://14m0kcglfcta" path="res://Scenes/monster/health_bar.gd" id="10_6kqhe"]
+[ext_resource type="Texture2D" uid="uid://b6bkaqak1blb" path="res://Assets/Houses/House7.png" id="10_g6twa"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="10_t6dfd"]
 [ext_resource type="Script" uid="uid://dqmoub7cbaq5d" path="res://Scripts/direction_skill.gd" id="11_03um0"]
 [ext_resource type="Texture2D" uid="uid://di4n18lwhof53" path="res://Assets/Minigame/Pixel Textures/Direction.png" id="11_rn3mc"]
@@ -30,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/minigames/sequence_minigame.tscn" id="18_w6icr"]
 [ext_resource type="Script" uid="uid://lox87x7jj012" path="res://Scenes/player/hud/explosion.gd" id="19_c53b8"]
 [ext_resource type="Texture2D" uid="uid://7dacngo750p8" path="res://Assets/New Ui.png" id="27_6somp"]
+[ext_resource type="Script" uid="uid://1afkqtand10m" path="res://Scripts/monster_cam.gd" id="34_wudtk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
 radius = 120.0
@@ -55,15 +63,16 @@ script = ExtResource("4_2qg40")
 width = 30
 height = 30
 building_scene = ExtResource("3_4x7ej")
+small_buldings = Array[CompressedTexture2D]([ExtResource("4_xoutb"), ExtResource("5_wudtk"), ExtResource("6_30cvy"), ExtResource("7_f75ig"), ExtResource("8_sbwgi"), ExtResource("9_il6c6"), ExtResource("10_g6twa")])
 
 [node name="Monster" type="StaticBody2D" parent="." unique_id=846309350 node_paths=PackedStringArray("player", "body", "shadow")]
 position = Vector2(2000, 0)
 rotation = -1.5707964
 script = ExtResource("8_26wnd")
-target_velocity = Vector2(-32, 0)
 player = NodePath("../PlayerMech")
 body = NodePath("Monster")
 shadow = NodePath("Shadow")
+target_velocity = Vector2(-32, 0)
 
 [node name="Shadow" type="AnimatedSprite2D" parent="Monster" unique_id=584221043]
 self_modulate = Color(0, 0, 0, 0.5019608)
@@ -246,10 +255,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DirectionSkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=1734898546]
+[node name="DirectionSkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=1734898546 node_paths=PackedStringArray("all_skills")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_03um0")
+all_skills = [NodePath("."), NodePath("../StunSkill"), NodePath("../VelocitySkill")]
 minigame_scene = ExtResource("12_abrxj")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/DirectionSkill" unique_id=130181474]
@@ -262,10 +272,11 @@ grow_vertical = 2
 texture = ExtResource("11_rn3mc")
 expand_mode = 5
 
-[node name="StunSkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=1281002282]
+[node name="StunSkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=1281002282 node_paths=PackedStringArray("all_skills")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("13_c53b8")
+all_skills = [NodePath("../DirectionSkill"), NodePath("."), NodePath("../VelocitySkill")]
 minigame_scene = ExtResource("15_ovfp5")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/StunSkill" unique_id=917861707]
@@ -278,10 +289,11 @@ grow_vertical = 2
 texture = ExtResource("12_03um0")
 expand_mode = 5
 
-[node name="VelocitySkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=2105511948]
+[node name="VelocitySkill" type="Button" parent="CanvasLayer/HUD/Skills/HBoxContainer" unique_id=2105511948 node_paths=PackedStringArray("all_skills")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_c53b8")
+all_skills = [NodePath("../DirectionSkill"), NodePath("../StunSkill"), NodePath(".")]
 minigame_scene = ExtResource("18_w6icr")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/VelocitySkill" unique_id=130646918]
@@ -414,6 +426,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("15_abrxj")
 metadata/_custom_type_script = "uid://b0y6bs782pjhd"
+
+[node name="MonsterCameraDisplay" type="Control" parent="CanvasLayer/HUD" unique_id=1143315731]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -188.0
+offset_right = 95.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/HUD/MonsterCameraDisplay" unique_id=1409532755]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/HUD/MonsterCameraDisplay/SubViewportContainer" unique_id=1312472953]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="MonsterCam" type="Camera2D" parent="CanvasLayer/HUD/MonsterCameraDisplay/SubViewportContainer/SubViewport" unique_id=834193188]
+position = Vector2(1369, -920)
+rotation = -1.5707964
+script = ExtResource("34_wudtk")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1554159125]
 anchors_preset = 15

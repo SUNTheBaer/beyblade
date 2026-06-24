@@ -8,7 +8,7 @@ extends Node
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("mecha_launch"):
-		disabled = true
+	#if Input.is_action_just_pressed("mecha_launch"):
+		#disabled = true
 	if Input.is_action_just_pressed("auto_win"):
 		victory = true
