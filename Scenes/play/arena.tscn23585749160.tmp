@@ -178,6 +178,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_03um0")
 minigame_scene = ExtResource("12_abrxj")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/DirectionSkill" unique_id=130181474]
 layout_mode = 1
@@ -194,6 +195,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("13_c53b8")
 minigame_scene = ExtResource("15_ovfp5")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/StunSkill" unique_id=917861707]
 layout_mode = 1
@@ -210,6 +212,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_c53b8")
 minigame_scene = ExtResource("18_w6icr")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/VelocitySkill" unique_id=130646918]
 layout_mode = 1

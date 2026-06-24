@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dv6r72ryldsii" path="res://Scripts/sequence_minigame.gd" id="1_3bl7a"]
 [ext_resource type="Texture2D" uid="uid://cod5h0bf4htbs" path="res://Assets/Minigame/up_arrow.png" id="2_3bl7a"]
-[ext_resource type="Texture2D" uid="uid://cercc0m2x0vnc" path="res://Assets/Minigame/down_arrow.png" id="2_ulsc8"]
-[ext_resource type="Texture2D" uid="uid://lc47fsi60pep" path="res://Assets/Minigame/left_arrow.png" id="3_dw5yf"]
-[ext_resource type="Texture2D" uid="uid://tm02o1do6iyx" path="res://Assets/Minigame/right_arrow.png" id="4_bu1ro"]
+[ext_resource type="Texture2D" uid="uid://bgpdn6uqv4kf" path="res://Assets/Minigame/Pixel Textures/Down arrow.png" id="2_84b16"]
+[ext_resource type="Texture2D" uid="uid://bluudd7ggm2xq" path="res://Assets/Minigame/Pixel Textures/Left arrow.png" id="3_3quk2"]
+[ext_resource type="Texture2D" uid="uid://b1j7r613hhcbd" path="res://Assets/Minigame/Pixel Textures/Right arrow.png" id="4_svu4q"]
+[ext_resource type="Texture2D" uid="uid://b2jge4eof0gkc" path="res://Assets/Minigame/Pixel Textures/Up arrow.png" id="5_nmfsp"]
 
 [node name="SequenceMinigame" type="Control" unique_id=398507986]
 layout_mode = 3
@@ -15,10 +16,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3bl7a")
 arrow_dict = {
-"down": ExtResource("2_ulsc8"),
-"left": ExtResource("3_dw5yf"),
-"right": ExtResource("4_bu1ro"),
-"up": ExtResource("2_3bl7a")
+"down": ExtResource("2_84b16"),
+"left": ExtResource("3_3quk2"),
+"right": ExtResource("4_svu4q"),
+"up": ExtResource("5_nmfsp")
 }
 timer_time = 5.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
