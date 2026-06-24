@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://byk0tnq2f1x33"]
+
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="1_1fp7o"]
+[ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/victory.gd" id="1_pyhgl"]
+
+[node name="Victory" type="Control" unique_id=1709937895 node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pyhgl")
+label = NodePath("CenterContainer/SubViewportContainer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=801028960]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=794340754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CenterContainer" unique_id=685210151]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/SubViewportContainer" unique_id=845078508]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(1440, 1080)
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/SubViewportContainer/SubViewport" unique_id=1935667057]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer/SubViewportContainer/SubViewport/CenterContainer" unique_id=1205938512]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+theme_override_constants/outline_size = 48
+theme_override_fonts/font = ExtResource("1_1fp7o")
+theme_override_font_sizes/font_size = 128
+text = "THE CITY IS SAVED"
+horizontal_alignment = 1
+vertical_alignment = 1

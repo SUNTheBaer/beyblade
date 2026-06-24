@@ -1,7 +1,8 @@
 class_name HUDPrecession
-extends Control
+extends HUDComponent
 
 @export var player: PlayerMech
+@export var exceed_timer: float = 1.0
 
 @export_group("Internal")
 @export var player_icon: TextureRect
@@ -25,7 +26,7 @@ func _process(dt: float) -> void:
 		return
 	
 	var p := player.get_precession()
-	stored_value_ = lerpf(stored_value_, p, 0.01)
+	stored_value_ = clampf(lerpf(stored_value_, p, 0.01), -PI / 2.0, PI / 2.0)
 	player_icon.rotation = stored_value_
 	
 	alarm_value_ = fmod(alarm_value_ + dt * 2.0 * (1.0 + 2.0 * fall_progress_), 1.0)
@@ -42,11 +43,14 @@ func _process(dt: float) -> void:
 		alert_notifier.self_modulate = Color.BLACK
 	
 	fall_progress.value = fall_progress_
+	is_capacity_exceeded = fall_progress_ >= 1.0
 	
 	if fall_progress_ >= 1.0:
 		fall_over_timer_ += dt
-		if fall_over_timer_ >= 1.0:
+		if fall_over_timer_ >= exceed_timer:
 			Data.disabled = true
+	else:
+		fall_over_timer_ = 0.0
 
 
 func _draw() -> void:

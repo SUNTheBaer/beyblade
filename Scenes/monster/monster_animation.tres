@@ -1,0 +1,76 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://8e5yl445fklt"]
+
+[ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="1_yjdv5"]
+[ext_resource type="Texture2D" uid="uid://cdt3f7iia0tws" path="res://Assets/Godzilla/Kaiju Walk.png" id="2_n3bdt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i6u8"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(0, 0, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ekj0"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(480, 0, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8mag"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(960, 0, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqh0h"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(0, 750, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lstsc"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(480, 750, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38di"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(960, 750, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e74uv"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(0, 1500, 480, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7c3iw"]
+atlas = ExtResource("2_n3bdt")
+region = Rect2(480, 1500, 480, 750)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yjdv5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i6u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ekj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8mag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqh0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lstsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38di")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e74uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7c3iw")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]

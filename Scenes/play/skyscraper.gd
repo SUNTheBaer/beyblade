@@ -45,7 +45,8 @@ func _process(dt: float) -> void:
 func _collapse_me(node: Node2D) -> void:
 	if collapsing:
 		return
-	var velocity: Vector2 = node.velocity if node is PhysicsBody2D else Vector2(0, 0)
+	var velocity: Vector2 = node.velocity if node is PlayerMech else Vector2(0, 0)
 	collapsing = true
+	shape.disabled = true
 	var d := velocity.normalized().dot((global_position - node.global_position).normalized())
 	ImpactManager.create_impact(height * maxf(1.0, velocity.length()) * d, 0.25, IMPACT_CURVE)
