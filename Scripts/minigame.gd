@@ -15,7 +15,8 @@ func _ready() -> void:
 
 func finish_minigame(result: float):
 	emit_signal("minigame_complete", result)
-	# Result screen before removing nodes
+	timer.paused = true
+	await get_tree().create_timer(1.0).timeout
 	queue_free()
 
 func _on_timer_timeout():

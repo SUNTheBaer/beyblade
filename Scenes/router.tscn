@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dddah8nsucc7s" path="res://Scripts/router.gd" id="1_2nkap"]
 [ext_resource type="PackedScene" uid="uid://c1b4a48fb4sg0" path="res://Scenes/play/arena.tscn" id="2_cavi2"]
-[ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/sequence_minigame.tscn" id="3_5oy8s"]
+[ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/minigames/sequence_minigame.tscn" id="3_5oy8s"]
 
 [node name="Router" type="Control" unique_id=1352145293]
 layout_mode = 3

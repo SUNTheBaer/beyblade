@@ -4,8 +4,8 @@ extends TextureRect
 signal set_switch_position
 
 @onready var result_light: TextureRect = $"../ResultLight"
-@onready var up_button: Button = $"../UpButton"
-@onready var down_button: Button = $"../DownButton"
+@onready var up_button: Button = $"UpButton"
+@onready var down_button: Button = $"DownButton"
 
 @export var possible_positions = {}
 @export var possible_results = {}

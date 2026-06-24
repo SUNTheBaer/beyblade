@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export var linear_velocity: Vector2
 @export var tilt_acceleration: float = 1.0
 @export var tilt_direction: Vector2
+@export var time_scale_modifier: float = 0.25
 @export var impact_register_distance: float = 480.0
 
 @export_group("Internal")
@@ -27,6 +28,8 @@ var predict_impact_time_scale_: float = 1.0
 var predict_impact_zoom_scale_: float = 1.0
 var shadow_height_: float = 24.0
 
+var linear_input_disabled: bool = false
+var tilt_input_disabled: bool = false
 
 func get_precession() -> float:
 	if linear_velocity.length() < 1.0 or tilt_direction.length() < 1.0:
@@ -87,14 +90,14 @@ func _process(dt: float) -> void:
 				if linear_velocity.length() < linear_acceleration:
 					linear_velocity = linear_velocity.normalized() * linear_acceleration
 	
-	if not Data.disabled:
+	if not Data.disabled and not linear_input_disabled:
 		if Input.is_action_pressed("mecha_forward"):
 			linear_velocity += linear_velocity.normalized() * dt * linear_acceleration
 		if Input.is_action_pressed("mecha_brake"):
 			linear_velocity = linear_velocity * 0.9
 	linear_velocity = (linear_velocity + tilt_direction / TAU).normalized() * linear_velocity.length()
 	
-	if not Data.disabled:
+	if not Data.disabled and not tilt_input_disabled:
 		if Engine.time_scale >= 1.0:
 			tilt_direction *= 0.999
 		if Input.is_action_pressed("mecha_tilt_left"):
@@ -151,23 +154,59 @@ func _process(dt: float) -> void:
 		linear_velocity = 2.0 * linear_velocity.bounce(n)
 			
 		damaged_ = 3.0
-		
-		predict_impact_zoom_scale_ = 1.0
-		predict_impact_ = false
-		predict_impact_value_ = 1.0
-	
-	if predict_impact_time_scale_ != Engine.time_scale:
-		var s: float = sign(predict_impact_time_scale_ - Engine.time_scale)
-		Engine.time_scale += dt * s
-		if sign(predict_impact_time_scale_ - Engine.time_scale) != s:
-			Engine.time_scale = predict_impact_time_scale_
-	
-	if predict_impact_zoom_scale_ != Data.zoom_scale:
-		var s: float = sign(predict_impact_zoom_scale_ - Data.zoom_scale)
-		Data.zoom_scale += dt * s
-		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
-			Data.zoom_scale = predict_impact_zoom_scale_
+    
+    if predict_impact_time_scale_ != Engine.time_scale:
+      var s: float = sign(predict_impact_time_scale_ - Engine.time_scale)
+      Engine.time_scale += dt * s
+      if sign(predict_impact_time_scale_ - Engine.time_scale) != s:
+        Engine.time_scale = predict_impact_time_scale_
+
+    if predict_impact_zoom_scale_ != Data.zoom_scale:
+      var s: float = sign(predict_impact_zoom_scale_ - Data.zoom_scale)
+      Data.zoom_scale += dt * s
+      if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
+        Data.zoom_scale = predict_impact_zoom_scale_
 
 
 func _is_heading_towards(object: Node2D) -> bool:
 	return (object.global_position - global_position).normalized().dot(velocity.normalized()) > 0.0
+
+
+func _on_ability_clicked() -> void:
+	linear_input_disabled = true
+	tilt_input_disabled = true
+	Engine.time_scale = time_scale_modifier
+
+
+func _on_direction_minigame_complete(result: float) -> void:
+	linear_input_disabled = false
+	tilt_input_disabled = false
+	Engine.time_scale = 1.0
+	if result > 0.0:
+		# Dash forward
+		linear_velocity *= 3
+		await get_tree().create_timer(0.2).timeout
+		linear_velocity /= 3
+
+
+func _on_stun_minigame_complete(result: float) -> void:
+	linear_input_disabled = false
+	tilt_input_disabled = false
+	Engine.time_scale = 1.0
+	if result > 0.0:
+		# Greatly reduce impact of collisions
+		pass
+
+func _on_velocity_minigame_complete(result: float) -> void:
+	linear_input_disabled = false
+	Engine.time_scale = 1.0
+	if result > 0.0:
+		# Increase accel but can't turn
+		linear_acceleration = 1.0
+		await get_tree().create_timer(2.0).timeout
+		tilt_input_disabled = false
+		linear_acceleration = 0.25
+		
+		predict_impact_zoom_scale_ = 1.0
+		predict_impact_ = false
+		predict_impact_value_ = 1.0

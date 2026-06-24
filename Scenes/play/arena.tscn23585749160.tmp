@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://dfsevdk52r3q" path="res://Assets/UI.png" id="6_2ux56"]
 [ext_resource type="Script" uid="uid://bfdfccplo0d2o" path="res://Scenes/player/hud/hud.gd" id="6_f1x7d"]
 [ext_resource type="Script" uid="uid://qbalepf37i73" path="res://Scenes/player/hud/sharp_progress_bar.gd" id="6_sqf1t"]
+[ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="7_mche8"]
 [ext_resource type="Script" uid="uid://b6aq7te8xv2ju" path="res://Scenes/player/hud/precession.gd" id="8_1klcq"]
 [ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="8_26wnd"]
 [ext_resource type="Texture2D" uid="uid://qld00opv8r2h" path="res://Scenes/player/hud/sideview.png" id="9_0w22j"]
-[ext_resource type="Script" uid="uid://14m0kcglfcta" path="res://Scenes/monster/health_bar.gd" id="10_6kqhe"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="10_t6dfd"]
 [ext_resource type="Script" uid="uid://dqmoub7cbaq5d" path="res://Scripts/direction_skill.gd" id="11_03um0"]
 [ext_resource type="Texture2D" uid="uid://di4n18lwhof53" path="res://Assets/Minigame/Pixel Textures/Direction.png" id="11_rn3mc"]
@@ -22,30 +22,10 @@
 [ext_resource type="Script" uid="uid://cgbv2y0mxau4g" path="res://Scripts/velocity_skill.gd" id="15_c53b8"]
 [ext_resource type="PackedScene" uid="uid://bvl6dyovf8ybl" path="res://Scenes/minigames/timing_meter_minigame.tscn" id="15_ovfp5"]
 [ext_resource type="PackedScene" uid="uid://dnwm4hilsyqj0" path="res://Scenes/minigames/sequence_minigame.tscn" id="18_w6icr"]
-[ext_resource type="Script" uid="uid://cqbviav7362nn" path="res://Scenes/player/hud/alert_controller.gd" id="13_rr6dn"]
-[ext_resource type="SpriteFrames" uid="uid://8e5yl445fklt" path="res://Scenes/monster/monster_animation.tres" id="13_t6dfd"]
-[ext_resource type="Script" uid="uid://chonslwn0ad6u" path="res://Scenes/player/hud/time_scale_alert.gd" id="14_03um0"]
-[ext_resource type="PackedScene" uid="uid://c36kr4cy2if7h" path="res://Scenes/player/hud/alert.tscn" id="14_35clo"]
-[ext_resource type="Script" uid="uid://b0y6bs782pjhd" path="res://Scenes/player/hud/disabled_alert.gd" id="15_abrxj"]
-[ext_resource type="Script" uid="uid://cqjwdx1w0g5vw" path="res://Scenes/player/hud/debugger.gd" id="15_rn3mc"]
-[ext_resource type="StyleBox" uid="uid://bj1iep4518tc3" path="res://Scenes/player/hud/panel.tres" id="17_ehees"]
-[ext_resource type="Script" uid="uid://lox87x7jj012" path="res://Scenes/player/hud/explosion.gd" id="19_c53b8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
 radius = 120.0
 height = 640.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehees"]
-bg_color = Color(1, 1, 1, 0.5019608)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [node name="Arena" type="Node2D" unique_id=2053573438]
 
@@ -56,67 +36,19 @@ width = 30
 height = 30
 building_scene = ExtResource("3_4x7ej")
 
-[node name="Monster" type="StaticBody2D" parent="." unique_id=846309350 node_paths=PackedStringArray("player", "body", "shadow")]
-position = Vector2(2000, 0)
-rotation = -1.5707964
-script = ExtResource("8_26wnd")
-player = NodePath("../PlayerMech")
-body = NodePath("Monster")
-shadow = NodePath("Shadow")
-target_velocity = Vector2(-32, 0)
-
-[node name="Shadow" type="AnimatedSprite2D" parent="Monster" unique_id=584221043]
-self_modulate = Color(0, 0, 0, 0.5019608)
-position = Vector2(32.00006, 32)
-scale = Vector2(1.2000002, 1.2000002)
-sprite_frames = ExtResource("13_t6dfd")
-
-[node name="Monster" type="AnimatedSprite2D" parent="Monster" unique_id=2104171867]
-z_index = 8
-sprite_frames = ExtResource("13_t6dfd")
-animation = &"walk"
-
-[node name="Shape" type="CollisionShape2D" parent="Monster" unique_id=1985352788]
-shape = SubResource("CapsuleShape2D_i13qm")
-
-[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster") instance=ExtResource("1_8ndor")]
+[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map") instance=ExtResource("1_8ndor")]
 position = Vector2(-3, -2)
 map = NodePath("../TileMapLayer")
-monster = NodePath("../Monster")
 angular_acceleration = 0.393
 angular_velocity = 3.142
 linear_acceleration = 64.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 512.0
 
-[node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("follow_node", "alt_follow_node") instance=ExtResource("2_qe2ea")]
+[node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("follow_node") instance=ExtResource("2_qe2ea")]
 follow_node = NodePath("../PlayerMech")
-alt_follow_node = NodePath("../Monster")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
-
-[node name="MonsterHP" type="ProgressBar" parent="CanvasLayer" unique_id=481207465 node_paths=PackedStringArray("monster")]
-custom_minimum_size = Vector2(320, 48)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -24.0
-offset_right = 160.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("10_t6dfd")
-theme_override_styles/background = ExtResource("17_ehees")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ehees")
-max_value = 1.0
-step = 0.0
-value = 1.0
-show_percentage = false
-script = ExtResource("10_6kqhe")
-monster = NodePath("../../Monster")
 
 [node name="HUD" type="Control" parent="CanvasLayer" unique_id=142871095 node_paths=PackedStringArray("player", "progress", "potential_progress")]
 layout_mode = 3
@@ -166,11 +98,9 @@ offset_right = 393.0
 offset_bottom = 1051.0
 script = ExtResource("8_1klcq")
 player = NodePath("../../../PlayerMech")
-exceed_timer = 4.0
 player_icon = NodePath("PlayerSideView")
 alert_notifier = NodePath("VBoxContainer/Label")
 fall_progress = NodePath("VBoxContainer/ProgressBar")
-alert_display_text = "SAFE AXIAL TILT EXCEEDED SLOW DOWN"
 metadata/_custom_type_script = "uid://b6aq7te8xv2ju"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HUDPrecession" unique_id=626557790]
@@ -248,6 +178,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_03um0")
 minigame_scene = ExtResource("12_abrxj")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/DirectionSkill" unique_id=130181474]
 layout_mode = 1
@@ -264,6 +195,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("13_c53b8")
 minigame_scene = ExtResource("15_ovfp5")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/StunSkill" unique_id=917861707]
 layout_mode = 1
@@ -280,6 +212,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_c53b8")
 minigame_scene = ExtResource("18_w6icr")
+cooldown_timer = null
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/Skills/HBoxContainer/VelocitySkill" unique_id=130646918]
 layout_mode = 1
@@ -311,107 +244,6 @@ offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HUDDebugElement" type="Control" parent="CanvasLayer/HUD" unique_id=969705597]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_rn3mc")
-alert_display_text = "DEBUG CRASH TRIGGERED"
-metadata/_custom_type_script = "uid://cqjwdx1w0g5vw"
-
-[node name="CollisionMonitors" type="Control" parent="CanvasLayer/HUD" unique_id=997217363]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="A" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=1320840171]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-alert_display_text = "IMPACT IMMINENT"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="B" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=1546340959]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-threshold = 0.8
-alert_display_text = "BRACE FOR IMPACT"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="C" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=689053401]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-threshold = 0.6
-alert_display_text = "IMPACT IMMINENT"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="D" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=1034633014]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-threshold = 0.4
-alert_display_text = "HARDENING SHELL"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="E" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=2066676308]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-threshold = 0.3
-alert_display_text = "RAISING CENTER OF GRAVITY"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="F" type="Control" parent="CanvasLayer/HUD/CollisionMonitors" unique_id=114210644]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("14_03um0")
-threshold = 0.15
-alert_display_text = "IMPACT"
-metadata/_custom_type_script = "uid://chonslwn0ad6u"
-
-[node name="DisabledMonitors" type="Control" parent="CanvasLayer/HUD" unique_id=540899418]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="A" type="Control" parent="CanvasLayer/HUD/DisabledMonitors" unique_id=88003147]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_abrxj")
-alert_display_text = "PRECESSION CAPACITY EXCEEDED"
-metadata/_custom_type_script = "uid://b0y6bs782pjhd"
-
-[node name="B" type="Control" parent="CanvasLayer/HUD/DisabledMonitors" unique_id=40964134]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_abrxj")
-alert_display_text = "LOSING ANGULAR MOMENTUM"
-metadata/_custom_type_script = "uid://b0y6bs782pjhd"
-
-[node name="C" type="Control" parent="CanvasLayer/HUD/DisabledMonitors" unique_id=1303503821]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_abrxj")
-metadata/_custom_type_script = "uid://b0y6bs782pjhd"
-
-[node name="D" type="Control" parent="CanvasLayer/HUD/DisabledMonitors" unique_id=178726316]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_abrxj")
-metadata/_custom_type_script = "uid://b0y6bs782pjhd"
-
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1554159125]
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,20 +254,22 @@ mouse_filter = 2
 texture = ExtResource("6_2ux56")
 expand_mode = 2
 
-[node name="HUDAlertController" type="Control" parent="CanvasLayer" unique_id=1728738171 node_paths=PackedStringArray("hud")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("13_rr6dn")
-hud = NodePath("../HUD")
-alert_scene = ExtResource("14_35clo")
-player_area = 400.0
-alert_area = Vector2(512, 180)
-metadata/_custom_type_script = "uid://cqbviav7362nn"
+[node name="Monster" type="StaticBody2D" parent="." unique_id=846309350 node_paths=PackedStringArray("player", "shadow")]
+position = Vector2(836, -723)
+rotation = -1.5483657
+script = ExtResource("8_26wnd")
+player = NodePath("../PlayerMech")
+shadow = NodePath("Shadow")
+
+[node name="Shadow" type="Sprite2D" parent="Monster" unique_id=1591309558]
+self_modulate = Color(0, 0, 0, 0.5019608)
+position = Vector2(32.00006, 32)
+scale = Vector2(1.2000002, 1.2000002)
+texture = ExtResource("7_mche8")
+
+[node name="Monster" type="Sprite2D" parent="Monster" unique_id=487693795]
+z_index = 8
+texture = ExtResource("7_mche8")
 
 [node name="Shape" type="CollisionShape2D" parent="Monster" unique_id=1985352788]
 shape = SubResource("CapsuleShape2D_i13qm")
@@ -446,14 +280,3 @@ shape = SubResource("CapsuleShape2D_i13qm")
 [connection signal="stun_minigame_complete" from="CanvasLayer/HUD/Skills/HBoxContainer/StunSkill" to="PlayerMech" method="_on_stun_minigame_complete"]
 [connection signal="ability_clicked" from="CanvasLayer/HUD/Skills/HBoxContainer/VelocitySkill" to="PlayerMech" method="_on_ability_clicked"]
 [connection signal="velocity_minigame_complete" from="CanvasLayer/HUD/Skills/HBoxContainer/VelocitySkill" to="PlayerMech" method="_on_velocity_minigame_complete"]
-
-[node name="HUDExplosion" type="Control" parent="CanvasLayer" unique_id=1838389373]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("19_c53b8")
-metadata/_custom_type_script = "uid://lox87x7jj012"
