@@ -4,6 +4,7 @@ extends TileMapLayer
 @export var width: int = 100
 @export var height: int = 100
 @export var building_scene: PackedScene
+@export var small_buldings: Array[CompressedTexture2D]
 
 var direction_mapping_: Dictionary[int, Vector2i]
 var edge_mapping_: Dictionary[int, Vector2i]
@@ -77,6 +78,23 @@ func _place_buildings() -> void:
 			if randi_range(0, 1) == 0:
 				var building := building_scene.instantiate() as Skyscraper
 				building.height = floori(sqrt(randf_range(1.0, 100.0)))
+				owner.add_child(building)
+				building.global_position = Vector2i(x + 1 - width / 2, y + 1 - height / 2) * tile_set.tile_size
+				building_map_[(x+0) + (y+0) * width] = 1
+				building_map_[(x+1) + (y+0) * width] = 1
+				building_map_[(x+0) + (y+1) * width] = 1
+				building_map_[(x+1) + (y+1) * width] = 1
+	
+	for y in height - 1:
+		for x in width - 1:
+			if _get_any_value(Vector2i(x, y)) \
+				or _get_any_value(Vector2i(x + 1, y)) \
+				or _get_any_value(Vector2i(x, y + 1)) \
+				or _get_any_value(Vector2i(x + 1, y + 1)):
+				continue
+			if randi_range(0, 1) == 0:
+				var building = Sprite2D.new()
+				building.texture = small_buldings.pick_random()
 				owner.add_child(building)
 				building.global_position = Vector2i(x + 1 - width / 2, y + 1 - height / 2) * tile_set.tile_size
 				building_map_[(x+0) + (y+0) * width] = 1
