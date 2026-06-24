@@ -154,18 +154,18 @@ func _process(dt: float) -> void:
 		linear_velocity = 2.0 * linear_velocity.bounce(n)
 			
 		damaged_ = 3.0
-    
-    if predict_impact_time_scale_ != Engine.time_scale:
-      var s: float = sign(predict_impact_time_scale_ - Engine.time_scale)
-      Engine.time_scale += dt * s
-      if sign(predict_impact_time_scale_ - Engine.time_scale) != s:
-        Engine.time_scale = predict_impact_time_scale_
+	
+	if predict_impact_time_scale_ != Engine.time_scale:
+		var s: float = sign(predict_impact_time_scale_ - Engine.time_scale)
+		Engine.time_scale += dt * s
+		if sign(predict_impact_time_scale_ - Engine.time_scale) != s:
+			Engine.time_scale = predict_impact_time_scale_
 
-    if predict_impact_zoom_scale_ != Data.zoom_scale:
-      var s: float = sign(predict_impact_zoom_scale_ - Data.zoom_scale)
-      Data.zoom_scale += dt * s
-      if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
-        Data.zoom_scale = predict_impact_zoom_scale_
+	if predict_impact_zoom_scale_ != Data.zoom_scale:
+		var s: float = sign(predict_impact_zoom_scale_ - Data.zoom_scale)
+		Data.zoom_scale += dt * s
+		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
+			Data.zoom_scale = predict_impact_zoom_scale_
 
 
 func _is_heading_towards(object: Node2D) -> bool:
