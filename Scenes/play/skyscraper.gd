@@ -11,6 +11,8 @@ static var IMPACT_CURVE: Curve = load("res://Scenes/play/skyscraper_impact_curve
 @export var shape: CollisionShape2D
 
 var sprites_: Array[Node2D]
+var velocities_: Array[Vector2]
+var offsets_: Array[Vector2]
 
 func _ready() -> void:
 	area.body_entered.connect(_collapse_me)
@@ -19,10 +21,14 @@ func _ready() -> void:
 		sprite.texture = vertical_texture
 		sprite.z_index = i + 1
 		sprites_.push_back(sprite)
+		velocities_.push_back(Vector2())
+		offsets_.push_back(Vector2())
 		add_child(sprite)
 
 
 func _process(dt: float) -> void:
+	dt *= Data.time_scale
+	
 	shape.disabled = not EntityManager.in_range(global_position)
 	
 	if collapse >= 1.0:
@@ -36,10 +42,14 @@ func _process(dt: float) -> void:
 		
 	var radius := (get_viewport_rect().size / 2.0).length()
 	var d := (global_position - get_viewport().get_camera_2d().global_position) / radius
+	var c := maxf(0.0, 1.0 - collapse)
 	for i in sprites_.size():
 		var s := sprites_[i]
 		s.z_index = floori(i + 1 - collapse)
-		s.position = 16.0 * i * d * maxf(0.0, 1.0 - collapse)
+		velocities_[i] *= 0.999
+		offsets_[i] += velocities_[i] * dt
+		s.position = 24.0 * i * d * c + offsets_[i]
+		s.self_modulate.a = c
 
 
 func _collapse_me(node: Node2D) -> void:
@@ -50,3 +60,5 @@ func _collapse_me(node: Node2D) -> void:
 	shape.disabled = true
 	var d := velocity.normalized().dot((global_position - node.global_position).normalized())
 	ImpactManager.create_impact(height * maxf(1.0, velocity.length()) * d, 0.25, IMPACT_CURVE)
+	for i in sprites_.size():
+		velocities_[i] = (velocity + Vector2(randf_range(-128.0, 128.0), randf_range(-128.0, 128.0))) * i / 10.0

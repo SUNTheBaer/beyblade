@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bluudd7ggm2xq" path="res://Assets/Minigame/Pixel Textures/Left arrow.png" id="3_3quk2"]
 [ext_resource type="Texture2D" uid="uid://b1j7r613hhcbd" path="res://Assets/Minigame/Pixel Textures/Right arrow.png" id="4_svu4q"]
 [ext_resource type="Texture2D" uid="uid://b2jge4eof0gkc" path="res://Assets/Minigame/Pixel Textures/Up arrow.png" id="5_nmfsp"]
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="6_3quk2"]
 
 [node name="SequenceMinigame" type="Control" unique_id=398507986]
 layout_mode = 3
@@ -24,42 +25,44 @@ arrow_dict = {
 timer_time = 5.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
 
-[node name="TimerText" type="Label" parent="." unique_id=110021635]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=724613832]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -252.0
-offset_top = 50.0
-offset_right = -52.0
-offset_bottom = 117.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1700265285]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1609905177]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimerText" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=110021635]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("6_3quk2")
+theme_override_font_sizes/font_size = 96
 text = "Timer"
 horizontal_alignment = 1
 
-[node name="FullSequence" type="HBoxContainer" parent="." unique_id=1135499226]
+[node name="FullSequence" type="HBoxContainer" parent="VBoxContainer" unique_id=1135499226]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+alignment = 1
 
-[node name="SequenceElement1" type="TextureRect" parent="FullSequence" unique_id=695133301]
+[node name="SequenceElement1" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=695133301]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement1" unique_id=735410804]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement1" unique_id=735410804]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,11 +71,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement2" type="TextureRect" parent="FullSequence" unique_id=1300602072]
+[node name="SequenceElement2" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1300602072]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement2" unique_id=485972290]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement2" unique_id=485972290]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,11 +86,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement3" type="TextureRect" parent="FullSequence" unique_id=346154221]
+[node name="SequenceElement3" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=346154221]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement3" unique_id=527113028]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement3" unique_id=527113028]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,11 +101,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement4" type="TextureRect" parent="FullSequence" unique_id=1105806217]
+[node name="SequenceElement4" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1105806217]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement4" unique_id=359557890]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement4" unique_id=359557890]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,11 +116,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement5" type="TextureRect" parent="FullSequence" unique_id=1598613659]
+[node name="SequenceElement5" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1598613659]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement5" unique_id=655729998]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement5" unique_id=655729998]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,11 +131,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement6" type="TextureRect" parent="FullSequence" unique_id=1456511923]
+[node name="SequenceElement6" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1456511923]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement6" unique_id=1570497374]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement6" unique_id=1570497374]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,11 +146,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement7" type="TextureRect" parent="FullSequence" unique_id=1783984189]
+[node name="SequenceElement7" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1783984189]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement7" unique_id=229941185]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement7" unique_id=229941185]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,11 +161,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.25882354, 0.79607844, 0, 0)
 
-[node name="SequenceElement8" type="TextureRect" parent="FullSequence" unique_id=1962266064]
+[node name="SequenceElement8" type="TextureRect" parent="VBoxContainer/FullSequence" unique_id=1962266064]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("2_3bl7a")
+expand_mode = 1
 
-[node name="ColorResult" type="ColorRect" parent="FullSequence/SequenceElement8" unique_id=1348414163]
+[node name="ColorResult" type="ColorRect" parent="VBoxContainer/FullSequence/SequenceElement8" unique_id=1348414163]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

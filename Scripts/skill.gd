@@ -9,17 +9,24 @@ signal ability_clicked
 @export var minigame_scene: PackedScene
 @export var cooldown_timer = 7.0
 
+
 func _ready():
-	self.connect("pressed", _on_skill_pressed)
+	pressed.connect(_on_skill_pressed)
+	($MarginContainer/ProgressBar as ProgressBar).value = 0.0
+
 
 func _on_skill_pressed() -> void:
-	emit_signal("ability_clicked")
-	for skill in all_skills:
-		skill.disabled = true
+	if minigame_display.get_child_count() != 0:
+		return
+	
+	ability_clicked.emit()
 	var instance = minigame_scene.instantiate()
-	instance.connect("minigame_complete", _on_minigame_complete)
+	instance.minigame_complete.connect(_on_minigame_complete)
 	minigame_display.add_child(instance)
+	minigame_display.mouse_filter = Control.MOUSE_FILTER_STOP
 
-func _on_minigame_complete(result: float) -> void:
-	for skill in all_skills:
-		skill.disabled = false
+
+func _on_minigame_complete(__: float) -> void:
+	minigame_display.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	($MarginContainer/ProgressBar as ProgressBar).value = 1.0
+	get_tree().create_tween().tween_property($MarginContainer/ProgressBar, "value", 0.0, cooldown_timer)

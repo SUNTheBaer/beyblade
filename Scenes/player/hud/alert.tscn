@@ -8,6 +8,7 @@
 [node name="Alert" type="Control" unique_id=1405250588 node_paths=PackedStringArray("panel", "label")]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_haa0a")
 panel = NodePath("PanelContainer")
 label = NodePath("PanelContainer/ScrollingLabel")
@@ -21,11 +22,13 @@ offset_left = -240.0
 offset_top = -120.0
 offset_right = 240.0
 offset_bottom = 120.0
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_rdt5s")
 
 [node name="ScrollingLabel" type="Control" parent="PanelContainer" unique_id=316858935 node_paths=PackedStringArray("label")]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 2
 script = ExtResource("3_0fql3")
 label = NodePath("Label")
 scrolling_speed = 256.0

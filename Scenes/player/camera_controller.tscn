@@ -8,4 +8,4 @@ camera = NodePath("Camera2D")
 metadata/_custom_type_script = "uid://fc13xn30b0xn"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=119543568]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bvl6dyovf8ybl"]
 
 [ext_resource type="Script" uid="uid://b5v7gecfh2vp7" path="res://Scripts/timing_meter_minigame.gd" id="1_1gkby"]
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_e7btw"]
 [ext_resource type="Texture2D" uid="uid://cf0wtn17bryu7" path="res://Assets/Minigame/Timing Minigame/Timing bar.png" id="2_e7btw"]
 [ext_resource type="Texture2D" uid="uid://0exdb3x52lj" path="res://Assets/Minigame/Timing Minigame/Timing target.png" id="3_uphda"]
 [ext_resource type="Texture2D" uid="uid://u0nhxanvml31" path="res://Assets/Minigame/Timing Minigame/Timing marker.png" id="4_lvujg"]
@@ -18,40 +19,39 @@ script = ExtResource("1_1gkby")
 select_bar_velocity = 500.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
 
-[node name="TimerText" type="Label" parent="." unique_id=110021635]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=104494455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1928114849]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=830088544]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimerText" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=110021635]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 361.0
-offset_top = -338.0
-offset_right = 496.0
-offset_bottom = -271.0
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("2_e7btw")
+theme_override_font_sizes/font_size = 96
 text = "Timer"
 horizontal_alignment = 1
 
-[node name="TimingMeter" type="NinePatchRect" parent="." unique_id=1225115740]
+[node name="TimingMeter" type="ColorRect" parent="VBoxContainer" unique_id=1624424343]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -525.0
-offset_top = -40.0
-offset_right = 525.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_e7btw")
-region_rect = Rect2(0, 0, 640, 160)
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+color = Color(0.49354547, 0.49354553, 0.49354553, 1)
 
-[node name="TargetBar" type="NinePatchRect" parent="TimingMeter" unique_id=429167704]
+[node name="TargetBar" type="ColorRect" parent="VBoxContainer/TimingMeter" unique_id=566259492]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -72,7 +72,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="SelectBar" type="NinePatchRect" parent="TimingMeter" unique_id=92157234]
+[node name="SelectBar" type="ColorRect" parent="VBoxContainer/TimingMeter" unique_id=1307162024]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8

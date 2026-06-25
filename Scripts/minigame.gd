@@ -4,8 +4,10 @@ extends Control
 signal minigame_complete
 
 @export var timer_time: float = 10.0
+@export var fade_out_time: float = 0.25
 
 var timer: Timer = Timer.new()
+
 
 func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
@@ -13,11 +15,14 @@ func _ready() -> void:
 	add_child(timer)
 	timer.start(timer_time)
 
+
 func finish_minigame(result: float):
 	emit_signal("minigame_complete", result)
 	timer.paused = true
-	await get_tree().create_timer(1.0).timeout
+	get_tree().create_tween().tween_property(self, ^":modulate:a", 0.0, fade_out_time)
+	await get_tree().create_timer(fade_out_time).timeout
 	queue_free()
+
 
 func _on_timer_timeout():
 	finish_minigame(0.0)

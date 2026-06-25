@@ -19,8 +19,11 @@ func _ready() -> void:
 		sequence_keys.append(random_arrow_key)
 		element.texture = arrow_dict[random_arrow_key]
 
-func _process(delta: float) -> void:
-	timer_text.text = "%.2f" % timer.time_left
+func _process(__: float) -> void:
+	if timer.paused:
+		return
+	
+	timer_text.text = "%.2fs remain" % timer.time_left
 	
 	if Input.is_action_just_pressed("up"):
 		_compare_input_to_sequence("up")

@@ -3,6 +3,7 @@ extends HUDComponent
 
 @export var player: PlayerMech
 @export var exceed_timer: float = 1.0
+@export var fall_timer: float = 4.0
 
 @export_group("Internal")
 @export var player_icon: TextureRect
@@ -21,19 +22,21 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.time_scale
+	
 	if Data.disabled:
 		visible = false
 		return
 	
 	var p := player.get_precession()
-	stored_value_ = clampf(lerpf(stored_value_, p, 0.01), -PI / 2.0, PI / 2.0)
+	stored_value_ = lerpf(stored_value_, clampf(p, -PI * 0.28, PI * 0.28), 0.01)
 	player_icon.rotation = stored_value_
 	
 	alarm_value_ = fmod(alarm_value_ + dt * 2.0 * (1.0 + 2.0 * fall_progress_), 1.0)
 	
 	if absf(p) > PI / 6.0:
 		fall_reduction_ = 0.0
-		fall_progress_ = minf(1.0, fall_progress_ + dt / 4.0)
+		fall_progress_ = minf(1.0, fall_progress_ + dt / fall_timer)
 		var mag := (sin(TAU * alarm_value_) + 1.0) / 2.0
 		alert_notifier.self_modulate = lerp(Color.WHITE, Color.BLACK, mag)
 		alert_notifier.add_theme_constant_override("font_outline", floori(mag * 16.0))
