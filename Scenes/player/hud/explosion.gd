@@ -5,6 +5,8 @@ var accum_: float = 0.0
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	if not Data.victory:
 		return
 	accum_ = minf(3000.0, accum_ + (accum_ + 128.0) * dt)

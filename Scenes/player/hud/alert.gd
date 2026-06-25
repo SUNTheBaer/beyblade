@@ -23,6 +23,8 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	if destroy:
 		scale.y = maxf(0.0, scale.y - dt * alert_cadence)
 		if scale.y <= 0.0:

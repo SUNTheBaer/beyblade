@@ -15,6 +15,8 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	var follow: Vector2
 	if player.imminent_impact():
 		follow = (monster.global_position + player.global_position) / 2.0

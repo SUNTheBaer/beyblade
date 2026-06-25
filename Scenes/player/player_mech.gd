@@ -85,8 +85,8 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
-	var orig_dt := dt
-	dt *= Data.time_scale
+	var orig_dt := dt * Data.pause_scale
+	dt *= Data.get_time()
 	
 	if damaged_ > 0.0 or Data.disabled:
 		accum_ = fmod(accum_ + dt * (1.0 if Data.disabled else 4.0), 1.0)
@@ -105,7 +105,7 @@ func _process(dt: float) -> void:
 	
 	var out_of_bounds := is_out_of_bounds()
 	
-	if Data.time_scale >= 1.0:
+	if Data.get_time() >= 1.0:
 		if Data.disabled:
 			linear_velocity *= 0.9
 		elif bonus_accelerate_:
@@ -126,12 +126,12 @@ func _process(dt: float) -> void:
 		elif not linear_input_disabled:
 			if bonus_accelerate_ or Input.is_action_pressed("mecha_forward"):
 				linear_velocity += linear_velocity.normalized() * dt * linear_acceleration * (3.0 if bonus_accelerate_ else 1.0)
-			if Input.is_action_pressed("mecha_brake"):
+			if Data.get_time() >= 1.0 and Input.is_action_pressed("mecha_brake"):
 				linear_velocity *= 0.9
 	linear_velocity = (linear_velocity + tilt_direction / TAU).normalized() * linear_velocity.length()
 	
 	if not Data.disabled and not tilt_input_disabled:
-		if Data.time_scale >= 1.0:
+		if Data.get_time() >= 1.0:
 			tilt_direction *= 0.95
 		if tilt_direction.length() > tilt_acceleration * 0.25:
 			tilt_direction = tilt_direction.normalized() * tilt_acceleration * 0.25
@@ -149,7 +149,7 @@ func _process(dt: float) -> void:
 			angular_velocity = clampf(angular_velocity - 0.5 * get_angular_acceleration() * dt, 0, max_angular_velocity)
 		else:
 			angular_velocity = clampf(angular_velocity + get_angular_acceleration() * dt, 0, max_angular_velocity)
-		if not linear_input_disabled and Input.is_action_pressed("mecha_brake"):
+		if Data.get_time() >= 1.0 and not linear_input_disabled and Input.is_action_pressed("mecha_brake"):
 			angular_velocity *= 0.9
 	
 	angular_position += angular_velocity * dt
@@ -199,7 +199,7 @@ func _process(dt: float) -> void:
 		damaged_ = 3.0
 		AudioManager.play_sound(COLLISION_SFX.pick_random())
 		if randf() < 0.25:
-			AudioManager.play_sound(load("res://Assets/KK roar.mp3"))
+			AudioManager.play_sound(load("res://Assets/KK roar.wav"))
 	
 	if predict_impact_time_scale_ != Data.time_scale:
 		var s: float = sign(predict_impact_time_scale_ - Data.time_scale)

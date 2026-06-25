@@ -22,9 +22,9 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
-	dt *= Data.time_scale
-	body.speed_scale = Data.time_scale
-	shadow.speed_scale = Data.time_scale
+	dt *= Data.get_time()
+	body.speed_scale = Data.get_time()
+	shadow.speed_scale = Data.get_time()
 	
 	if not is_zero_approx(impact_velocity.length()):
 		global_position += impact_velocity * dt

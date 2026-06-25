@@ -34,7 +34,7 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
-	dt *= Data.time_scale
+	dt *= Data.get_time()
 	
 	shape.disabled = not EntityManager.in_range(global_position)
 	

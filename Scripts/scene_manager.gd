@@ -2,6 +2,7 @@ extends Control
 class_name GlobalSceneManager
 
 enum SCENE {
+	MENU,
 	PLAY,
 	VICTORY,
 	DEFEAT
@@ -20,9 +21,10 @@ func _ready() -> void:
 	z_index = 1
 	process_mode = PROCESS_MODE_ALWAYS
 	
-	register("res://Scenes/play/arena.tscn",	SCENE.PLAY)
-	register("res://Scenes/victory.tscn", 		SCENE.VICTORY)
-	register("res://Scenes/defeat.tscn", 		SCENE.DEFEAT)
+	register("res://Scenes/main menu/main_menu.tscn",	SCENE.MENU)
+	register("res://Scenes/play/arena.tscn",			SCENE.PLAY)
+	register("res://Scenes/victory.tscn", 				SCENE.VICTORY)
+	register("res://Scenes/defeat.tscn", 				SCENE.DEFEAT)
 
 
 func reload_scene() -> void:
@@ -32,11 +34,12 @@ func reload_scene() -> void:
 func go_to_scene(scene: SCENE) -> void:
 	get_tree().paused = false
 	Data.time_scale = 1.0
+	Data.pause_scale = 1.0
 	var fname := _get_filename_from_scene(scene)
 	var err := get_tree().change_scene_to_file(fname)
 	if OK != err:
 		push_error("Scene " + str(scene) + " is misconfigured")
-		get_tree().change_scene_to_file("res://Scenes/router.tscn")
+		get_tree().change_scene_to_file("res://Scenes/main menu/main_menu.tscn")
 
 
 func _get_scene_from_filename(fname: String) -> SCENE:
@@ -44,7 +47,7 @@ func _get_scene_from_filename(fname: String) -> SCENE:
 		return scene_map_[fname]
 	else:
 		push_error("Invalid scene '" + fname + "'")
-		return SCENE.PLAY
+		return SCENE.MENU
 
 
 func _get_filename_from_scene(scene: SCENE) -> String:
@@ -52,4 +55,4 @@ func _get_filename_from_scene(scene: SCENE) -> String:
 		return fname_map_[scene]
 	else:
 		push_error("Invalid scene '" + str(scene) + "'")
-		return "res://Scenes/router.tscn"
+		return "res://Scenes/main menu/main_menu.tscn"

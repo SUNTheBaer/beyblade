@@ -17,6 +17,8 @@ func _ready() -> void:
 	target_bar.position.x = randf_range(0, timing_meter.size.x - target_bar.size.x)
 
 func _physics_process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	if timer.paused:
 		return
 	
