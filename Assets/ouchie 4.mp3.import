@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://denukkmn8vhve"
+path="res://.godot/imported/ouchie 4.mp3-d245e3fde4067dd764c375666cc448ad.mp3str"
+
+[deps]
+
+source_file="res://Assets/ouchie 4.mp3"
+dest_files=["res://.godot/imported/ouchie 4.mp3-d245e3fde4067dd764c375666cc448ad.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

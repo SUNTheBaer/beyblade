@@ -44,10 +44,10 @@
 [ext_resource type="Script" uid="uid://lj8iixijv6ml" path="res://Scenes/player/hud/oob_alert.gd" id="27_xolvv"]
 [ext_resource type="Script" uid="uid://bvvahonhtcxne" path="res://Scenes/player/hud/defeat.gd" id="34_qeiqt"]
 [ext_resource type="Script" uid="uid://1afkqtand10m" path="res://Scripts/monster_cam.gd" id="34_wudtk"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
-radius = 120.0
-height = 640.0
+[ext_resource type="PackedScene" uid="uid://5jdte2i4tjf1" path="res://Scenes/main menu/poster.tscn" id="45_f56kt"]
+[ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="45_yirdq"]
+[ext_resource type="Material" uid="uid://csptbwqahhjxp" path="res://Scenes/main menu/arena_greyscale_material.tres" id="46_ul8bc"]
+[ext_resource type="Script" uid="uid://dxgdfven2qbbm" path="res://Scenes/play/start_timescale.gd" id="48_bca0g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehees"]
 bg_color = Color(1, 1, 1, 0.5019608)
@@ -86,12 +86,14 @@ map = NodePath("../TileMapLayer")
 monster = NodePath("../Monster")
 max_angular_velocity = 6.283
 angular_acceleration = 0.262
+angular_velocity = 1.571
 linear_acceleration = 64.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 128.0
 
-[node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("player") instance=ExtResource("2_qe2ea")]
+[node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("player", "monster") instance=ExtResource("2_qe2ea")]
 player = NodePath("../PlayerMech")
+monster = NodePath("../Monster")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
 
@@ -283,7 +285,6 @@ shortcut = ExtResource("17_0kpkv")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("11_03um0")
-all_skills = [NodePath("."), NodePath("../StunSkill"), NodePath("../VelocitySkill")]
 minigame_scene = ExtResource("12_abrxj")
 cooldown_timer = 8.0
 
@@ -340,7 +341,6 @@ shortcut = ExtResource("21_8ahch")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("13_c53b8")
-all_skills = [NodePath("../DirectionSkill"), NodePath("."), NodePath("../VelocitySkill")]
 minigame_scene = ExtResource("15_ovfp5")
 cooldown_timer = 4.0
 
@@ -397,7 +397,6 @@ shortcut = ExtResource("25_xoutb")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("15_c53b8")
-all_skills = [NodePath("../DirectionSkill"), NodePath("../StunSkill"), NodePath(".")]
 minigame_scene = ExtResource("18_w6icr")
 cooldown_timer = 24.0
 
@@ -656,6 +655,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("45_yirdq")
+initial_fade = 1.0
+fade_in_time = -2.0
+metadata/_custom_type_script = "uid://bxju5l0sr4klf"
+
+[node name="Poster" parent="CanvasLayer/FadeInController" unique_id=1137955399 instance=ExtResource("45_f56kt")]
+material = ExtResource("46_ul8bc")
+layout_mode = 1
+
+[node name="StartTimescale" type="Node" parent="." unique_id=1436585676]
+script = ExtResource("48_bca0g")
+time_to_scale = 4.0
 
 [connection signal="ability_clicked" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_ability_clicked"]
 [connection signal="direction_minigame_complete" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_direction_minigame_complete"]

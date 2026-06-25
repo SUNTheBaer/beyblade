@@ -1,6 +1,13 @@
 class_name PlayerMech
 extends CharacterBody2D
 
+static var COLLISION_SFX: Array[AudioStream] = [
+	load("res://Assets/ouchie 1.mp3"),
+	load("res://Assets/ouchie 2.mp3"),
+	load("res://Assets/ouchie 3.mp3"),
+	load("res://Assets/ouchie 4.mp3")
+]
+
 @export var map: RandomizedCityscape
 @export var monster: Monster
 @export var max_angular_velocity: float = 4 * TAU
@@ -190,6 +197,9 @@ func _process(dt: float) -> void:
 		tilt_direction = velocity.normalized() * tilt_direction.length()
 		predict_impact_value_ = 1.0
 		damaged_ = 3.0
+		AudioManager.play_sound(COLLISION_SFX.pick_random())
+		if randf() < 0.25:
+			AudioManager.play_sound(load("res://Assets/KK roar.mp3"))
 	
 	if predict_impact_time_scale_ != Data.time_scale:
 		var s: float = sign(predict_impact_time_scale_ - Data.time_scale)
@@ -203,7 +213,7 @@ func _process(dt: float) -> void:
 		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
 			Data.zoom_scale = predict_impact_zoom_scale_
 	
-	print(tilt_direction.length())
+	# print(tilt_direction.length())
 
 
 func _is_heading_towards(object: Node2D) -> bool:

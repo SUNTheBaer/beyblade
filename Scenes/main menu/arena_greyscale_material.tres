@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://csptbwqahhjxp"]
+
+[ext_resource type="Shader" uid="uid://dnvu2f254dro6" path="res://Scenes/main menu/greyscale.gdshader" id="1_rrmbi"]
+
+[resource]
+shader = ExtResource("1_rrmbi")
+shader_parameter/greyness = 1.0

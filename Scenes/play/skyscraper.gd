@@ -2,6 +2,13 @@ class_name Skyscraper
 extends Node2D
 
 static var IMPACT_CURVE: Curve = load("res://Scenes/play/skyscraper_impact_curve.tres")
+static var COLLISION_SFX: Array[AudioStream] = [
+	load("res://Assets/boom 1.mp3"),
+	load("res://Assets/boom 2.mp3"),
+	load("res://Assets/boom 3.mp3"),
+	load("res://Assets/boom 4.mp3"),
+	load("res://Assets/boom 5.mp3")
+]
 
 @export var height: int = 1
 @export var vertical_texture: Texture2D
@@ -57,8 +64,13 @@ func _collapse_me(node: Node2D) -> void:
 		return
 	var velocity: Vector2 = node.velocity if node is PlayerMech else Vector2(0, 0)
 	collapsing = true
-	shape.disabled = true
 	var d := velocity.normalized().dot((global_position - node.global_position).normalized())
 	ImpactManager.create_impact(height * maxf(1.0, velocity.length()) * d, 0.25, IMPACT_CURVE)
 	for i in sprites_.size():
 		velocities_[i] = (velocity + Vector2(randf_range(-128.0, 128.0), randf_range(-128.0, 128.0))) * i / 10.0
+	AudioManager.play_sound(COLLISION_SFX.pick_random())
+	_set_disabled.call_deferred()
+
+
+func _set_disabled() -> void:
+	shape.disabled = true

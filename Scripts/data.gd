@@ -1,11 +1,21 @@
 extends Node
 
-@export var victory: bool = false
-@export var disabled: bool = false
+@export var victory: bool = false: set = _set_victory
+@export var disabled: bool = false: set = _set_disabled
 @export var sun_direction: Vector2 = Vector2(1, 1).normalized()
 @export var time_scale: float = 1.0
 @export var zoom_scale: float = 1.0
 @export var impact_sensor: float = 1.0
+
+
+func _set_victory(value: bool) -> void:
+	victory = value
+	AudioManager.switch_music(null, 3.0)
+
+
+func _set_disabled(value: bool) -> void:
+	disabled = value
+	AudioManager.switch_music(null, 3.0)
 
 
 func _process(dt: float) -> void:
