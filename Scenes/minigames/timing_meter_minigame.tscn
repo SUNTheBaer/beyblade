@@ -2,12 +2,17 @@
 
 [ext_resource type="Script" uid="uid://b5v7gecfh2vp7" path="res://Scripts/timing_meter_minigame.gd" id="1_1gkby"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_e7btw"]
+[ext_resource type="Texture2D" uid="uid://cf0wtn17bryu7" path="res://Assets/Minigame/Timing Minigame/Timing bar.png" id="2_e7btw"]
+[ext_resource type="Texture2D" uid="uid://0exdb3x52lj" path="res://Assets/Minigame/Timing Minigame/Timing target.png" id="3_uphda"]
+[ext_resource type="Texture2D" uid="uid://u0nhxanvml31" path="res://Assets/Minigame/Timing Minigame/Timing marker.png" id="4_lvujg"]
 
 [node name="TimingMeterMinigame" type="Control" unique_id=398507986]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1gkby")
@@ -54,13 +59,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -27.0
-offset_right = 20.0
-offset_bottom = 27.0
+offset_left = -25.0
+offset_top = -40.0
+offset_right = 25.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.8390404, 0.1616556, 0.175082, 1)
+texture = ExtResource("3_uphda")
+region_rect = Rect2(284.4655, 0, 71.25745, 160)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
 [node name="SelectBar" type="ColorRect" parent="VBoxContainer/TimingMeter" unique_id=1307162024]
 unique_name_in_owner = true
@@ -71,9 +81,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -2.5
-offset_top = -27.0
+offset_top = -40.0
 offset_right = 2.5
-offset_bottom = 27.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1628688, 0.8243146, 0, 1)
+texture = ExtResource("4_lvujg")
+patch_margin_top = 6
+patch_margin_bottom = 6

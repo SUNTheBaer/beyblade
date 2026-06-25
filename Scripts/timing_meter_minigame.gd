@@ -1,12 +1,12 @@
 extends Minigame
 
-@onready var timing_meter: ColorRect = %TimingMeter
-@onready var select_bar: ColorRect = %SelectBar
-@onready var target_bar: ColorRect = %TargetBar
+@onready var timing_meter: NinePatchRect = %TimingMeter
+@onready var select_bar: NinePatchRect = %SelectBar
+@onready var target_bar: NinePatchRect = %TargetBar
 @onready var timer_text: Label = %TimerText
 
 @export var select_bar_velocity: float = 0.05
-@export var select_bar_offset: int = 10
+@export var select_bar_offset: int = 0
 @export var win_threshold: int = 3
 
 var select_bar_direction: int = 1

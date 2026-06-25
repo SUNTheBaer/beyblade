@@ -5,6 +5,7 @@ signal ability_clicked
 
 @onready var minigame_display: Control = %MinigameDisplay
 
+@export var all_skills: Array[Skill]
 @export var minigame_scene: PackedScene
 @export var cooldown_timer = 7.0
 
