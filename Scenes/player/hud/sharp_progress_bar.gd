@@ -1,6 +1,6 @@
 @tool
 class_name SharpProgressBar
-extends Control
+extends HUDComponent
 
 @export var progress: float = 0.5: set = _set_progress
 @export var tip_length_ratio: float = 2.0

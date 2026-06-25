@@ -3,7 +3,8 @@ class_name GlobalSceneManager
 
 enum SCENE {
 	PLAY,
-	VICTORY
+	VICTORY,
+	DEFEAT
 }
 
 var scene_map_: Dictionary
@@ -21,6 +22,7 @@ func _ready() -> void:
 	
 	register("res://Scenes/play/arena.tscn",	SCENE.PLAY)
 	register("res://Scenes/victory.tscn", 		SCENE.VICTORY)
+	register("res://Scenes/defeat.tscn", 		SCENE.DEFEAT)
 
 
 func reload_scene() -> void:
@@ -29,7 +31,7 @@ func reload_scene() -> void:
 
 func go_to_scene(scene: SCENE) -> void:
 	get_tree().paused = false
-	Engine.time_scale = 1.0
+	Data.time_scale = 1.0
 	var fname := _get_filename_from_scene(scene)
 	var err := get_tree().change_scene_to_file(fname)
 	if OK != err:

@@ -31,8 +31,9 @@ func _ready() -> void:
 	area.body_entered.connect(_body_entered)
 
 
-func _process(delta: float) -> void:
-	accum_ += delta
+func _process(dt: float) -> void:
+	dt *= Data.time_scale
+	accum_ += dt
 	if accum_ > 0.25:
 		collider.disabled = not EntityManager.in_range(global_position)
 		accum_ -= 0.25

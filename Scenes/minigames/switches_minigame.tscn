@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cdh84l8mtuwak"]
 
 [ext_resource type="Script" uid="uid://dajb451y4bs35" path="res://Scripts/switches_minigame.gd" id="1_3wt5c"]
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_axylo"]
 [ext_resource type="Script" uid="uid://ec3enbe05g4q" path="res://Scripts/switch.gd" id="3_qcsqf"]
 [ext_resource type="Texture2D" uid="uid://srx5lbggarp1" path="res://Assets/Minigame/Pixel Textures/Down switch.png" id="5_i4u77"]
 [ext_resource type="Texture2D" uid="uid://bxjraj3mwikqa" path="res://Assets/Minigame/Pixel Textures/Neutral switch.png" id="6_aj4cr"]
@@ -16,50 +17,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3wt5c")
-switches = [NodePath("Switches/Switch1/Switch"), NodePath("Switches/Switch2/Switch"), NodePath("Switches/Switch3/Switch"), NodePath("Switches/Switch4/Switch"), NodePath("Switches/Switch5/Switch"), NodePath("Switches/Switch6/Switch")]
-timer_time = 8.0
+switches = [NodePath("VBoxContainer/Switches/Switch1/Switch"), NodePath("VBoxContainer/Switches/Switch2/Switch"), NodePath("VBoxContainer/Switches/Switch3/Switch"), NodePath("VBoxContainer/Switches/Switch4/Switch"), NodePath("VBoxContainer/Switches/Switch5/Switch"), NodePath("VBoxContainer/Switches/Switch6/Switch")]
+timer_time = 16.0
 metadata/_custom_type_script = "uid://br0fpg8bvduxh"
 
-[node name="TimerText" type="Label" parent="." unique_id=110021635]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1085365002]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -252.0
-offset_top = 50.0
-offset_right = -52.0
-offset_bottom = 117.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=652473121]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=484525345]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimerText" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=110021635]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("2_axylo")
+theme_override_font_sizes/font_size = 96
 text = "Timer"
 horizontal_alignment = 1
 
-[node name="Switches" type="HBoxContainer" parent="." unique_id=1644003294]
+[node name="Switches" type="HBoxContainer" parent="VBoxContainer" unique_id=1644003294]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/separation = 30
+alignment = 1
 
-[node name="Switch1" type="VBoxContainer" parent="Switches" unique_id=562226606]
+[node name="Switch1" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=562226606]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch1" unique_id=1112843985]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch1" unique_id=1112843985]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch1" unique_id=828714124]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch1" unique_id=828714124]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -73,25 +74,25 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch1/Switch" unique_id=992490138]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch1/Switch" unique_id=992490138]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch1/Switch" unique_id=1432544688]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch1/Switch" unique_id=1432544688]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Switch2" type="VBoxContainer" parent="Switches" unique_id=1819436032]
+[node name="Switch2" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=1819436032]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch2" unique_id=510750569]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch2" unique_id=510750569]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch2" unique_id=1357920396]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch2" unique_id=1357920396]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -105,25 +106,25 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch2/Switch" unique_id=360084937]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch2/Switch" unique_id=360084937]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch2/Switch" unique_id=1012438549]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch2/Switch" unique_id=1012438549]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Switch3" type="VBoxContainer" parent="Switches" unique_id=1018001754]
+[node name="Switch3" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=1018001754]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch3" unique_id=1635605736]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch3" unique_id=1635605736]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch3" unique_id=1413228086]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch3" unique_id=1413228086]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -137,25 +138,25 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch3/Switch" unique_id=224030223]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch3/Switch" unique_id=224030223]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch3/Switch" unique_id=1730544979]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch3/Switch" unique_id=1730544979]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Switch4" type="VBoxContainer" parent="Switches" unique_id=1486223636]
+[node name="Switch4" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=1486223636]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch4" unique_id=1105667127]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch4" unique_id=1105667127]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch4" unique_id=566923120]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch4" unique_id=566923120]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -169,25 +170,25 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch4/Switch" unique_id=1430123886]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch4/Switch" unique_id=1430123886]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch4/Switch" unique_id=1245971149]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch4/Switch" unique_id=1245971149]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Switch5" type="VBoxContainer" parent="Switches" unique_id=1967263074]
+[node name="Switch5" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=1967263074]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch5" unique_id=283881620]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch5" unique_id=283881620]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch5" unique_id=1709035889]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch5" unique_id=1709035889]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -201,25 +202,25 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch5/Switch" unique_id=1744729137]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch5/Switch" unique_id=1744729137]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch5/Switch" unique_id=930886260]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch5/Switch" unique_id=930886260]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[node name="Switch6" type="VBoxContainer" parent="Switches" unique_id=545816005]
+[node name="Switch6" type="VBoxContainer" parent="VBoxContainer/Switches" unique_id=545816005]
 layout_mode = 2
 
-[node name="ResultLight" type="TextureRect" parent="Switches/Switch6" unique_id=182695643]
+[node name="ResultLight" type="TextureRect" parent="VBoxContainer/Switches/Switch6" unique_id=182695643]
 layout_mode = 2
 texture = ExtResource("8_f2iah")
 
-[node name="Switch" type="TextureRect" parent="Switches/Switch6" unique_id=488155]
+[node name="Switch" type="TextureRect" parent="VBoxContainer/Switches/Switch6" unique_id=488155]
 layout_mode = 2
 texture = ExtResource("7_nbtn2")
 script = ExtResource("3_qcsqf")
@@ -233,32 +234,32 @@ possible_results = {
 "red": ExtResource("9_johnb")
 }
 
-[node name="UpButton" type="Button" parent="Switches/Switch6/Switch" unique_id=1628868813]
+[node name="UpButton" type="Button" parent="VBoxContainer/Switches/Switch6/Switch" unique_id=1628868813]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 96.0
 
-[node name="DownButton" type="Button" parent="Switches/Switch6/Switch" unique_id=869994736]
+[node name="DownButton" type="Button" parent="VBoxContainer/Switches/Switch6/Switch" unique_id=869994736]
 layout_mode = 0
 offset_top = 96.0
 offset_right = 192.0
 offset_bottom = 192.0
 
-[connection signal="set_switch_position" from="Switches/Switch1/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch1/Switch/UpButton" to="Switches/Switch1/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch1/Switch/DownButton" to="Switches/Switch1/Switch" method="_on_down_button_pressed"]
-[connection signal="set_switch_position" from="Switches/Switch2/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch2/Switch/UpButton" to="Switches/Switch2/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch2/Switch/DownButton" to="Switches/Switch2/Switch" method="_on_down_button_pressed"]
-[connection signal="set_switch_position" from="Switches/Switch3/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch3/Switch/UpButton" to="Switches/Switch3/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch3/Switch/DownButton" to="Switches/Switch3/Switch" method="_on_down_button_pressed"]
-[connection signal="set_switch_position" from="Switches/Switch4/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch4/Switch/UpButton" to="Switches/Switch4/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch4/Switch/DownButton" to="Switches/Switch4/Switch" method="_on_down_button_pressed"]
-[connection signal="set_switch_position" from="Switches/Switch5/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch5/Switch/UpButton" to="Switches/Switch5/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch5/Switch/DownButton" to="Switches/Switch5/Switch" method="_on_down_button_pressed"]
-[connection signal="set_switch_position" from="Switches/Switch6/Switch" to="." method="_on_switch_set_switch_position"]
-[connection signal="pressed" from="Switches/Switch6/Switch/UpButton" to="Switches/Switch6/Switch" method="_on_up_button_pressed"]
-[connection signal="pressed" from="Switches/Switch6/Switch/DownButton" to="Switches/Switch6/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch1/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch1/Switch/UpButton" to="VBoxContainer/Switches/Switch1/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch1/Switch/DownButton" to="VBoxContainer/Switches/Switch1/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch2/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch2/Switch/UpButton" to="VBoxContainer/Switches/Switch2/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch2/Switch/DownButton" to="VBoxContainer/Switches/Switch2/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch3/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch3/Switch/UpButton" to="VBoxContainer/Switches/Switch3/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch3/Switch/DownButton" to="VBoxContainer/Switches/Switch3/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch4/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch4/Switch/UpButton" to="VBoxContainer/Switches/Switch4/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch4/Switch/DownButton" to="VBoxContainer/Switches/Switch4/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch5/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch5/Switch/UpButton" to="VBoxContainer/Switches/Switch5/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch5/Switch/DownButton" to="VBoxContainer/Switches/Switch5/Switch" method="_on_down_button_pressed"]
+[connection signal="set_switch_position" from="VBoxContainer/Switches/Switch6/Switch" to="." method="_on_switch_set_switch_position"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch6/Switch/UpButton" to="VBoxContainer/Switches/Switch6/Switch" method="_on_up_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Switches/Switch6/Switch/DownButton" to="VBoxContainer/Switches/Switch6/Switch" method="_on_down_button_pressed"]

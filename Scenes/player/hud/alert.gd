@@ -22,9 +22,7 @@ func _ready() -> void:
 	label.scrolling_speed = randf_range(32.0, 128.0)
 
 
-func _process(delta: float) -> void:
-	var dt := delta / maxf(0.01, Engine.time_scale)
-	
+func _process(dt: float) -> void:
 	if destroy:
 		scale.y = maxf(0.0, scale.y - dt * alert_cadence)
 		if scale.y <= 0.0:

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cuim48tcvy34h"]
+
+[ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="1_la3of"]
+[ext_resource type="SpriteFrames" uid="uid://8e5yl445fklt" path="res://Scenes/monster/monster_animation.tres" id="2_suwoo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
+radius = 120.0
+height = 640.0
+
+[node name="Monster" type="StaticBody2D" unique_id=543096226 node_paths=PackedStringArray("body", "shadow")]
+script = ExtResource("1_la3of")
+body = NodePath("Monster")
+shadow = NodePath("Shadow")
+target_velocity = Vector2(-32, 0)
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1685745687]
+self_modulate = Color(0, 0, 0, 0.5019608)
+position = Vector2(32.00006, 32)
+rotation = 1.5707964
+scale = Vector2(1.2000002, 1.2000002)
+sprite_frames = ExtResource("2_suwoo")
+
+[node name="Monster" type="AnimatedSprite2D" parent="." unique_id=1510092435]
+z_index = 8
+rotation = 1.5707964
+sprite_frames = ExtResource("2_suwoo")
+animation = &"walk"
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=25322788]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i13qm")
+
+[node name="Shape2" type="CollisionShape2D" parent="." unique_id=1009152624]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i13qm")

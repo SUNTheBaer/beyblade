@@ -20,31 +20,56 @@ extends CharacterBody2D
 @export var pointer: Node2D
 @export var shadow: Node2D
 
+var bonus_accelerate_: bool
+
+
 var damaged_: float
 var accum_: float
 var predict_impact_: bool = false
 var predict_impact_value_: float = 0.0
 var predict_impact_time_scale_: float = 1.0
+var predict_impact_time_accel_: float = 1.0
 var predict_impact_zoom_scale_: float = 1.0
+var predict_impact_zoom_accel_: float = 1.0
 var shadow_height_: float = 24.0
 
 var linear_input_disabled: bool = false
 var tilt_input_disabled: bool = false
 
+
+func is_out_of_bounds() -> bool:
+	var pos := Vector2i(
+		global_position.x / map.tile_set.tile_size.x,
+		global_position.y / map.tile_set.tile_size.y)
+	return pos.x <= -map.width / 2 \
+		or pos.y <= -map.height / 2 \
+		or pos.x > map.width / 2 \
+		or pos.y > map.height / 2
+
+
+func imminent_impact() -> bool:
+	return predict_impact_
+
+
 func get_precession() -> float:
 	if linear_velocity.length() < 1.0 or tilt_direction.length() < 1.0:
 		return 0.0
-	var n_component := linear_acceleration * 0.58
-	var m_component := (1.0 - absf(linear_velocity.normalized().dot(tilt_direction.normalized()))) * (linear_velocity.length() + tilt_direction.length())
-	var v_component := 1.0 - (n_component / (n_component + m_component))
+	# var n_component := linear_acceleration * 0.58
+	var m_component := (1.0 - absf(linear_velocity.normalized().dot(tilt_direction.normalized()))) \
+		* (linear_velocity.length() + tilt_direction.length_squared())
+	var v_component := m_component / maxf(TAU, pow(TAU, 2.0) * pow(angular_velocity, 3.0))
 	var result: float = sign(linear_velocity.angle_to(tilt_direction)) * PI * v_component
 	
-	print(n_component, " ", m_component, " ", v_component, " ", result)
+	# print(n_component, " ", m_component, " ", v_component, " ", result)
 	return result
 
 
+func is_at_max_angular_velocity() -> bool:
+	return angular_velocity >= max_angular_velocity
+
+
 func get_angular_acceleration() -> float:
-	return angular_acceleration * linear_velocity.length() / linear_acceleration
+	return angular_acceleration
 
 
 func _ready() -> void:
@@ -53,6 +78,9 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	var orig_dt := dt
+	dt *= Data.time_scale
+	
 	if damaged_ > 0.0 or Data.disabled:
 		accum_ = fmod(accum_ + dt * (1.0 if Data.disabled else 4.0), 1.0)
 		damaged_ = maxf(damaged_ - dt, 0.0)
@@ -68,20 +96,15 @@ func _process(dt: float) -> void:
 	
 	shadow.global_position = global_position + Data.sun_direction * shadow_height_
 	
-	var pos := Vector2i(
-		global_position.x / map.tile_set.tile_size.x,
-		global_position.y / map.tile_set.tile_size.y)
+	var out_of_bounds := is_out_of_bounds()
 	
-	var out_of_bounds := pos.x <= -map.width / 2 \
-		or pos.y <= -map.height / 2 \
-		or pos.x > map.width / 2 \
-		or pos.y > map.height / 2
-	
-	if Engine.time_scale >= 1.0:
+	if Data.time_scale >= 1.0:
 		if Data.disabled:
 			linear_velocity *= 0.9
+		elif bonus_accelerate_:
+			linear_velocity *= 1.0
 		elif predict_impact_value_ > 0.0:
-			linear_velocity *= 0.95
+			linear_velocity *= 0.8
 		elif out_of_bounds:
 			linear_velocity *= 0.99
 		else:
@@ -90,16 +113,21 @@ func _process(dt: float) -> void:
 				if linear_velocity.length() < linear_acceleration:
 					linear_velocity = linear_velocity.normalized() * linear_acceleration
 	
-	if not Data.disabled and not linear_input_disabled:
-		if Input.is_action_pressed("mecha_forward"):
-			linear_velocity += linear_velocity.normalized() * dt * linear_acceleration
-		if Input.is_action_pressed("mecha_brake"):
-			linear_velocity = linear_velocity * 0.9
+	if not Data.disabled:
+		if predict_impact_:
+			linear_velocity += linear_velocity.normalized() * orig_dt * linear_acceleration
+		elif not linear_input_disabled:
+			if bonus_accelerate_ or Input.is_action_pressed("mecha_forward"):
+				linear_velocity += linear_velocity.normalized() * dt * linear_acceleration * (3.0 if bonus_accelerate_ else 1.0)
+			if Input.is_action_pressed("mecha_brake"):
+				linear_velocity *= 0.9
 	linear_velocity = (linear_velocity + tilt_direction / TAU).normalized() * linear_velocity.length()
 	
 	if not Data.disabled and not tilt_input_disabled:
-		if Engine.time_scale >= 1.0:
-			tilt_direction *= 0.999
+		if Data.time_scale >= 1.0:
+			tilt_direction *= 0.95
+		if tilt_direction.length() > tilt_acceleration * 0.25:
+			tilt_direction = tilt_direction.normalized() * tilt_acceleration * 0.25
 		if Input.is_action_pressed("mecha_tilt_left"):
 			tilt_direction += linear_velocity.rotated(-PI/2).normalized() * dt * tilt_acceleration
 		if Input.is_action_pressed("mecha_tilt_right"):
@@ -109,10 +137,14 @@ func _process(dt: float) -> void:
 	
 	if Data.disabled:
 		angular_velocity = clampf(angular_velocity - TAU * dt, 0, max_angular_velocity)
-	elif out_of_bounds:
-		angular_velocity = clampf(angular_velocity - 0.5 * get_angular_acceleration() * dt, 0, max_angular_velocity)
 	else:
-		angular_velocity = clampf(angular_velocity + get_angular_acceleration() * dt, 0, max_angular_velocity)
+		if out_of_bounds:
+			angular_velocity = clampf(angular_velocity - 0.5 * get_angular_acceleration() * dt, 0, max_angular_velocity)
+		else:
+			angular_velocity = clampf(angular_velocity + get_angular_acceleration() * dt, 0, max_angular_velocity)
+		if not linear_input_disabled and Input.is_action_pressed("mecha_brake"):
+			angular_velocity *= 0.9
+	
 	angular_position += angular_velocity * dt
 	
 	body.rotation = angular_position
@@ -135,10 +167,13 @@ func _process(dt: float) -> void:
 		else:
 			Data.impact_sensor = 1.0 - impact.get_remainder().length() / impact_register_distance
 	
-	if not Data.victory:
-		predict_impact_time_scale_ = pow(Data.impact_sensor, 2.0) * 0.9 + 0.1
+	if Data.victory:
+		predict_impact_time_scale_ = 0.00
+	elif predict_impact_ or linear_input_disabled or tilt_input_disabled:
+		predict_impact_time_scale_ = 0.15
 	else:
-		predict_impact_time_scale_ = 0.05
+		predict_impact_time_scale_ = pow(Data.impact_sensor, 2.0) * 0.9 + 0.1
+		
 	
 	velocity = lerp(velocity, linear_velocity, 0.05)
 	var collision := move_and_collide(velocity * dt)
@@ -148,24 +183,27 @@ func _process(dt: float) -> void:
 		angular_velocity = maxf(angular_velocity - velocity.length() / PI, 0.0)
 		ImpactManager.create_impact(velocity.length(), 0.5)
 		var n := collision.get_normal()
-		print(n)
-		print(velocity, " bounce ", velocity.bounce(n))
+		# print(n)
+		# print(velocity, " bounce ", velocity.bounce(n))
 		velocity = 2.0 * velocity.bounce(n)
 		linear_velocity = 2.0 * linear_velocity.bounce(n)
-			
+		tilt_direction = velocity.normalized() * tilt_direction.length()
+		predict_impact_value_ = 1.0
 		damaged_ = 3.0
 	
-	if predict_impact_time_scale_ != Engine.time_scale:
-		var s: float = sign(predict_impact_time_scale_ - Engine.time_scale)
-		Engine.time_scale += dt * s
-		if sign(predict_impact_time_scale_ - Engine.time_scale) != s:
-			Engine.time_scale = predict_impact_time_scale_
+	if predict_impact_time_scale_ != Data.time_scale:
+		var s: float = sign(predict_impact_time_scale_ - Data.time_scale)
+		Data.time_scale += orig_dt * s * predict_impact_time_accel_
+		if sign(predict_impact_time_scale_ - Data.time_scale) != s:
+			Data.time_scale = predict_impact_time_scale_
 
 	if predict_impact_zoom_scale_ != Data.zoom_scale:
 		var s: float = sign(predict_impact_zoom_scale_ - Data.zoom_scale)
-		Data.zoom_scale += dt * s
+		Data.zoom_scale += orig_dt * s * predict_impact_zoom_accel_
 		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
 			Data.zoom_scale = predict_impact_zoom_scale_
+	
+	print(tilt_direction.length())
 
 
 func _is_heading_towards(object: Node2D) -> bool:
@@ -175,38 +213,33 @@ func _is_heading_towards(object: Node2D) -> bool:
 func _on_ability_clicked() -> void:
 	linear_input_disabled = true
 	tilt_input_disabled = true
-	Engine.time_scale = time_scale_modifier
 
 
 func _on_direction_minigame_complete(result: float) -> void:
 	linear_input_disabled = false
 	tilt_input_disabled = false
-	Engine.time_scale = 1.0
 	if result > 0.0:
-		# Dash forward
-		linear_velocity *= 3
-		await get_tree().create_timer(0.2).timeout
-		linear_velocity /= 3
+		bonus_accelerate_ = true
+		await get_tree().create_timer(4.0).timeout
+		bonus_accelerate_ = false
+	else:
+		ImpactManager.create_impact(128.0, 0.25)
 
 
 func _on_stun_minigame_complete(result: float) -> void:
 	linear_input_disabled = false
 	tilt_input_disabled = false
-	Engine.time_scale = 1.0
 	if result > 0.0:
 		# Greatly reduce impact of collisions
 		pass
+	else:
+		ImpactManager.create_impact(128.0, 0.25)
+
 
 func _on_velocity_minigame_complete(result: float) -> void:
 	linear_input_disabled = false
-	Engine.time_scale = 1.0
+	tilt_input_disabled = false
 	if result > 0.0:
-		# Increase accel but can't turn
-		linear_acceleration = 1.0
-		await get_tree().create_timer(2.0).timeout
-		tilt_input_disabled = false
-		linear_acceleration = 0.25
-		
-		predict_impact_zoom_scale_ = 1.0
-		predict_impact_ = false
-		predict_impact_value_ = 1.0
+		angular_velocity = max_angular_velocity
+	else:
+		ImpactManager.create_impact(128.0, 0.25)

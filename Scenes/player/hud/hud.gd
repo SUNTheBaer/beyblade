@@ -9,7 +9,7 @@ extends Control
 
 var floating_progress_: float
 
-func _process(dt: float) -> void:
+func _process(__: float) -> void:
 	progress.progress = player.angular_velocity / player.max_angular_velocity
 	floating_progress_ = lerp(floating_progress_, progress.progress, 0.05)
 	potential_progress.progress = floating_progress_ + player.get_angular_acceleration() / player.max_angular_velocity

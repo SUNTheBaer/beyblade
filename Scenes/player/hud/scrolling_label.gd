@@ -20,8 +20,8 @@ func _ready() -> void:
 	_sync_size()
 
 
-func _process(delta: float) -> void:
-	scrolling_amount_ = fmod(scrolling_amount_ + delta * scrolling_speed, base_size_)
+func _process(dt: float) -> void:
+	scrolling_amount_ = fmod(scrolling_amount_ + dt * scrolling_speed, base_size_)
 	label.position.x = -scrolling_amount_
 
 

@@ -14,6 +14,11 @@ func _ready() -> void:
 	_scan_children(hud)
 
 
+func _process(dt: float) -> void:
+	if Data.victory:
+		modulate.a = maxf(0.0, modulate.a - dt)
+
+
 func _scan_children(value: Control) -> void:
 	if value is HUDComponent:
 		value.capacity_exceeded.connect(_increment_alert.bind(value))

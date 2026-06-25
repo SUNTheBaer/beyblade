@@ -7,12 +7,12 @@ extends Node3D
 @export var camera: Camera3D
 
 
-func _process(delta: float) -> void:
+func _process(__: float) -> void:
 	if Input.is_action_just_pressed("mecha_switch_view"):
 		top_down = not top_down
 
 
-func _physics_process(dt: float) -> void:
+func _physics_process(__: float) -> void:
 	if null == mecha:
 		return
 	

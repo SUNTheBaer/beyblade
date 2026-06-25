@@ -16,9 +16,12 @@ func _ready() -> void:
 	super._ready()
 	target_bar.position.x = randf_range(0, timing_meter.size.x - target_bar.size.x)
 
-func _physics_process(delta: float) -> void:
-	timer_text.text = "%.2f" % timer.time_left
-	select_bar.position.x += select_bar_velocity * select_bar_direction * delta
+func _physics_process(dt: float) -> void:
+	if timer.paused:
+		return
+	
+	timer_text.text = "%.2fs remains" % timer.time_left
+	select_bar.position.x += select_bar_velocity * select_bar_direction * dt
 	
 	if (select_bar.position.x > timing_meter.size.x - select_bar_offset) or (select_bar.position.x < select_bar_offset):
 		select_bar_direction *= -1
