@@ -33,7 +33,7 @@ func _process(dt: float) -> void:
 	else:
 		var target_rotation := (player.global_position - global_position).angle()
 		var diff := angle_difference(target_rotation, rotation)
-		print("diff ", diff)
+		# print("diff ", diff)
 		rotation = target_rotation \
 			if absf(diff) < rotation_speed * dt \
 			else rotation - rotation_speed * dt * sign(diff)

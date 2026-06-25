@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dqmtdt1igkcsw"
+path="res://.godot/imported/ouchie 2.wav-1a1f650b07f7a0167549ec05d46fa671.sample"
+
+[deps]
+
+source_file="res://Assets/ouchie 2.wav"
+dest_files=["res://.godot/imported/ouchie 2.wav-1a1f650b07f7a0167549ec05d46fa671.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
