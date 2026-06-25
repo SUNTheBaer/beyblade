@@ -11,12 +11,10 @@ extends Node
 
 func _set_victory(value: bool) -> void:
 	victory = value
-	AudioManager.switch_music(null, 3.0)
 
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
-	AudioManager.switch_music(null, 3.0)
 
 
 func get_time() -> float:

@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_yjdv5")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -70,7 +70,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7c3iw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walk",
 "speed": 5.0
 }]

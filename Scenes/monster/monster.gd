@@ -9,11 +9,16 @@ extends StaticBody2D
 @export var impact_velocity: Vector2
 @export var rotation_speed: float = PI / 4.0
 
+var monster_speed: float = 128.0
+var monster_stun_multiplier: float = 5.0
+var monster_stun_time: float = 2.0
+
 
 func _set_hp(value: float) -> void:
 	hp = clampf(value, 0.0, 1.0)
 	if hp <= 0.0:
 		Data.victory = true
+		AudioManager.switch_music(null, 3.0)
 
 
 func _ready() -> void:
@@ -37,7 +42,7 @@ func _process(dt: float) -> void:
 		rotation = target_rotation \
 			if absf(diff) < rotation_speed * dt \
 			else rotation - rotation_speed * dt * sign(diff)
-		target_velocity = Vector2.from_angle(rotation) * 128.0
+		target_velocity = Vector2.from_angle(rotation) * monster_speed
 		if not is_zero_approx(target_velocity.length()):
 			body.animation = "walk"
 			global_position += target_velocity * dt
@@ -47,3 +52,8 @@ func _process(dt: float) -> void:
 	shadow.animation = body.animation
 	shadow.frame = body.frame
 	shadow.global_position = global_position + Data.sun_direction * 32.0
+
+func stun_monster():
+	monster_speed /= monster_stun_multiplier
+	await get_tree().create_timer(monster_stun_time).timeout
+	monster_speed *= monster_stun_multiplier
