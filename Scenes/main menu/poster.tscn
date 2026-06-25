@@ -1,10 +1,25 @@
 [gd_scene format=3 uid="uid://5jdte2i4tjf1"]
 
 [ext_resource type="Texture2D" uid="uid://dqi8j63er2yjf" path="res://Assets/Main menu/Background - 1.png" id="1_tu21c"]
+[ext_resource type="Texture2D" uid="uid://csudo58xveaqx" path="res://Assets/Main menu/Background - 2.png" id="2_5ah0w"]
 [ext_resource type="Texture2D" uid="uid://mld5qu8hu416" path="res://Assets/Main menu/Harrow.png" id="2_fs4to"]
 [ext_resource type="Texture2D" uid="uid://5yff5vihq6o4" path="res://Assets/Main menu/Logo.png" id="3_5ah0w"]
 [ext_resource type="Texture2D" uid="uid://bbyii6qsn81tn" path="res://Assets/Main menu/Play.png" id="4_5fsa0"]
 [ext_resource type="Script" uid="uid://dnef2dys7wedg" path="res://Scenes/main menu/impact_hover.gd" id="5_rlut7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xef34"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tu21c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5ah0w")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Poster" type="Control" unique_id=1137955399]
 layout_mode = 3
@@ -14,16 +29,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="." unique_id=798217741]
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=123101935]
 use_parent_material = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("1_tu21c")
+position = Vector2(720, 540)
+sprite_frames = SubResource("SpriteFrames_xef34")
+autoplay = "default"
 
 [node name="Harrow" type="TextureRect" parent="." unique_id=1097441245]
 use_parent_material = true
