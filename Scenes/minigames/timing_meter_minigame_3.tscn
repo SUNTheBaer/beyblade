@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bvl6dyovf8ybl"]
+[gd_scene format=3 uid="uid://jrdtlt6ovrix"]
 
 [ext_resource type="Script" uid="uid://b5v7gecfh2vp7" path="res://Scripts/timing_meter_minigame.gd" id="1_1gkby"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_e7btw"]
