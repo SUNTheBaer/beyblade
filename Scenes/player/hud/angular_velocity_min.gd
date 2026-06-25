@@ -14,5 +14,6 @@ func _process(dt: float) -> void:
 		accum_ += dt
 		if accum_ > capacity + 1.0:
 			Data.disabled = true
+			AudioManager.switch_music(null, 3.0)
 	else:
 		accum_ = 0.0
