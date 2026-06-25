@@ -9,6 +9,8 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	if Data.disabled:
 		modulate.a = minf(1.0, modulate.a + dt / time_to_lose)
 		if modulate.a >= 1.0:

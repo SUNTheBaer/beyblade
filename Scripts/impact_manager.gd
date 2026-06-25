@@ -16,6 +16,8 @@ func create_impact(mag: float = 1.0, duration: float = 0.1, curve: Curve = null)
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	impact = 0.0
 	
 	var to_remove: PackedInt32Array

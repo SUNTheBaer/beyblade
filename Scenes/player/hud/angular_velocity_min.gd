@@ -7,9 +7,11 @@ extends HUDComponent
 var accum_: float
 
 func _process(dt: float) -> void:
+	dt *= Data.get_time()
+	
 	is_capacity_exceeded = player.angular_velocity < player.get_angular_acceleration() * capacity
 	if is_capacity_exceeded:
-		accum_ += dt * Data.time_scale
+		accum_ += dt
 		if accum_ > capacity + 1.0:
 			Data.disabled = true
 	else:

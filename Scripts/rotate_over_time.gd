@@ -6,4 +6,6 @@ extends Node3D
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
+	
 	rotate(axis, rotation_speed * dt)

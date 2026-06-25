@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
-	dt *= Data.time_scale
+	dt *= Data.get_time()
 	
 	if Data.disabled:
 		visible = false

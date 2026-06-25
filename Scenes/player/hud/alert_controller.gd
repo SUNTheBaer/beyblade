@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
 	if Data.victory:
 		modulate.a = maxf(0.0, modulate.a - dt)
 

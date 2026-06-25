@@ -2,7 +2,6 @@ class_name Router
 extends Control
 
 @export var battle_scene: PackedScene
-@export var minigame_scene: PackedScene
 
 var greyness_: float = 0.0: set = _set_greyness
 
@@ -13,6 +12,7 @@ func _set_greyness(value: float) -> void:
 
 
 func _ready() -> void:
+	Data.reset()
 	AudioManager.switch_music(load("res://Assets/KKVSTT main menu w intro.mp3"))
 	$Poster/TextureButton.disabled = false
 	$Poster/TextureButton.pressed.connect(_on_texture_button_pressed)
@@ -22,8 +22,8 @@ func _route() -> void:
 	AudioManager.switch_music(load("res://Assets/KKVSTT battle theme.mp3"), 12.0)
 	
 	var scene := battle_scene.instantiate()
-	get_tree().current_scene = scene
 	get_tree().root.add_child(scene)
+	get_tree().current_scene = scene
 	queue_free()
 
 

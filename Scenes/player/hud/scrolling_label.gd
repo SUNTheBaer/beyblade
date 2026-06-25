@@ -21,6 +21,7 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	dt *= Data.pause_scale
 	scrolling_amount_ = fmod(scrolling_amount_ + dt * scrolling_speed, base_size_)
 	label.position.x = -scrolling_amount_
 

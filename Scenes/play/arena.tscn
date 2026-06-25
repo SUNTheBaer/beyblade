@@ -48,6 +48,8 @@
 [ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="45_yirdq"]
 [ext_resource type="Material" uid="uid://csptbwqahhjxp" path="res://Scenes/main menu/arena_greyscale_material.tres" id="46_ul8bc"]
 [ext_resource type="Script" uid="uid://dxgdfven2qbbm" path="res://Scenes/play/start_timescale.gd" id="48_bca0g"]
+[ext_resource type="Script" uid="uid://p7632fk2v5er" path="res://Scenes/play/pause_menu.gd" id="48_olwfp"]
+[ext_resource type="Script" uid="uid://cqj6qxbng0611" path="res://Scenes/play/reset_data.gd" id="50_w62nu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehees"]
 bg_color = Color(1, 1, 1, 0.5019608)
@@ -664,6 +666,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("45_yirdq")
+initial_wait_time = 2.0
 initial_fade = 1.0
 fade_in_time = -2.0
 metadata/_custom_type_script = "uid://bxju5l0sr4klf"
@@ -672,9 +675,46 @@ metadata/_custom_type_script = "uid://bxju5l0sr4klf"
 material = ExtResource("46_ul8bc")
 layout_mode = 1
 
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=885276249]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=1894720627 node_paths=PackedStringArray("resume_button", "restart_button", "main_menu_button")]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+script = ExtResource("48_olwfp")
+resume_button = NodePath("Resume")
+restart_button = NodePath("Restart")
+main_menu_button = NodePath("MainMenu")
+
+[node name="Resume" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1084901872]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_t6dfd")
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Restart" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=856577736]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_t6dfd")
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1006699646]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_t6dfd")
+theme_override_font_sizes/font_size = 64
+text = "Main Menu"
+
 [node name="StartTimescale" type="Node" parent="." unique_id=1436585676]
 script = ExtResource("48_bca0g")
 time_to_scale = 4.0
+
+[node name="ResetData" type="Node" parent="." unique_id=298487845]
+script = ExtResource("50_w62nu")
 
 [connection signal="ability_clicked" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_ability_clicked"]
 [connection signal="direction_minigame_complete" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_direction_minigame_complete"]
