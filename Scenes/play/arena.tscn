@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://byecnvoar2g8c" path="res://Scenes/player/hud/angular_velocity_min.gd" id="14_qeiqt"]
 [ext_resource type="Script" uid="uid://b0y6bs782pjhd" path="res://Scenes/player/hud/disabled_alert.gd" id="15_abrxj"]
 [ext_resource type="Script" uid="uid://cgbv2y0mxau4g" path="res://Scripts/velocity_skill.gd" id="15_c53b8"]
-[ext_resource type="PackedScene" uid="uid://bvl6dyovf8ybl" path="res://Scenes/minigames/timing_meter_minigame.tscn" id="15_ovfp5"]
+[ext_resource type="PackedScene" uid="uid://8p2objts1og0" path="res://Scenes/minigames/timing_meter_minigame.tscn" id="15_ovfp5"]
 [ext_resource type="Script" uid="uid://cqjwdx1w0g5vw" path="res://Scenes/player/hud/debugger.gd" id="15_rn3mc"]
 [ext_resource type="Shortcut" uid="uid://i310fyfvritc" path="res://Scenes/minigames/direction_minigame_shortcut.tres" id="17_0kpkv"]
 [ext_resource type="StyleBox" uid="uid://bj1iep4518tc3" path="res://Scenes/player/hud/panel.tres" id="17_ehees"]

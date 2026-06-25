@@ -12,6 +12,8 @@ var master_bus: int = AudioServer.get_bus_index("Master")
 
 
 func switch_music(audio: AudioStream, transition: float = 1.0) -> void:
+	print("switching music to: ")
+	print(audio)
 	if null != music_stream_player.stream:
 		var tween_out := create_tween()
 		tween_out.tween_property(self, "music_volume", 0.0, transition)

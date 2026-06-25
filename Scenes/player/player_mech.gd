@@ -240,8 +240,7 @@ func _on_stun_minigame_complete(result: float) -> void:
 	linear_input_disabled = false
 	tilt_input_disabled = false
 	if result > 0.0:
-		# Greatly reduce impact of collisions
-		pass
+		monster.stun_monster()
 	else:
 		ImpactManager.create_impact(128.0, 0.25)
 
