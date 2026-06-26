@@ -3,22 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://26wy07b7yyyw" path="res://Assets/Skyscraper base.png" id="1_2pprx"]
 [ext_resource type="Script" uid="uid://7gthtn5ptx67" path="res://Scenes/play/skyscraper.gd" id="1_sg5sv"]
 [ext_resource type="Texture2D" uid="uid://d3clg1ojj7ngi" path="res://Assets/Skyscraper top.png" id="2_337jk"]
-[ext_resource type="Texture2D" uid="uid://curyash1v8avl" path="res://Assets/Smoke/Smoke.png" id="4_jxbr2"]
-[ext_resource type="Material" uid="uid://cn83rg6ecmwp7" path="res://Scenes/play/dust_particle_material.tres" id="5_a2q1r"]
-[ext_resource type="Texture2D" uid="uid://5nveny3juyhr" path="res://Assets/Smoke/Smoke2.png" id="6_j7vgi"]
-[ext_resource type="Texture2D" uid="uid://nmq7d06nav0i" path="res://Assets/Smoke/Smoke3.png" id="7_6xac3"]
-[ext_resource type="Texture2D" uid="uid://b0gkk4qqo4xts" path="res://Assets/Smoke/Smoke4.png" id="8_1fr15"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_337jk"]
 size = Vector2(160, 160)
 
-[node name="Skyscraper" type="Node2D" unique_id=1432227385 node_paths=PackedStringArray("area", "shape", "dust")]
+[node name="Skyscraper" type="Node2D" unique_id=1432227385 node_paths=PackedStringArray("area", "shape")]
 use_parent_material = true
 script = ExtResource("1_sg5sv")
 vertical_texture = ExtResource("2_337jk")
 area = NodePath("Area")
 shape = NodePath("Area/CollisionShape2D")
-dust = [NodePath("GroundDust"), NodePath("GroundDust2"), NodePath("GroundDust3"), NodePath("GroundDust4")]
 
 [node name="Base" type="Sprite2D" parent="." unique_id=1352440885]
 use_parent_material = true
@@ -31,39 +25,3 @@ use_parent_material = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area" unique_id=1653638606]
 use_parent_material = true
 shape = SubResource("RectangleShape2D_337jk")
-
-[node name="GroundDust" type="GPUParticles2D" parent="." unique_id=1688451622]
-z_index = 3
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("4_jxbr2")
-lifetime = 30.0
-process_material = ExtResource("5_a2q1r")
-
-[node name="GroundDust2" type="GPUParticles2D" parent="." unique_id=1592309986]
-z_index = 3
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("6_j7vgi")
-lifetime = 30.0
-process_material = ExtResource("5_a2q1r")
-
-[node name="GroundDust3" type="GPUParticles2D" parent="." unique_id=443391584]
-z_index = 3
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("7_6xac3")
-lifetime = 30.0
-process_material = ExtResource("5_a2q1r")
-
-[node name="GroundDust4" type="GPUParticles2D" parent="." unique_id=1824533058]
-z_index = 3
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("8_1fr15")
-lifetime = 30.0
-process_material = ExtResource("5_a2q1r")

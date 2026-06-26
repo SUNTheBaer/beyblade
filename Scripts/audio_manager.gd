@@ -1,5 +1,7 @@
 extends Node
 
+signal no_signal
+
 @export var music_volume: float = 0.0
 @export var sfx_volume: float = 1.0
 
@@ -38,6 +40,8 @@ func pulse(to: float, transition: float = 0.0) -> Signal:
 
 
 func play_sound(audio: AudioStream) -> Signal:
+	if null == audio:
+		return no_signal
 	var sfx_stream_player := AudioStreamPlayer.new()
 	sfx_stream_player.pitch_scale = randf_range(0.9, 1.1)
 	sfx_stream_player.stream = audio

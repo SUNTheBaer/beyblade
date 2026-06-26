@@ -2,10 +2,10 @@ class_name PlayerMech
 extends CharacterBody2D
 
 static var COLLISION_SFX: Array[AudioStream] = [
-	load("res://Assets/ouchie 1.mp3"),
-	load("res://Assets/ouchie 2.mp3"),
-	load("res://Assets/ouchie 3.mp3"),
-	load("res://Assets/ouchie 4.mp3")
+	# load("res://Assets/ouchie 1.mp3"),
+	# load("res://Assets/ouchie 2.mp3"),
+	# load("res://Assets/ouchie 3.mp3"),
+	# load("res://Assets/ouchie 4.mp3")
 ]
 
 @export var map: RandomizedCityscape

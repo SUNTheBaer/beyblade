@@ -163,7 +163,7 @@ position = Vector2(4800, 0)
 rotation = 3.1415927
 player = NodePath("../PlayerMech")
 
-[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster") instance=ExtResource("1_8ndor")]
+[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster", "dust") instance=ExtResource("1_8ndor")]
 position = Vector2(-867, -1)
 map = NodePath("../Cityscape")
 monster = NodePath("../Monster")
@@ -173,12 +173,12 @@ angular_velocity = 1.571
 linear_acceleration = 192.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 256.0
+dust = [NodePath("GroundDust"), NodePath("GroundDust2"), NodePath("GroundDust3"), NodePath("GroundDust4")]
 
 [node name="MonserCameraViewport" type="SubViewport" parent="." unique_id=297163106]
 disable_3d = true
 size = Vector2i(512, 180)
-render_target_clear_mode = 1
-render_target_update_mode = 0
+render_target_update_mode = 4
 script = ExtResource("15_ukgc8")
 
 [node name="MonsterCamera" type="Camera2D" parent="MonserCameraViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]

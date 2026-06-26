@@ -1,9 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://dx5dwjp0p5ng3"]
-
-[ext_resource type="FontFile" uid="uid://b2d2v57ka4dub" path="res://Assets/fonts/CutiveMono-Regular.ttf" id="1_xb51t"]
-
-[resource]
-Label/colors/font_color = Color(1, 1, 1, 1)
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 8
-Label/fonts/font = ExtResource("1_xb51t")
