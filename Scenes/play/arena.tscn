@@ -173,7 +173,7 @@ angular_velocity = 1.571
 linear_acceleration = 192.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 256.0
-dust = [NodePath("GroundDust"), NodePath("GroundDust2"), NodePath("GroundDust3"), NodePath("GroundDust4")]
+dust = [null, null, null, null]
 
 [node name="MonserCameraViewport" type="SubViewport" parent="." unique_id=297163106]
 disable_3d = true
