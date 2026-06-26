@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dvdjjw8gq0i7h"]
+
+[ext_resource type="Shader" uid="uid://0srpy585wmjn" path="res://Scenes/global_colorize.gdshader" id="1_p2721"]
+
+[resource]
+shader = ExtResource("1_p2721")
+shader_parameter/target_color = Color(0, 0, 0, 1)
+shader_parameter/target_mix = 0.0

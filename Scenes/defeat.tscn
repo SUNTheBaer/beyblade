@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="1_g61i6"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_ms7ji"]
+[ext_resource type="Script" uid="uid://iuakld2qua0p" path="res://Scripts/delayed_scene_transition.gd" id="3_ms7ji"]
 
-[node name="Defeat" type="Control" unique_id=1709937895 node_paths=PackedStringArray("label")]
+[node name="Defeat" type="Control" unique_id=1709937895]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g61i6")
-label = NodePath("CenterContainer/SubViewportContainer")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=801028960]
 layout_mode = 1
@@ -57,3 +57,7 @@ theme_override_font_sizes/font_size = 128
 text = "DEFEAT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DelayedSceneTransition" type="Node" parent="." unique_id=1417260275]
+script = ExtResource("3_ms7ji")
+metadata/_custom_type_script = "uid://iuakld2qua0p"

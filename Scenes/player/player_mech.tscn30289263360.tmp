@@ -6,14 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cxag80068lyqd" path="res://Assets/Cursor.png" id="4_gqju5"]
 [ext_resource type="Material" uid="uid://cn83rg6ecmwp7" path="res://Scenes/play/dust_particle_material.tres" id="5_grvog"]
 [ext_resource type="Texture2D" uid="uid://curyash1v8avl" path="res://Assets/Smoke/Smoke.png" id="5_o161p"]
-[ext_resource type="Texture2D" uid="uid://5nveny3juyhr" path="res://Assets/Smoke/Smoke2.png" id="7_2k8yw"]
-[ext_resource type="Texture2D" uid="uid://nmq7d06nav0i" path="res://Assets/Smoke/Smoke3.png" id="8_gxwse"]
-[ext_resource type="Texture2D" uid="uid://b0gkk4qqo4xts" path="res://Assets/Smoke/Smoke4.png" id="9_jk0p4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqju5"]
 radius = 128.0
 
-[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "damaged", "pointer", "monster_pointer", "shadow", "dust")]
+[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "damaged", "pointer", "monster_pointer", "shadow")]
 z_index = 4
 use_parent_material = true
 script = ExtResource("1_1jxkn")
@@ -22,7 +19,6 @@ damaged = NodePath("Body/Damage")
 pointer = NodePath("Pointer")
 monster_pointer = NodePath("MonsterPointer")
 shadow = NodePath("Shadow")
-dust = [NodePath("GroundDust"), NodePath("GroundDust2"), NodePath("GroundDust3"), NodePath("GroundDust4")]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1536957718]
 self_modulate = Color(0, 0, 0, 0.5019608)
@@ -63,37 +59,8 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_gqju5")
 
 [node name="GroundDust" type="GPUParticles2D" parent="." unique_id=1462401000]
-z_index = 2
 z_as_relative = false
-amount = 1024
-amount_ratio = 0.0
+amount = 128
 texture = ExtResource("5_o161p")
-lifetime = 30.0
-process_material = ExtResource("5_grvog")
-
-[node name="GroundDust2" type="GPUParticles2D" parent="." unique_id=977368945]
-z_index = 4
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("7_2k8yw")
-lifetime = 30.0
-process_material = ExtResource("5_grvog")
-
-[node name="GroundDust3" type="GPUParticles2D" parent="." unique_id=1815582524]
-z_index = 6
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("8_gxwse")
-lifetime = 30.0
-process_material = ExtResource("5_grvog")
-
-[node name="GroundDust4" type="GPUParticles2D" parent="." unique_id=507150084]
-z_index = 8
-z_as_relative = false
-amount = 128
-amount_ratio = 0.0
-texture = ExtResource("9_jk0p4")
 lifetime = 30.0
 process_material = ExtResource("5_grvog")

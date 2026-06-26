@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://c1b4a48fb4sg0"]
+[gd_scene format=3 uid="uid://c1b4a48fb4sg0"]
 
 [ext_resource type="PackedScene" uid="uid://c7smi24o76y5g" path="res://Scenes/player/player_mech.tscn" id="1_8ndor"]
 [ext_resource type="Material" uid="uid://dvdjjw8gq0i7h" path="res://Scenes/global_colorize_material.tres" id="1_xxbfd"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://di4n18lwhof53" path="res://Assets/Minigame/Pixel Textures/Direction.png" id="11_rn3mc"]
 [ext_resource type="Texture2D" uid="uid://beiupjufyeqw8" path="res://Assets/Minigame/Pixel Textures/Stun.png" id="12_03um0"]
 [ext_resource type="PackedScene" uid="uid://cdh84l8mtuwak" path="res://Scenes/minigames/switches_minigame.tscn" id="12_abrxj"]
-[ext_resource type="TileSet" uid="uid://b4hwuwgvsxlia" path="res://Scenes/play/military_tileset.tres" id="12_ns62s"]
 [ext_resource type="Script" uid="uid://csix81n57lrx7" path="res://Scenes/player/hud/angular_velocity_max.gd" id="13_4ynrk"]
 [ext_resource type="Texture2D" uid="uid://dhu5ot8l80aak" path="res://Assets/Minigame/Pixel Textures/Velocity.png" id="13_abrxj"]
 [ext_resource type="Script" uid="uid://c6sigpkewqswx" path="res://Scripts/stun_skill.gd" id="13_c53b8"]
@@ -32,13 +31,10 @@
 [ext_resource type="Script" uid="uid://chonslwn0ad6u" path="res://Scenes/player/hud/time_scale_alert.gd" id="14_03um0"]
 [ext_resource type="PackedScene" uid="uid://c36kr4cy2if7h" path="res://Scenes/player/hud/alert.tscn" id="14_35clo"]
 [ext_resource type="Script" uid="uid://byecnvoar2g8c" path="res://Scenes/player/hud/angular_velocity_min.gd" id="14_qeiqt"]
-[ext_resource type="Script" uid="uid://b23kdh64gl6o0" path="res://Scenes/play/vehicle_spawner.gd" id="14_xxbfd"]
 [ext_resource type="Script" uid="uid://b0y6bs782pjhd" path="res://Scenes/player/hud/disabled_alert.gd" id="15_abrxj"]
 [ext_resource type="Script" uid="uid://cgbv2y0mxau4g" path="res://Scripts/velocity_skill.gd" id="15_c53b8"]
 [ext_resource type="PackedScene" uid="uid://8p2objts1og0" path="res://Scenes/minigames/timing_meter_minigame.tscn" id="15_ovfp5"]
-[ext_resource type="PackedScene" uid="uid://d3byjpdplog78" path="res://Scenes/play/vehicle.tscn" id="15_r0vl0"]
 [ext_resource type="Script" uid="uid://cqjwdx1w0g5vw" path="res://Scenes/player/hud/debugger.gd" id="15_rn3mc"]
-[ext_resource type="Script" uid="uid://daythrx3p1ywr" path="res://Scenes/play/vehicle_pathing.gd" id="15_uiqm4"]
 [ext_resource type="Script" uid="uid://b3c2rctuvaprf" path="res://Scenes/monster/monster_view.gd" id="15_ukgc8"]
 [ext_resource type="Shortcut" uid="uid://i310fyfvritc" path="res://Scenes/minigames/direction_minigame_shortcut.tres" id="17_0kpkv"]
 [ext_resource type="StyleBox" uid="uid://bj1iep4518tc3" path="res://Scenes/player/hud/panel.tres" id="17_ehees"]
@@ -57,25 +53,6 @@
 [ext_resource type="Script" uid="uid://dxgdfven2qbbm" path="res://Scenes/play/start_timescale.gd" id="48_bca0g"]
 [ext_resource type="Script" uid="uid://p7632fk2v5er" path="res://Scenes/play/pause_menu.gd" id="48_olwfp"]
 [ext_resource type="Script" uid="uid://cqj6qxbng0611" path="res://Scenes/play/reset_data.gd" id="50_w62nu"]
-[ext_resource type="Texture2D" uid="uid://cbw4v02u4gi5f" path="res://Assets/Military/Tank.png" id="58_na5w4"]
-
-[sub_resource type="Curve2D" id="Curve2D_xxbfd"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -80, -558, 0, 0, 0, 0, -760, -358, 0, 0, 0, 0, -453, 488, 0, 0, 0, 0, 475, 468, 0, 0, 0, 0, 752, -192, 0, 0, 0, 0, -80, -558)
-}
-point_count = 6
-
-[sub_resource type="Curve2D" id="Curve2D_ukgc8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -527, -587, 0, 0, 0, 0, -21, -276, 0, 0, 0, 0, 752, -574, 0, 0, 0, 0, 405, 32, 0, 0, 0, 0, 807, 520, 0, 0, 0, 0, -18, 274, 0, 0, 0, 0, -695, 588, 0, 0, 0, 0, -394, 1, 0, 0, 0, 0, -527, -587)
-}
-point_count = 9
-
-[sub_resource type="Curve2D" id="Curve2D_r0vl0"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -750, 134, 0, 0, 0, 0, -41, -439, 0, 0, 0, 0, 830, -48, 0, 0, 0, 0, 283, 14, 0, 0, 0, 0, 44, 639, 0, 0, 0, 0, -185, 69, 0, 0, 0, 0, -750, 134)
-}
-point_count = 7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehees"]
 bg_color = Color(1, 1, 1, 0.5019608)
@@ -120,7 +97,7 @@ color_ramp = SubResource("Gradient_rcv6h")
 [node name="Arena" type="Node2D" unique_id=2053573438]
 material = ExtResource("1_xxbfd")
 
-[node name="Cityscape" type="TileMapLayer" parent="." unique_id=2088551355]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2088551355]
 use_parent_material = true
 tile_set = ExtResource("3_dnwwo")
 script = ExtResource("4_2qg40")
@@ -129,18 +106,14 @@ height = 60
 building_scene = ExtResource("3_4x7ej")
 small_buldings = Array[CompressedTexture2D]([ExtResource("4_xoutb"), ExtResource("5_wudtk"), ExtResource("6_30cvy"), ExtResource("7_f75ig"), ExtResource("8_sbwgi"), ExtResource("9_il6c6"), ExtResource("10_g6twa")])
 
-[node name="Militarybase" type="TileMapLayer" parent="." unique_id=1037428082]
-tile_map_data = PackedByteArray("AAD+/wAAAAACAAEAAAD//wAAAAACAAEAAAD//wEAAAACAAEAAAAAAAEAAAACAAEAAAAAAAAAAAACAAEAAAABAAAAAAACAAEAAAABAP//AAACAAEAAAAAAP//AAACAAEAAAD/////AAACAAEAAAD+////AAACAAEAAAD///7/AAACAAEAAAAAAP7/AAACAAEAAAD+/wEAAAACAAEAAAD9/wEAAAACAAEAAAD9/wAAAAACAAEAAAD9/wIAAAACAAEAAAD+/wIAAAACAAEAAAD//wIAAAACAAEAAAAAAAIAAAACAAEAAAABAAIAAAACAAEAAAACAAIAAAACAAEAAAADAAIAAAACAAEAAAAEAAIAAAACAAEAAAAFAAIAAAACAAEAAAAFAAMAAAACAAEAAAAEAAMAAAACAAEAAAADAAMAAAACAAEAAAACAAMAAAACAAEAAAABAAMAAAACAAEAAAAAAAMAAAACAAEAAAD//wMAAAACAAEAAAD+/wMAAAACAAEAAAD9/wMAAAACAAEAAAD8/wMAAAACAAEAAAD7/wMAAAACAAEAAAD6/wMAAAACAAEAAAD6/wIAAAACAAEAAAD6/wEAAAACAAEAAAD6/wAAAAACAAEAAAD6////AAACAAEAAAD6//7/AAACAAEAAAD6//3/AAACAAEAAAD6//z/AAACAAEAAAD7//z/AAACAAEAAAD8//z/AAACAAEAAAD9//z/AAACAAEAAAD+//z/AAACAAEAAAD///z/AAACAAEAAAAAAPz/AAACAAEAAAABAP3/AAACAAEAAAACAP3/AAACAAEAAAACAPz/AAACAAEAAAADAPz/AAACAAEAAAAEAPz/AAACAAEAAAAFAPz/AAACAAEAAAABAPz/AAACAAEAAAAEAP3/AAACAAEAAAAFAP3/AAACAAEAAAAFAP7/AAACAAEAAAAFAP//AAACAAEAAAAFAAAAAAACAAEAAAAFAAEAAAACAAEAAAAEAAEAAAACAAEAAAADAAEAAAACAAEAAAACAAEAAAACAAEAAAABAAEAAAACAAEAAAACAAAAAAACAAEAAAADAAAAAAACAAEAAAAEAAAAAAACAAEAAAADAP//AAACAAEAAAACAP//AAACAAEAAAADAP7/AAACAAEAAAAEAP7/AAACAAEAAAAEAP//AAACAAEAAAACAP7/AAACAAEAAAABAP7/AAACAAEAAAADAP3/AAACAAEAAAAAAP3/AAACAAEAAAD///3/AAACAAEAAAD+//3/AAACAAEAAAD9//3/AAACAAEAAAD8//3/AAACAAEAAAD8//7/AAACAAEAAAD8////AAACAAEAAAD8/wAAAAACAAEAAAD8/wEAAAACAAEAAAD7/wEAAAACAAEAAAD7/wIAAAACAAEAAAD7/wAAAAACAAEAAAD8/wIAAAACAAEAAAD7////AAACAAEAAAD7//7/AAACAAEAAAD7//3/AAACAAEAAAD9//7/AAACAAEAAAD9////AAACAAEAAAD+//7/AAACAAEAAAAAAPv/AAACAAAAAAD///v/AAACAAAAAAD+//v/AAACAAAAAAD9//v/AAACAAAAAAD8//v/AAACAAAAAAD7//v/AAACAAAAAAD6//v/AAACAAAAAAD5//v/AAABAAAAAAAGAPv/AAADAAAAAAAGAAQAAAADAAIAAAAGAPz/AAADAAEAAAAGAP3/AAADAAEAAAAGAP7/AAADAAEAAAAGAP//AAADAAEAAAAGAAAAAAADAAEAAAAGAAEAAAADAAEAAAAGAAIAAAADAAEAAAAGAAMAAAADAAEAAAAFAAQAAAACAAIAAAAEAAQAAAACAAIAAAADAAQAAAACAAIAAAACAAQAAAACAAIAAAABAAQAAAACAAIAAAAAAAQAAAACAAIAAAD//wQAAAACAAIAAAD+/wQAAAACAAIAAAD9/wQAAAACAAIAAAD8/wQAAAACAAIAAAD7/wQAAAACAAIAAAD6/wQAAAACAAIAAAD5/wQAAAABAAIAAAD5/wMAAAABAAEAAAD5/wIAAAABAAEAAAD5/wEAAAABAAEAAAD5/wAAAAABAAEAAAD5////AAABAAEAAAD5//7/AAABAAEAAAD5//3/AAABAAEAAAD5//z/AAABAAEAAAABAPv/AAACAAAAAAACAPv/AAACAAAAAAADAPv/AAACAAAAAAAEAPv/AAACAAAAAAAFAPv/AAACAAAAAAA=")
-tile_set = ExtResource("12_ns62s")
-
 [node name="Monster" parent="." unique_id=543096226 node_paths=PackedStringArray("player") instance=ExtResource("4_8ahch")]
-position = Vector2(4800, 0)
+position = Vector2(8640, 0)
 rotation = 3.1415927
 player = NodePath("../PlayerMech")
 
 [node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster") instance=ExtResource("1_8ndor")]
-position = Vector2(-867, -1)
-map = NodePath("../Cityscape")
+position = Vector2(-3, -2)
+map = NodePath("../TileMapLayer")
 monster = NodePath("../Monster")
 max_angular_velocity = 6.283
 angular_acceleration = 0.262
@@ -156,54 +129,16 @@ size = Vector2i(512, 180)
 render_target_update_mode = 4
 script = ExtResource("15_ukgc8")
 
-[node name="MonsterCamera" type="Camera2D" parent="SubViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]
+[node name="MonsterCamera" type="Camera2D" parent="SubViewport" unique_id=615985526 node_paths=PackedStringArray("monster")]
 zoom = Vector2(0.2, 0.2)
 script = ExtResource("41_ukgc8")
-player = NodePath("../../PlayerMech")
 monster = NodePath("../../Monster")
 
 [node name="CameraController" parent="." unique_id=390737956 node_paths=PackedStringArray("player", "monster") instance=ExtResource("2_qe2ea")]
 player = NodePath("../PlayerMech")
 monster = NodePath("../Monster")
 
-[node name="VehicleManager" type="Node2D" parent="." unique_id=235071080 node_paths=PackedStringArray("potential_paths")]
-z_index = 2
-scale = Vector2(2, 2)
-script = ExtResource("14_xxbfd")
-potential_paths = [null, null, null]
-
-[node name="Path2D" type="Path2D" parent="VehicleManager" unique_id=1288797812]
-curve = SubResource("Curve2D_xxbfd")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="VehicleManager/Path2D" unique_id=29906690]
-position = Vector2(-80, -558)
-rotation = 2.8555412
-script = ExtResource("15_uiqm4")
-
-[node name="Vehicle" parent="VehicleManager/Path2D/PathFollow2D" unique_id=1865385987 instance=ExtResource("15_r0vl0")]
-
-[node name="Path2D2" type="Path2D" parent="VehicleManager" unique_id=94566506]
-curve = SubResource("Curve2D_ukgc8")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="VehicleManager/Path2D2" unique_id=1244245822]
-position = Vector2(-527, -587)
-rotation = 0.55110353
-script = ExtResource("15_uiqm4")
-
-[node name="Vehicle" parent="VehicleManager/Path2D2/PathFollow2D" unique_id=393694253 instance=ExtResource("15_r0vl0")]
-
-[node name="Path2D3" type="Path2D" parent="VehicleManager" unique_id=1062310382]
-curve = SubResource("Curve2D_r0vl0")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="VehicleManager/Path2D3" unique_id=764584070]
-position = Vector2(-750, 134)
-rotation = -0.6797092
-script = ExtResource("15_uiqm4")
-
-[node name="Vehicle" parent="VehicleManager/Path2D3/PathFollow2D" unique_id=1402349817 instance=ExtResource("15_r0vl0")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
-layer = 10
 
 [node name="MonsterHP" type="ProgressBar" parent="CanvasLayer" unique_id=481207465 node_paths=PackedStringArray("monster")]
 custom_minimum_size = Vector2(320, 48)
@@ -806,30 +741,6 @@ time_to_scale = 4.0
 
 [node name="ResetData" type="Node" parent="." unique_id=298487845]
 script = ExtResource("50_w62nu")
-
-[node name="Tank" type="Sprite2D" parent="." unique_id=217211698]
-position = Vector2(-757, 133)
-rotation = 0.6245947
-scale = Vector2(2, 2)
-texture = ExtResource("58_na5w4")
-
-[node name="Tank2" type="Sprite2D" parent="." unique_id=353446756]
-position = Vector2(-704, 60)
-rotation = 0.83426225
-scale = Vector2(2, 2)
-texture = ExtResource("58_na5w4")
-
-[node name="Tank3" type="Sprite2D" parent="." unique_id=1696924151]
-position = Vector2(-577.78687, -63.782417)
-rotation = 1.3538227
-scale = Vector2(2, 2)
-texture = ExtResource("58_na5w4")
-
-[node name="Tank4" type="Sprite2D" parent="." unique_id=1074790258]
-position = Vector2(-524.78687, -136.78241)
-rotation = 1.5634903
-scale = Vector2(2, 2)
-texture = ExtResource("58_na5w4")
 
 [connection signal="ability_clicked" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_ability_clicked"]
 [connection signal="direction_minigame_complete" from="CanvasLayer/HUD/Skills/HBoxContainer/VBoxContainer/DirectionSkill" to="PlayerMech" method="_on_direction_minigame_complete"]

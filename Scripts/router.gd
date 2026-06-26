@@ -12,6 +12,9 @@ func _set_greyness(value: float) -> void:
 
 
 func _ready() -> void:
+	preload("res://Assets/KKVSTT battle theme.mp3")
+	preload("res://Assets/KKVSTT main menu w intro.mp3")
+	
 	Data.reset()
 	AudioManager.switch_music(load("res://Assets/KKVSTT main menu w intro.mp3"))
 	$Poster/TextureButton.disabled = false
@@ -19,12 +22,7 @@ func _ready() -> void:
 
 
 func _route() -> void:
-	AudioManager.switch_music(load("res://Assets/KKVSTT battle theme.mp3"), 12.0)
-	
-	var scene := battle_scene.instantiate()
-	get_tree().root.add_child(scene)
-	get_tree().current_scene = scene
-	queue_free()
+	SceneManager.go_to_scene(SceneManager.SCENE.PLAY)
 
 
 func _on_texture_button_pressed() -> void:

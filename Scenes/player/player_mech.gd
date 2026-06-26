@@ -20,12 +20,15 @@ static var COLLISION_SFX: Array[AudioStream] = [
 @export var tilt_direction: Vector2
 @export var time_scale_modifier: float = 0.25
 @export var impact_register_distance: float = 480.0
+@export var movement_scale: float = 0.2
 
 @export_group("Internal")
 @export var body: Node2D
 @export var damaged: Node2D
 @export var pointer: Node2D
+@export var monster_pointer: Node2D
 @export var shadow: Node2D
+@export var dust: Array[GPUParticles2D]
 
 var bonus_accelerate_: bool
 
@@ -58,13 +61,17 @@ func imminent_impact() -> bool:
 	return predict_impact_
 
 
+func inflict_damage(amount: float) -> void:
+	damaged_ = maxf(damaged_, amount)
+
+
 func get_precession() -> float:
 	if linear_velocity.length() < 1.0 or tilt_direction.length() < 1.0:
 		return 0.0
 	# var n_component := linear_acceleration * 0.58
 	var m_component := (1.0 - absf(linear_velocity.normalized().dot(tilt_direction.normalized()))) \
 		* (linear_velocity.length() + tilt_direction.length_squared())
-	var v_component := m_component / maxf(TAU, pow(TAU, 2.0) * pow(angular_velocity, 3.0))
+	var v_component := m_component / maxf(TAU, pow(TAU, 3.0) * pow(angular_velocity, 4.0))
 	var result: float = sign(linear_velocity.angle_to(tilt_direction)) * PI * v_component
 	
 	# print(n_component, " ", m_component, " ", v_component, " ", result)
@@ -75,18 +82,31 @@ func is_at_max_angular_velocity() -> bool:
 	return angular_velocity >= max_angular_velocity
 
 
+func get_linear_acceleration() -> float:
+	return linear_acceleration * movement_scale
+
+
 func get_angular_acceleration() -> float:
-	return angular_acceleration
+	return angular_acceleration * movement_scale
 
 
 func _ready() -> void:
 	EntityManager.subscribe(self, 320.0)
 	damaged.visible = false
+	AudioManager.switch_music(load("res://Assets/KKVSTT battle theme.mp3"), 12.0)
 
 
 func _process(dt: float) -> void:
 	var orig_dt := dt * Data.pause_scale
 	dt *= Data.get_time()
+	
+	if not monster.active and \
+		(global_position.x < -160.0 * 7.0 or global_position.x > 160.0 * 7.0 \
+		or global_position.y< -160.0 * 5.0 or global_position.y > 160.0 * 5.0):
+		movement_scale = 1.0
+		monster.active = true
+		ImpactManager.create_impact(100.0, 3.0)
+		AudioManager.play_sound(load("res://Assets/KK roar.wav"))
 	
 	if damaged_ > 0.0 or Data.disabled:
 		accum_ = fmod(accum_ + dt * (1.0 if Data.disabled else 4.0), 1.0)
@@ -108,6 +128,8 @@ func _process(dt: float) -> void:
 	if Data.get_time() >= 1.0:
 		if Data.disabled:
 			linear_velocity *= 0.9
+		elif damaged_ > 0.0:
+			linear_velocity *= 0.9
 		elif bonus_accelerate_:
 			linear_velocity *= 1.0
 		elif predict_impact_value_ > 0.0:
@@ -115,17 +137,17 @@ func _process(dt: float) -> void:
 		elif out_of_bounds:
 			linear_velocity *= 0.99
 		else:
-			if linear_velocity.length() > linear_acceleration:
+			if linear_velocity.length() > get_linear_acceleration():
 				linear_velocity *= 0.999
-				if linear_velocity.length() < linear_acceleration:
-					linear_velocity = linear_velocity.normalized() * linear_acceleration
+				if linear_velocity.length() < get_linear_acceleration():
+					linear_velocity = linear_velocity.normalized() * get_linear_acceleration()
 	
 	if not Data.disabled:
 		if predict_impact_:
-			linear_velocity += linear_velocity.normalized() * orig_dt * linear_acceleration
+			linear_velocity += linear_velocity.normalized() * orig_dt * get_linear_acceleration()
 		elif not linear_input_disabled:
 			if bonus_accelerate_ or Input.is_action_pressed("mecha_forward"):
-				linear_velocity += linear_velocity.normalized() * dt * linear_acceleration * (3.0 if bonus_accelerate_ else 1.0)
+				linear_velocity += linear_velocity.normalized() * dt * get_linear_acceleration() * (3.0 if bonus_accelerate_ else 1.0)
 			if Data.get_time() >= 1.0 and Input.is_action_pressed("mecha_brake"):
 				linear_velocity *= 0.9
 	linear_velocity = (linear_velocity + tilt_direction / TAU).normalized() * linear_velocity.length()
@@ -141,6 +163,7 @@ func _process(dt: float) -> void:
 			tilt_direction += linear_velocity.rotated(PI/2).normalized() * dt * tilt_acceleration
 		
 	pointer.rotation = (tilt_direction + linear_velocity / TAU).normalized().angle()
+	monster_pointer.rotation = (monster.global_position - global_position).angle()
 	
 	if Data.disabled:
 		angular_velocity = clampf(angular_velocity - TAU * dt, 0, max_angular_velocity)
@@ -150,7 +173,7 @@ func _process(dt: float) -> void:
 		else:
 			angular_velocity = clampf(angular_velocity + get_angular_acceleration() * dt, 0, max_angular_velocity)
 		if Data.get_time() >= 1.0 and not linear_input_disabled and Input.is_action_pressed("mecha_brake"):
-			angular_velocity *= 0.9
+			angular_velocity *= 0.95
 	
 	angular_position += angular_velocity * dt
 	
@@ -185,21 +208,23 @@ func _process(dt: float) -> void:
 	velocity = lerp(velocity, linear_velocity, 0.05)
 	var collision := move_and_collide(velocity * dt)
 	if null != collision and collision.get_collider() is Monster and _is_heading_towards(collision.get_collider()):
-		monster.impact_velocity = velocity * 0.5
+		monster.impact(velocity * 0.5)
 		monster.hp = monster.hp - angular_velocity / (6.0 * TAU)
-		angular_velocity = maxf(angular_velocity - velocity.length() / PI, 0.0)
+		angular_velocity *= 0.5
 		ImpactManager.create_impact(velocity.length(), 0.5)
 		var n := collision.get_normal()
 		# print(n)
 		# print(velocity, " bounce ", velocity.bounce(n))
 		velocity = 2.0 * velocity.bounce(n)
+		if velocity.length() < 3.0 * get_linear_acceleration():
+			velocity = velocity.normalized() * 3.0 * get_linear_acceleration()
 		linear_velocity = 2.0 * linear_velocity.bounce(n)
+		if linear_velocity.length() < 6.0 * get_linear_acceleration():
+			linear_velocity = linear_velocity.normalized() * 6.0 * get_linear_acceleration()
 		tilt_direction = velocity.normalized() * tilt_direction.length()
 		predict_impact_value_ = 1.0
 		damaged_ = 3.0
 		AudioManager.play_sound(COLLISION_SFX.pick_random())
-		if randf() < 0.25:
-			AudioManager.play_sound(load("res://Assets/KK roar.wav"))
 	
 	if predict_impact_time_scale_ != Data.time_scale:
 		var s: float = sign(predict_impact_time_scale_ - Data.time_scale)
@@ -213,7 +238,11 @@ func _process(dt: float) -> void:
 		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
 			Data.zoom_scale = predict_impact_zoom_scale_
 	
-	# print(tilt_direction.length())
+	var dspawn := maxf(angular_velocity * velocity.length() / (36.0 * get_linear_acceleration()) - 0.25, 0.0) \
+		if not out_of_bounds else 0.0
+	for d in dust:
+		d.speed_scale = Data.get_time()
+		d.amount_ratio = dspawn
 
 
 func _is_heading_towards(object: Node2D) -> bool:
