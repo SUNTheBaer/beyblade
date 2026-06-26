@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://v84pwsk4qsm0"]
+
+[ext_resource type="Shader" uid="uid://6gm0auoy53ts" path="res://Scenes/monster/grit_shader.gdshader" id="1_xb2ah"]
+
+[resource]
+shader = ExtResource("1_xb2ah")

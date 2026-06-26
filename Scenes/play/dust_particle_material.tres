@@ -1,0 +1,25 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://cn83rg6ecmwp7"]
+
+[ext_resource type="Curve" uid="uid://cabckkdlsn050" path="res://Scenes/play/alpha_curve.tres" id="1_xreg2"]
+[ext_resource type="Curve" uid="uid://dupwsfsxn3ct2" path="res://Scenes/play/scale_curve.tres" id="2_ttwwb"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_rrwkl"]
+curve = ExtResource("1_xreg2")
+
+[sub_resource type="CurveTexture" id="CurveTexture_xreg2"]
+curve = ExtResource("2_ttwwb")
+
+[resource]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 128.0
+initial_velocity_max = 512.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xreg2")
+alpha_curve = SubResource("CurveTexture_rrwkl")
+turbulence_enabled = true
+turbulence_noise_strength = 0.05
+turbulence_noise_scale = 100.0

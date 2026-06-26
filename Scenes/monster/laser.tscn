@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://721k54by25gv"]
+
+[ext_resource type="Script" uid="uid://djo1jb0fhkyu1" path="res://Scenes/monster/laser.gd" id="1_ud0uq"]
+[ext_resource type="Material" uid="uid://dvdjjw8gq0i7h" path="res://Scenes/global_colorize_material.tres" id="2_c2mew"]
+
+[node name="Laser" type="Area2D" unique_id=1672941238 node_paths=PackedStringArray("collision_shape")]
+z_index = 12
+script = ExtResource("1_ud0uq")
+global_material = ExtResource("2_c2mew")
+collision_shape = NodePath("Shape")
+metadata/_custom_type_script = "uid://djo1jb0fhkyu1"
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=677908889]

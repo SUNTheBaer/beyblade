@@ -9,6 +9,7 @@ var accum_: float = 0.0
 
 
 func _ready() -> void:
+	visible = true
 	modulate.a = initial_fade
 
 
