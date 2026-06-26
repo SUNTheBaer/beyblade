@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crb0daw4hh1sw" path="res://Scenes/monster/monster.gd" id="1_la3of"]
 [ext_resource type="SpriteFrames" uid="uid://8e5yl445fklt" path="res://Scenes/monster/monster_animation.tres" id="2_suwoo"]
+[ext_resource type="PackedScene" uid="uid://721k54by25gv" path="res://Scenes/monster/laser.tscn" id="2_wpcy8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i13qm"]
 radius = 120.0
@@ -9,9 +10,10 @@ height = 640.0
 
 [node name="Monster" type="StaticBody2D" unique_id=543096226 node_paths=PackedStringArray("body", "shadow")]
 script = ExtResource("1_la3of")
+target_velocity = Vector2(-32, 0)
 body = NodePath("Monster")
 shadow = NodePath("Shadow")
-target_velocity = Vector2(-32, 0)
+laser_scene = ExtResource("2_wpcy8")
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1685745687]
 self_modulate = Color(0, 0, 0, 0.5019608)
@@ -24,7 +26,6 @@ sprite_frames = ExtResource("2_suwoo")
 z_index = 8
 rotation = 1.5707964
 sprite_frames = ExtResource("2_suwoo")
-animation = &"walk"
 
 [node name="Shape" type="CollisionShape2D" parent="." unique_id=25322788]
 rotation = 1.5707964

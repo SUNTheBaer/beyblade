@@ -19,8 +19,6 @@ func _ready() -> void:
 
 
 func _route() -> void:
-	AudioManager.switch_music(load("res://Assets/KKVSTT battle theme.mp3"), 12.0)
-	
 	var scene := battle_scene.instantiate()
 	get_tree().root.add_child(scene)
 	get_tree().current_scene = scene

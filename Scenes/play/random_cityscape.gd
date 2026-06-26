@@ -1,6 +1,8 @@
 class_name RandomizedCityscape
 extends TileMapLayer
 
+@export var milbase_width: int = 14
+@export var milbase_height: int = 10
 @export var width: int = 100
 @export var height: int = 100
 @export var building_scene: PackedScene
@@ -39,6 +41,11 @@ func _parse_tileset() -> void:
 func _generate_roads() -> void:
 	for y in height:
 		for x in width:
+			var xx := x - width / 2
+			var yy := y - height / 2
+			if xx >= -milbase_width / 2 and xx < milbase_width / 2 and yy >= -milbase_height / 2 and yy < milbase_height / 2:
+				road_map_.push_back(0)
+				continue
 			if x % 5 == 0 or y % 5 == 0:
 				road_map_.push_back(1)
 			elif x % 3 == 0 or y % 3 == 0:
@@ -92,7 +99,7 @@ func _place_buildings() -> void:
 				or _get_any_value(Vector2i(x, y + 1)) \
 				or _get_any_value(Vector2i(x + 1, y + 1)):
 				continue
-			if randi_range(0, 1) == 0:
+			if randi_range(0, 10) != 0:
 				var building = Sprite2D.new()
 				building.texture = small_buldings.pick_random()
 				owner.add_child(building)
@@ -117,6 +124,10 @@ func _get_road_value(x: Vector2i) -> int:
 
 
 func _get_any_value(x: Vector2i) -> bool:
+	var xx := x.x - width / 2
+	var yy := x.y - height / 2
+	if xx >= -milbase_width / 2 and xx < milbase_width / 2 and yy >= -milbase_height / 2 and yy < milbase_height / 2:
+		return true
 	if 0 > x.x or 0 > x.y or width <= x.x or height <= x.y:
 		return false
 	return road_map_[x.x + x.y * width] > 0 or building_map_[x.x + x.y * width] > 0
