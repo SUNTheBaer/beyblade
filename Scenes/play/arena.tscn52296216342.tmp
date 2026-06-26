@@ -79,6 +79,29 @@ _data = {
 }
 point_count = 7
 
+[sub_resource type="Gradient" id="Gradient_d0qwu"]
+offsets = PackedFloat32Array(0.8414739, 0.9031705, 0.97257924)
+colors = PackedColorArray(0.1452662, 0.1452662, 0.1452662, 0.0058078878, 0, 0, 0, 0.45882353, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g4wkh"]
+noise_type = 2
+seed = 405
+frequency = 0.002
+fractal_type = 3
+fractal_octaves = 4
+fractal_lacunarity = 7.0
+fractal_gain = 2.0
+fractal_weighted_strength = 1.0
+fractal_ping_pong_strength = 1.0
+cellular_distance_function = 2
+cellular_jitter = 2.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_na5w4"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_g4wkh")
+color_ramp = SubResource("Gradient_d0qwu")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehees"]
 bg_color = Color(1, 1, 1, 0.5019608)
 border_width_left = 8
@@ -97,7 +120,7 @@ corner_radius_bottom_left = 16
 bg_color = Color(1, 1, 1, 0.5019608)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uiqm4"]
-viewport_path = NodePath("MonserCameraViewport")
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_rcv6h"]
 offsets = PackedFloat32Array(0.27912933, 0.368758, 0.6555698, 0.9769526)
@@ -118,29 +141,6 @@ height = 45
 generate_mipmaps = false
 noise = SubResource("FastNoiseLite_fo2bp")
 color_ramp = SubResource("Gradient_rcv6h")
-
-[sub_resource type="Gradient" id="Gradient_d0qwu"]
-offsets = PackedFloat32Array(0.428449, 0.85775495, 0.97257924)
-colors = PackedColorArray(0.1452662, 0.1452662, 0.1452662, 0.0058078878, 0, 0, 0, 0.45882353, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_g4wkh"]
-noise_type = 2
-seed = 351
-frequency = 0.002
-fractal_type = 3
-fractal_octaves = 4
-fractal_lacunarity = 7.0
-fractal_gain = 2.0
-fractal_weighted_strength = 1.0
-fractal_ping_pong_strength = 1.0
-cellular_distance_function = 2
-cellular_jitter = 2.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_na5w4"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_g4wkh")
-color_ramp = SubResource("Gradient_d0qwu")
 
 [node name="Arena" type="Node2D" unique_id=2053573438]
 material = ExtResource("1_xxbfd")
@@ -168,20 +168,20 @@ position = Vector2(-867, -1)
 map = NodePath("../Cityscape")
 monster = NodePath("../Monster")
 max_angular_velocity = 6.283
-angular_acceleration = 0.647
+angular_acceleration = 1.047
 angular_velocity = 1.571
 linear_acceleration = 192.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 256.0
 
-[node name="MonserCameraViewport" type="SubViewport" parent="." unique_id=297163106]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=297163106]
 disable_3d = true
+handle_input_locally = false
 size = Vector2i(512, 180)
-render_target_clear_mode = 1
-render_target_update_mode = 0
+render_target_update_mode = 4
 script = ExtResource("15_ukgc8")
 
-[node name="MonsterCamera" type="Camera2D" parent="MonserCameraViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]
+[node name="MonsterCamera" type="Camera2D" parent="SubViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]
 zoom = Vector2(0.2, 0.2)
 script = ExtResource("41_ukgc8")
 player = NodePath("../../PlayerMech")
@@ -229,6 +229,20 @@ script = ExtResource("15_uiqm4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=210874803]
 layer = 10
+
+[node name="TVNoise" type="TextureRect" parent="CanvasLayer" unique_id=1116479768]
+material = ExtResource("21_g4wkh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_na5w4")
+script = ExtResource("43_uiqm4")
+
+[node name="TVNoiseRandomizer" type="Node" parent="CanvasLayer/TVNoise" unique_id=1522605088]
+script = ExtResource("23_d0qwu")
+metadata/_custom_type_script = "uid://chylwlcgsjwqc"
 
 [node name="MonsterHP" type="ProgressBar" parent="CanvasLayer" unique_id=481207465 node_paths=PackedStringArray("monster")]
 custom_minimum_size = Vector2(320, 48)
@@ -736,51 +750,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("45_yirdq")
-initial_wait_time = 2.0
-initial_fade = 1.0
-fade_in_time = -2.0
-metadata/_custom_type_script = "uid://bxju5l0sr4klf"
-
-[node name="Poster" parent="CanvasLayer/FadeInController" unique_id=1137955399 instance=ExtResource("45_f56kt")]
-material = ExtResource("46_ul8bc")
-layout_mode = 1
-
-[node name="TVNoise" type="TextureRect" parent="CanvasLayer" unique_id=1116479768]
-material = ExtResource("21_g4wkh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("NoiseTexture2D_na5w4")
-script = ExtResource("43_uiqm4")
-
-[node name="TVNoiseVignette" type="ColorRect" parent="CanvasLayer/TVNoise" unique_id=1283100392]
-material = ExtResource("21_g4wkh")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="TVNoiseRandomizer" type="Node" parent="CanvasLayer/TVNoise" unique_id=1522605088]
-script = ExtResource("23_d0qwu")
-material = ExtResource("21_g4wkh")
-metadata/_custom_type_script = "uid://chylwlcgsjwqc"
-
 [node name="HUDExplosion" type="Control" parent="CanvasLayer" unique_id=1838389373]
 layout_mode = 3
 anchors_preset = 15
@@ -814,6 +783,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("45_yirdq")
+initial_wait_time = 2.0
+initial_fade = 1.0
+fade_in_time = -2.0
+metadata/_custom_type_script = "uid://bxju5l0sr4klf"
+
+[node name="Poster" parent="CanvasLayer/FadeInController" unique_id=1137955399 instance=ExtResource("45_f56kt")]
+material = ExtResource("46_ul8bc")
+layout_mode = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=885276249]
 anchors_preset = 15

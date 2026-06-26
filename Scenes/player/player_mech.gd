@@ -47,6 +47,10 @@ var linear_input_disabled: bool = false
 var tilt_input_disabled: bool = false
 
 
+func get_current_damage_level() -> float:
+	return damaged_
+
+
 func is_out_of_bounds() -> bool:
 	var pos := Vector2i(
 		global_position.x / map.tile_set.tile_size.x,
@@ -97,6 +101,8 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	print("PLAYER MECH ", dt)
+	
 	var orig_dt := dt * Data.pause_scale
 	dt *= Data.get_time()
 	
@@ -223,7 +229,7 @@ func _process(dt: float) -> void:
 			linear_velocity = linear_velocity.normalized() * 6.0 * get_linear_acceleration()
 		tilt_direction = velocity.normalized() * tilt_direction.length()
 		predict_impact_value_ = 1.0
-		damaged_ = 3.0
+		damaged_ = 1.0
 		AudioManager.play_sound(COLLISION_SFX.pick_random())
 	
 	if predict_impact_time_scale_ != Data.time_scale:
@@ -238,7 +244,9 @@ func _process(dt: float) -> void:
 		if sign(predict_impact_zoom_scale_ - Data.zoom_scale) != s:
 			Data.zoom_scale = predict_impact_zoom_scale_
 	
-	var dspawn := maxf(angular_velocity * velocity.length() / (36.0 * get_linear_acceleration()) - 0.25, 0.0) \
+	# Intentioanlly use linaccel instead of the modified version so that we
+	# don't get a ton of dust during tutorial
+	var dspawn := maxf(angular_velocity * velocity.length() / (36.0 * linear_acceleration) - 0.4, 0.0) \
 		if not out_of_bounds else 0.0
 	for d in dust:
 		d.speed_scale = Data.get_time()

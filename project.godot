@@ -15,6 +15,10 @@ run/main_scene="uid://cyksn3ut2hx2e"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 EntityManager="*uid://c5ibc85uiyhet"

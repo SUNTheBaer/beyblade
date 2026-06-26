@@ -22,7 +22,10 @@ func _ready() -> void:
 
 
 func _route() -> void:
-	SceneManager.go_to_scene(SceneManager.SCENE.PLAY)
+	var scene := battle_scene.instantiate()
+	get_tree().root.add_child(scene)
+	# get_tree().current_scene = scene
+	queue_free()
 
 
 func _on_texture_button_pressed() -> void:

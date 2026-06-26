@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://v84pwsk4qsm0"]
+
+[ext_resource type="Shader" uid="uid://6gm0auoy53ts" path="res://Scenes/play/noise_shader.gdshader" id="1_hh1f6"]
+
+[resource]
+shader = ExtResource("1_hh1f6")
+shader_parameter/color_base = 0.025
+shader_parameter/color_power = 2.105
+shader_parameter/color_strength = 0.25
+shader_parameter/color_radius = 1.414213

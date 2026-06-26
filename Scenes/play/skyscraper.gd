@@ -77,7 +77,7 @@ func collapse_me(node: Node2D) -> void:
 	if node is PlayerMech:
 		velocity = node.velocity
 		var d := velocity.normalized().dot((global_position - node.global_position).normalized())
-		ImpactManager.create_impact(height * maxf(1.0, velocity.length()) * d, 0.25, IMPACT_CURVE)
+		ImpactManager.create_impact(maxf(1.0, velocity.length() / 10.0) * d, 0.25, IMPACT_CURVE)
 		node.angular_velocity -= node.angular_acceleration
 	elif node is MonsterLaser:
 		velocity = Vector2.from_angle(node.global_rotation) * 128.0
