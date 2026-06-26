@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d3byjpdplog78"]
+
+[ext_resource type="Script" uid="uid://dyu3ydvmh4l87" path="res://Scenes/play/vehicle.gd" id="1_tm8ri"]
+[ext_resource type="Texture2D" uid="uid://dn50orgiasfe" path="res://Assets/Military/Fighter jet.png" id="2_vtswu"]
+[ext_resource type="Texture2D" uid="uid://busxc3m4pp60" path="res://Assets/Military/Helicopter.png" id="3_injei"]
+
+[node name="Vehicle" type="CharacterBody2D" unique_id=1865385987]
+script = ExtResource("1_tm8ri")
+possible_vehicles = Array[Texture]([ExtResource("2_vtswu"), ExtResource("3_injei")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1079171227]
+texture = ExtResource("2_vtswu")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=198628598]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_postprocessing = 1
