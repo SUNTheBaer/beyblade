@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddtaqhcu7dd0s"
+path="res://.godot/imported/mini game 1 switch down.mp3-bd0a1eb8f563061fd8a4e629b5a08c5f.mp3str"
+
+[deps]
+
+source_file="res://Assets/sfx/mini game 1 switch down.mp3"
+dest_files=["res://.godot/imported/mini game 1 switch down.mp3-bd0a1eb8f563061fd8a4e629b5a08c5f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

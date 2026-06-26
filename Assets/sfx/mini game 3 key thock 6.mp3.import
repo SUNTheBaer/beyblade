@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hp1mtinmbkxa"
+path="res://.godot/imported/mini game 3 key thock 6.mp3-22a5f51e7ef70e9ba8e47670edc3f11a.mp3str"
+
+[deps]
+
+source_file="res://Assets/sfx/mini game 3 key thock 6.mp3"
+dest_files=["res://.godot/imported/mini game 3 key thock 6.mp3-22a5f51e7ef70e9ba8e47670edc3f11a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

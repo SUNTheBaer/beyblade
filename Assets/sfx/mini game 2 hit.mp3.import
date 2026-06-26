@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdkcb5katkr1a"
+path="res://.godot/imported/mini game 2 hit.mp3-31d92da852bad4558b26a65e5d86e929.mp3str"
+
+[deps]
+
+source_file="res://Assets/sfx/mini game 2 hit.mp3"
+dest_files=["res://.godot/imported/mini game 2 hit.mp3-31d92da852bad4558b26a65e5d86e929.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
