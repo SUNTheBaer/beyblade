@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kxs655ph0sfw"
+path="res://.godot/imported/laser 3 seconds.mp3-84e564f8f9df5bff9324242f350d68ed.mp3str"
+
+[deps]
+
+source_file="res://Assets/laser 3 seconds.mp3"
+dest_files=["res://.godot/imported/laser 3 seconds.mp3-84e564f8f9df5bff9324242f350d68ed.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

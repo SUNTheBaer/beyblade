@@ -28,6 +28,7 @@ AudioManager="*uid://cvvon4mle72h1"
 window/size/viewport_width=1440
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://c62qe6pfr3410"
 
 [input]
 
