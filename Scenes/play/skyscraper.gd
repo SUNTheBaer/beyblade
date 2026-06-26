@@ -3,11 +3,11 @@ extends Node2D
 
 static var IMPACT_CURVE: Curve = load("res://Scenes/play/skyscraper_impact_curve.tres")
 static var COLLISION_SFX: Array[AudioStream] = [
-	load("res://Assets/boom 1.mp3"),
-	load("res://Assets/boom 2.mp3"),
-	load("res://Assets/boom 3.mp3"),
-	load("res://Assets/boom 4.mp3"),
-	load("res://Assets/boom 5.mp3")
+	# load("res://Assets/boom 1.mp3"),
+	# load("res://Assets/boom 2.mp3"),
+	# load("res://Assets/boom 3.mp3"),
+	# load("res://Assets/boom 4.mp3"),
+	# load("res://Assets/boom 5.mp3")
 ]
 
 @export var height: int = 1
@@ -77,7 +77,7 @@ func collapse_me(node: Node2D) -> void:
 	if node is PlayerMech:
 		velocity = node.velocity
 		var d := velocity.normalized().dot((global_position - node.global_position).normalized())
-		ImpactManager.create_impact(height * maxf(1.0, velocity.length()) * d, 0.25, IMPACT_CURVE)
+		ImpactManager.create_impact(maxf(1.0, velocity.length() / 10.0) * d, 0.25, IMPACT_CURVE)
 		node.angular_velocity -= node.angular_acceleration
 	elif node is MonsterLaser:
 		velocity = Vector2.from_angle(node.global_rotation) * 128.0

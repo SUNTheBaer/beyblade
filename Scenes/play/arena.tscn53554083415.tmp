@@ -97,7 +97,7 @@ corner_radius_bottom_left = 16
 bg_color = Color(1, 1, 1, 0.5019608)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uiqm4"]
-viewport_path = NodePath("MonserCameraViewport")
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_rcv6h"]
 offsets = PackedFloat32Array(0.27912933, 0.368758, 0.6555698, 0.9769526)
@@ -163,7 +163,7 @@ position = Vector2(4800, 0)
 rotation = 3.1415927
 player = NodePath("../PlayerMech")
 
-[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster", "dust") instance=ExtResource("1_8ndor")]
+[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster") instance=ExtResource("1_8ndor")]
 position = Vector2(-867, -1)
 map = NodePath("../Cityscape")
 monster = NodePath("../Monster")
@@ -173,15 +173,15 @@ angular_velocity = 1.571
 linear_acceleration = 192.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 256.0
-dust = [NodePath("GroundDust"), NodePath("GroundDust2"), NodePath("GroundDust3"), NodePath("GroundDust4")]
 
-[node name="MonserCameraViewport" type="SubViewport" parent="." unique_id=297163106]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=297163106]
 disable_3d = true
+handle_input_locally = false
 size = Vector2i(512, 180)
 render_target_update_mode = 4
 script = ExtResource("15_ukgc8")
 
-[node name="MonsterCamera" type="Camera2D" parent="MonserCameraViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]
+[node name="MonsterCamera" type="Camera2D" parent="SubViewport" unique_id=615985526 node_paths=PackedStringArray("player", "monster")]
 zoom = Vector2(0.2, 0.2)
 script = ExtResource("41_ukgc8")
 player = NodePath("../../PlayerMech")
@@ -736,51 +736,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("45_yirdq")
-initial_wait_time = 2.0
-initial_fade = 1.0
-fade_in_time = -2.0
-metadata/_custom_type_script = "uid://bxju5l0sr4klf"
-
-[node name="Poster" parent="CanvasLayer/FadeInController" unique_id=1137955399 instance=ExtResource("45_f56kt")]
-material = ExtResource("46_ul8bc")
-layout_mode = 1
-
-[node name="TVNoise" type="TextureRect" parent="CanvasLayer" unique_id=1116479768]
-material = ExtResource("21_g4wkh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("NoiseTexture2D_na5w4")
-script = ExtResource("43_uiqm4")
-
-[node name="TVNoiseVignette" type="ColorRect" parent="CanvasLayer/TVNoise" unique_id=1283100392]
-material = ExtResource("21_g4wkh")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="TVNoiseRandomizer" type="Node" parent="CanvasLayer/TVNoise" unique_id=1522605088]
-script = ExtResource("23_d0qwu")
-material = ExtResource("21_g4wkh")
-metadata/_custom_type_script = "uid://chylwlcgsjwqc"
-
 [node name="HUDExplosion" type="Control" parent="CanvasLayer" unique_id=1838389373]
 layout_mode = 3
 anchors_preset = 15
@@ -815,6 +770,24 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("45_yirdq")
+initial_wait_time = 2.0
+initial_fade = 1.0
+fade_in_time = -2.0
+metadata/_custom_type_script = "uid://bxju5l0sr4klf"
+
+[node name="Poster" parent="CanvasLayer/FadeInController" unique_id=1137955399 instance=ExtResource("45_f56kt")]
+material = ExtResource("46_ul8bc")
+layout_mode = 1
+
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=885276249]
 anchors_preset = 15
 anchor_right = 1.0
@@ -848,6 +821,31 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("10_t6dfd")
 theme_override_font_sizes/font_size = 64
 text = "Main Menu"
+
+[node name="TVNoise" type="TextureRect" parent="CanvasLayer" unique_id=1116479768]
+material = ExtResource("21_g4wkh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_na5w4")
+script = ExtResource("43_uiqm4")
+
+[node name="TVNoiseVignette" type="ColorRect" parent="CanvasLayer/TVNoise" unique_id=1283100392]
+material = ExtResource("21_g4wkh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TVNoiseRandomizer" type="Node" parent="CanvasLayer/TVNoise" unique_id=1522605088]
+script = ExtResource("23_d0qwu")
+material = ExtResource("21_g4wkh")
+metadata/_custom_type_script = "uid://chylwlcgsjwqc"
 
 [node name="StartTimescale" type="Node" parent="." unique_id=1436585676]
 script = ExtResource("48_bca0g")

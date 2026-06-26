@@ -29,10 +29,10 @@ func _process(dt: float) -> void:
 	else:
 		velocity_exceeded_level_ = 0.0
 	
-	var x := minf(0.5 / dt, pow(ImpactManager.impact, 3.0) / 16.0) + TAU * velocity_exceeded_level_
+	var x := minf(0.5 / dt, pow(ImpactManager.impact, 3.0) / 16.0) + PI * velocity_exceeded_level_ / 2.0
 	var next := camera.position + Vector2(
-		clamp(randfn(0.0, x * 128.0), -1024.0, 1024.0),
-		clamp(randfn(0.0, x * 128.0), -1024.0, 1024.0)) * dt
+		clamp(randfn(0.0, x * 192.0), -3600.0, 3600.0),
+		clamp(randfn(0.0, x * 192.0), -3600.0, 3600.0)) * dt
 	camera.position = next * 0.25
 	
 	camera.zoom = base_zoom_ * Data.zoom_scale

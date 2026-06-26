@@ -6,6 +6,9 @@
 [node name="Laser" type="Area2D" unique_id=1672941238 node_paths=PackedStringArray("collision_shape")]
 z_index = 12
 script = ExtResource("1_ud0uq")
+zenith_time = 2.0
+increase_time = 0.25
+decrease_time = 0.25
 global_material = ExtResource("2_c2mew")
 collision_shape = NodePath("Shape")
 metadata/_custom_type_script = "uid://djo1jb0fhkyu1"

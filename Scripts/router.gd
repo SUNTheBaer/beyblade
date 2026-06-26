@@ -4,7 +4,7 @@ extends Control
 @export var battle_scene: PackedScene
 
 var greyness_: float = 0.0: set = _set_greyness
-
+var resources_: Array[Resource]
 
 func _set_greyness(value: float) -> void:
 	greyness_ = value
@@ -12,8 +12,8 @@ func _set_greyness(value: float) -> void:
 
 
 func _ready() -> void:
-	preload("res://Assets/KKVSTT battle theme.mp3")
-	preload("res://Assets/KKVSTT main menu w intro.mp3")
+	# resources_.push_back(preload("res://Assets/KKVSTT battle theme.mp3"))
+	# resources_.push_back(preload("res://Assets/KKVSTT main menu w intro.mp3"))
 	
 	Data.reset()
 	AudioManager.switch_music(load("res://Assets/KKVSTT main menu w intro.mp3"))
@@ -22,7 +22,12 @@ func _ready() -> void:
 
 
 func _route() -> void:
-	SceneManager.go_to_scene(SceneManager.SCENE.PLAY)
+	var scene := battle_scene.instantiate()
+	get_tree().root.add_child(scene)
+	# get_tree().current_scene = scene
+	visible = false
+	await get_tree().create_timer(30.0).timeout
+	queue_free()
 
 
 func _on_texture_button_pressed() -> void:

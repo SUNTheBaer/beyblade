@@ -22,8 +22,9 @@ var laser_: MonsterLaser
 func _set_hp(value: float) -> void:
 	hp = clampf(value, 0.0, 1.0)
 	if hp <= 0.0:
+		if not Data.victory:
+			AudioManager.switch_music(null, 3.0)
 		Data.victory = true
-		AudioManager.switch_music(null, 3.0)
 
 
 func _set_shooting_laser(value: bool) -> void:
