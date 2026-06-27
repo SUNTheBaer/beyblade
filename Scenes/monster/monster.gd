@@ -9,13 +9,15 @@ extends StaticBody2D
 @export var rotation_speed: float = PI / 4.0
 @export var shooting_laser: bool = false: set = _set_shooting_laser
 @export var leap: bool = false: set = _set_leap
-@export var leap_distance: float = 5.0
+@export var leap_distance: float = 2000.0
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
 @export var shadow: AnimatedSprite2D
 @export var collision: CollisionShape2D
 @export var laser_scene: PackedScene
+
+@onready var cityscape: RandomizedCityscape = $"../Cityscape"
 
 var monster_speed: float = 128.0
 var monster_stun_multiplier: float = 5.0
@@ -163,10 +165,21 @@ func _leap() -> void:
 	body.animation_finished.disconnect(_leap)
 	collision.disabled = true
 	var leap_vector = (player.global_position - global_position).normalized()
-	var target_position = leap_vector * leap_distance
+	var target_position = leap_vector * leap_distance + global_position
+	if target_position.x > cityscape.width * 160 / 2:
+		target_position.x = cityscape.width * 160 / 2
+	elif target_position.x < -cityscape.width * 160 / 2:
+		target_position.x = -cityscape.width * 160 / 2
+	elif target_position.y < cityscape.height * 160 / 2:
+		target_position.y = cityscape.height * 160 / 2
+	elif target_position.y < -cityscape.height * 160 / 2:
+		target_position.y = -cityscape.height * 160 / 2
 	var t = 3.0
+	var target_rotation := (player.global_position - global_position).angle()
+	var diff := angle_difference(target_rotation, rotation)
 	get_tree().create_tween().tween_property(self, "global_position", target_position, t)
 	get_tree().create_tween().tween_property(self, "scale", scale * 1.5, t/2)
+	get_tree().create_tween().tween_property(self, "rotation", abs(diff), t/2)
 	await get_tree().create_timer(t/2).timeout
 	get_tree().create_tween().tween_property(self, "scale", scale / 1.5, t/2)
 	await get_tree().create_timer(t/2).timeout
