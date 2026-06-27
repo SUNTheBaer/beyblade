@@ -33,8 +33,11 @@ func reload_scene() -> void:
 
 func go_to_scene(scene: SCENE) -> void:
 	get_tree().paused = false
+	Engine.time_scale = 1.0
 	Data.time_scale = 1.0
 	Data.pause_scale = 1.0
+	AudioManager.stop_all_sounds()
+	
 	var fname := _get_filename_from_scene(scene)
 	var err := get_tree().change_scene_to_file(fname)
 	if OK != err:

@@ -29,6 +29,7 @@ static var COLLISION_SFX: Array[AudioStream] = [
 @export var monster_pointer: Node2D
 @export var shadow: Node2D
 @export var dust: Array[GPUParticles2D]
+@export var buttons: Node
 
 var bonus_accelerate_: bool
 
@@ -45,8 +46,6 @@ var shadow_height_: float = 24.0
 
 var linear_input_disabled: bool = false
 var tilt_input_disabled: bool = false
-
-var engine_id_: int
 
 
 func get_current_damage_level() -> float:
@@ -99,7 +98,6 @@ func get_angular_acceleration() -> float:
 func _ready() -> void:
 	EntityManager.subscribe(self, 320.0)
 	damaged.visible = false
-	engine_id_ = AudioManager.play_persistent_sound(load("res://Assets/sfx/top engine rumble.mp3"), "world_sfx")
 
 
 func _process(dt: float) -> void:
@@ -111,12 +109,17 @@ func _process(dt: float) -> void:
 	if not monster.active and \
 		(global_position.x < -160.0 * 7.0 or global_position.x > 160.0 * 7.0 \
 		or global_position.y< -160.0 * 5.0 or global_position.y > 160.0 * 5.0):
+		if null != buttons:
+			buttons.queue_free()
+			buttons = null
 		movement_scale = 1.0
 		monster.active = true
 		AudioManager.switch_music(load("res://Assets/KKVSTT battle theme.mp3"), 4.0)
 		AudioManager.play_sound(load("res://Assets/KK roar.wav"), "world_sfx")
 		await get_tree().create_timer(1.5).timeout
 		ImpactManager.create_impact(100.0, 3.0)
+		await get_tree().create_timer(4.5).timeout
+		monster.can_shoot_laser = true
 	
 	if damaged_ > 0.0 or Data.disabled:
 		accum_ = fmod(accum_ + dt * (1.0 if Data.disabled else 4.0), 1.0)
@@ -218,8 +221,8 @@ func _process(dt: float) -> void:
 	velocity = lerp(velocity, linear_velocity, 0.05)
 	var collision := move_and_collide(velocity * dt)
 	if null != collision and collision.get_collider() is Monster and _is_heading_towards(collision.get_collider()):
-		if angular_velocity == max_angular_velocity:
-			AudioManager.play_sound(load("res://Assets/sfx/max speed hit.mp3"), "world_sfx")
+		if angular_velocity == max_angular_velocity or predict_impact_:
+			AudioManager.play_sound(load("res://Assets/sfx/max speed hit.mp3"), "Master", 2.0)
 		else:
 			AudioManager.play_sound(COLLISION_SFX.pick_random(), "world_sfx")
 		monster.impact(velocity * 0.5)
@@ -258,10 +261,6 @@ func _process(dt: float) -> void:
 	for d in dust:
 		d.speed_scale = Data.get_time()
 		d.amount_ratio = dspawn
-	
-	if engine_id_ in AudioManager.audio_map:
-		AudioManager.audio_map[engine_id_].volume_linear = \
-			maxf(0.1, linear_velocity.length() / (6.0 * linear_acceleration))
 
 
 func _is_heading_towards(object: Node2D) -> bool:

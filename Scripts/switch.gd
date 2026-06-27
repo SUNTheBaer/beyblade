@@ -24,7 +24,7 @@ var current_position: String
 func _ready() -> void:
 	starting_position_key = possible_positions.keys().pick_random()
 	correct_position_key = possible_positions.keys().pick_random()
-	_set_switch_position(starting_position_key)
+	_set_switch_position(starting_position_key, false)
 
 func _on_up_button_pressed() -> void:
 	match current_position:
@@ -40,11 +40,14 @@ func _on_down_button_pressed() -> void:
 		"neutral":
 			_set_switch_position("down")
 
-func _set_switch_position(position: String) -> void:
-	AudioManager.play_sound(SFX[position], "minigame_sfx")
+func _set_switch_position(position: String, play_audio: bool = true) -> void:
+	if play_audio:
+		AudioManager.play_sound(SFX[position], "minigame_sfx")
 	current_position = position
 	texture = possible_positions[position]
 	if current_position == correct_position_key:
+		if play_audio:
+			AudioManager.play_sound(load("res://Assets/sfx/mini game 1 light on.mp3"), "minigame_sfx", 0.5)
 		result_light.texture = possible_results["green"]
 		correct_position_bool = true
 	else:

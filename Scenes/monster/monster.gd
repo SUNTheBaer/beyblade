@@ -8,6 +8,7 @@ extends StaticBody2D
 @export var impact_velocity: Vector2
 @export var rotation_speed: float = PI / 4.0
 @export var shooting_laser: bool = false: set = _set_shooting_laser
+@export var can_shoot_laser: bool = false
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
@@ -35,7 +36,6 @@ func _set_shooting_laser(value: bool) -> void:
 	shooting_laser = value
 	if shooting_laser:
 		print("Initiate laser shot")
-		AudioManager.play_sound(load("res://Assets/KK roar.wav"), "world_sfx")
 		body.play("laser")
 		body.animation_finished.connect(_shoot_laser)
 	else:
@@ -130,7 +130,9 @@ func _finish_laser() -> void:
 
 
 func _should_fire_laser() -> bool:
+	if not can_shoot_laser:
+		return false
 	if randf() > 0.005:
 		return false
 	var d := global_position.distance_to(player.global_position)
-	return d > 1800 and d < 4000
+	return d > 800 and d < 3000

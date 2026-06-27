@@ -4,6 +4,7 @@ extends HUDComponent
 @export var player: PlayerMech
 @export var exceed_timer: float = 1.0
 @export var fall_timer: float = 4.0
+@export var slow_down: HUDSlowDown
 
 @export_group("Internal")
 @export var player_icon: TextureRect
@@ -49,10 +50,12 @@ func _process(dt: float) -> void:
 	is_capacity_exceeded = fall_progress_ >= 1.0
 	
 	if fall_progress_ >= 1.0:
+		slow_down.register(self, true)
 		fall_over_timer_ += dt
 		if fall_over_timer_ >= exceed_timer:
 			Data.disabled = true
 	else:
+		slow_down.register(self, false)
 		fall_over_timer_ = 0.0
 
 

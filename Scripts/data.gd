@@ -8,19 +8,19 @@ extends Node
 @export var zoom_scale: float = 1.0
 @export var impact_sensor: float = 1.0
 
+var accum_: float = 0.0
+
 
 func _set_victory(value: bool) -> void:
 	victory = value
 	if victory:
-		AudioManager.stop_all_sounds()
-		AudioManager.switch_music(null, 1.0)
+		AudioManager.switch_music(null, 4.0)
 
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
 	if disabled:
-		AudioManager.stop_all_sounds()
-		AudioManager.switch_music(null, 1.0)
+		AudioManager.switch_music(null, 4.0)
 
 
 func get_time() -> float:
@@ -46,4 +46,12 @@ func _process(dt: float) -> void:
 	# 	disabled = true
 	if Input.is_action_just_pressed("auto_win"):
 		victory = true
+	
+	if victory or disabled:
+		accum_ = minf(1.0, accum_ + dt)
+		AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("sfx"), 1.0 - accum_)
+	else:
+		accum_ = 0.0
+		AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("sfx"), 1.0)
+	
 	pass

@@ -15,6 +15,7 @@ func _ready() -> void:
 	# resources_.push_back(preload("res://Assets/KKVSTT battle theme.mp3"))
 	# resources_.push_back(preload("res://Assets/KKVSTT main menu w intro.mp3"))
 	
+	greyness_ = 0.0
 	Data.reset()
 	AudioManager.switch_music(load("res://Assets/KKVSTT main menu w intro.mp3"))
 	$Poster/TextureButton.disabled = false

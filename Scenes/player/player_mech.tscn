@@ -4,11 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://cfvjccth81ykw" path="res://Assets/Beyblade.png" id="2_whpwa"]
 [ext_resource type="Texture2D" uid="uid://cgt1wnq4ebntq" path="res://Assets/Beyblade-hurt.png" id="3_vu0aq"]
 [ext_resource type="Texture2D" uid="uid://cxag80068lyqd" path="res://Assets/Cursor.png" id="4_gqju5"]
+[ext_resource type="Theme" uid="uid://b0aecj8upn15l" path="res://Assets/HUD/button_theme.tres" id="5_2k8yw"]
+[ext_resource type="Shortcut" uid="uid://3g3qswd006ye" path="res://Scenes/player/hud/shortcut_w.tres" id="6_gxwse"]
+[ext_resource type="Script" uid="uid://7a6vfygljq8p" path="res://Scenes/player/hud/orient_up.gd" id="7_gxwse"]
+[ext_resource type="Shortcut" uid="uid://bp1b1xc7dolhv" path="res://Scenes/player/hud/shortcut_s.tres" id="7_jk0p4"]
+[ext_resource type="Shortcut" uid="uid://dexnlj1ofhngr" path="res://Scenes/player/hud/shortcut_d.tres" id="8_x54hi"]
+[ext_resource type="Shortcut" uid="uid://c6uky132eih0f" path="res://Scenes/player/hud/shortcut_a.tres" id="9_dekom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gqju5"]
 radius = 128.0
 
-[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "damaged", "pointer", "monster_pointer", "shadow")]
+[node name="PlayerMech" type="CharacterBody2D" unique_id=2034114962 node_paths=PackedStringArray("body", "damaged", "pointer", "monster_pointer", "shadow", "buttons")]
 z_index = 4
 use_parent_material = true
 script = ExtResource("1_1jxkn")
@@ -17,6 +23,7 @@ damaged = NodePath("Body/Damage")
 pointer = NodePath("Pointer")
 monster_pointer = NodePath("MonsterPointer")
 shadow = NodePath("Shadow")
+buttons = NodePath("Pointer/Buttons")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1536957718]
 self_modulate = Color(0, 0, 0, 0.5019608)
@@ -45,6 +52,70 @@ z_index = 1024
 use_parent_material = true
 position = Vector2(192, 0)
 texture = ExtResource("4_gqju5")
+
+[node name="Buttons" type="Control" parent="Pointer" unique_id=1084906065]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="W" type="Button" parent="Pointer/Buttons" unique_id=453074887]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_left = 204.0
+offset_top = -77.0
+offset_right = 364.0
+offset_bottom = 83.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("5_2k8yw")
+theme_override_font_sizes/font_size = 128
+shortcut = ExtResource("6_gxwse")
+shortcut_in_tooltip = false
+text = "W"
+script = ExtResource("7_gxwse")
+
+[node name="S" type="Button" parent="Pointer/Buttons" unique_id=1172877238]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_left = -363.0
+offset_top = -83.0
+offset_right = -203.0
+offset_bottom = 77.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("5_2k8yw")
+theme_override_font_sizes/font_size = 128
+shortcut = ExtResource("7_jk0p4")
+shortcut_in_tooltip = false
+text = "S"
+script = ExtResource("7_gxwse")
+
+[node name="D" type="Button" parent="Pointer/Buttons" unique_id=302168585]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_left = -80.0
+offset_top = 195.0
+offset_right = 80.0
+offset_bottom = 355.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("5_2k8yw")
+theme_override_font_sizes/font_size = 128
+shortcut = ExtResource("8_x54hi")
+shortcut_in_tooltip = false
+text = "D"
+script = ExtResource("7_gxwse")
+
+[node name="A" type="Button" parent="Pointer/Buttons" unique_id=828775379]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_left = -79.0
+offset_top = -374.0
+offset_right = 81.0
+offset_bottom = -214.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme = ExtResource("5_2k8yw")
+theme_override_font_sizes/font_size = 128
+shortcut = ExtResource("9_dekom")
+shortcut_in_tooltip = false
+text = "A"
+script = ExtResource("7_gxwse")
 
 [node name="MonsterPointer" type="Node2D" parent="." unique_id=1517372339]
 use_parent_material = true
