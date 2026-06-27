@@ -6,7 +6,7 @@
 
 [node name="Vehicle" type="CharacterBody2D" unique_id=1865385987]
 script = ExtResource("1_tm8ri")
-possible_vehicles = Array[Texture]([ExtResource("2_vtswu"), ExtResource("3_injei")])
+possible_vehicles = Array[CompressedTexture2D]([ExtResource("2_vtswu"), ExtResource("3_injei")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1079171227]
 texture = ExtResource("2_vtswu")
