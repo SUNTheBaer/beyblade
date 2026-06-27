@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://crw2oryj2klhy"
+path="res://.godot/imported/max speed hit.mp3-6d20590363b2504e73a097f7fbe99165.mp3str"
+
+[deps]
+
+source_file="res://Assets/sfx/max speed hit.mp3"
+dest_files=["res://.godot/imported/max speed hit.mp3-6d20590363b2504e73a097f7fbe99165.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
