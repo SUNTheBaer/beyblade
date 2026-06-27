@@ -170,7 +170,7 @@ func _leap() -> void:
 		target_position.x = cityscape.width * 160 / 2
 	elif target_position.x < -cityscape.width * 160 / 2:
 		target_position.x = -cityscape.width * 160 / 2
-	elif target_position.y < cityscape.height * 160 / 2:
+	elif target_position.y > cityscape.height * 160 / 2:
 		target_position.y = cityscape.height * 160 / 2
 	elif target_position.y < -cityscape.height * 160 / 2:
 		target_position.y = -cityscape.height * 160 / 2
@@ -204,4 +204,4 @@ func _should_leap() -> bool:
 	if randf() > 0.001:
 		return false
 	var d := global_position.distance_to(player.global_position)
-	return d > 400 and d < 1800
+	return d > 0 and d < 1800
