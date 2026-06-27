@@ -58,12 +58,16 @@
 [ext_resource type="Script" uid="uid://dbgoknfelnur6" path="res://Scenes/monster/tv_noise.gd" id="43_uiqm4"]
 [ext_resource type="PackedScene" uid="uid://5jdte2i4tjf1" path="res://Scenes/main menu/poster.tscn" id="45_f56kt"]
 [ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="45_yirdq"]
+[ext_resource type="AudioStream" uid="uid://51i838qrlx4r" path="res://Assets/alarm 6.mp3" id="46_nwrm0"]
 [ext_resource type="Material" uid="uid://csptbwqahhjxp" path="res://Scenes/main menu/arena_greyscale_material.tres" id="46_ul8bc"]
 [ext_resource type="Script" uid="uid://dxgdfven2qbbm" path="res://Scenes/play/start_timescale.gd" id="48_bca0g"]
 [ext_resource type="Script" uid="uid://p7632fk2v5er" path="res://Scenes/play/pause_menu.gd" id="48_olwfp"]
 [ext_resource type="AudioStream" uid="uid://c18007jkvh2ia" path="res://Assets/alarm 2.mp3" id="49_1pwt1"]
 [ext_resource type="Script" uid="uid://cqj6qxbng0611" path="res://Scenes/play/reset_data.gd" id="50_w62nu"]
+[ext_resource type="Script" uid="uid://bjcynfekbi4l7" path="res://Scenes/player/hud/hud_slow_down.gd" id="52_44qrc"]
+[ext_resource type="Script" uid="uid://dkvfn73kavogc" path="res://Scripts/pulse_over_time.gd" id="52_37136"]
 [ext_resource type="Texture2D" uid="uid://cbw4v02u4gi5f" path="res://Assets/Military/Tank.png" id="58_na5w4"]
+[ext_resource type="Theme" uid="uid://b0aecj8upn15l" path="res://Assets/HUD/button_theme.tres" id="63_3bgn1"]
 
 [sub_resource type="Curve2D" id="Curve2D_xxbfd"]
 _data = {
@@ -124,13 +128,12 @@ noise = SubResource("FastNoiseLite_fo2bp")
 color_ramp = SubResource("Gradient_rcv6h")
 
 [sub_resource type="Gradient" id="Gradient_d0qwu"]
-offsets = PackedFloat32Array(0.428449, 0.85775495, 0.97257924)
+offsets = PackedFloat32Array(0, 0.63, 0.959)
 colors = PackedColorArray(0.1452662, 0.1452662, 0.1452662, 0.0058078878, 0, 0, 0, 0.45882353, 0, 0, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g4wkh"]
 noise_type = 2
-seed = 351
-frequency = 0.002
+frequency = 0.004
 fractal_type = 3
 fractal_octaves = 4
 fractal_lacunarity = 7.0
@@ -292,12 +295,13 @@ offset_bottom = 73.0
 script = ExtResource("6_sqf1t")
 metadata/_custom_type_script = "uid://qbalepf37i73"
 
-[node name="HUDMaxAngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=556723371 node_paths=PackedStringArray("player")]
+[node name="HUDMaxAngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=556723371 node_paths=PackedStringArray("player", "slow_down")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("13_4ynrk")
 player = NodePath("../../../../PlayerMech")
+slow_down = NodePath("../../HUDSlowDown")
 alert_display_text = "CENTRIFUGAL THRESHOLD EXEEDED SLOW DOWN"
 alert_audio = ExtResource("27_kel27")
 metadata/_custom_type_script = "uid://csix81n57lrx7"
@@ -321,7 +325,7 @@ offset_top = 830.0
 offset_right = 420.0
 offset_bottom = 1074.0
 
-[node name="HUDPrecession" type="Control" parent="CanvasLayer/HUD" unique_id=1718864513 node_paths=PackedStringArray("player", "player_icon", "alert_notifier", "fall_progress")]
+[node name="HUDPrecession" type="Control" parent="CanvasLayer/HUD" unique_id=1718864513 node_paths=PackedStringArray("player", "slow_down", "player_icon", "alert_notifier", "fall_progress")]
 anchors_preset = 0
 offset_left = 35.0
 offset_top = 856.0
@@ -331,6 +335,7 @@ script = ExtResource("8_1klcq")
 player = NodePath("../../../PlayerMech")
 exceed_timer = 4.0
 fall_timer = 12.0
+slow_down = NodePath("../HUDSlowDown")
 player_icon = NodePath("PlayerSideView")
 alert_notifier = NodePath("VBoxContainer/Label")
 fall_progress = NodePath("VBoxContainer/ProgressBar")
@@ -354,6 +359,7 @@ step = 0.0
 value = 0.5
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD/HUDPrecession/VBoxContainer" unique_id=634046808]
+z_index = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.79482806, 0.794828, 0.794828, 1)
 theme_override_fonts/font = ExtResource("10_t6dfd")
@@ -588,6 +594,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("15_rn3mc")
 alert_display_text = "DEBUG CRASH TRIGGERED"
+alert_audio = ExtResource("46_nwrm0")
 metadata/_custom_type_script = "uid://cqjwdx1w0g5vw"
 
 [node name="CollisionMonitors" type="Control" parent="CanvasLayer/HUD" unique_id=997217363]
@@ -709,6 +716,30 @@ offset_bottom = 180.0
 texture = SubResource("NoiseTexture2D_i13qm")
 script = ExtResource("43_uiqm4")
 
+[node name="HUDSlowDown" type="Control" parent="CanvasLayer/HUD" unique_id=1890523511]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("52_44qrc")
+metadata/_custom_type_script = "uid://bjcynfekbi4l7"
+
+[node name="SlowDown" type="Label" parent="CanvasLayer/HUD/HUDSlowDown" unique_id=1797511481]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_t6dfd")
+theme_override_font_sizes/font_size = 164
+text = "SLOW DOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("52_37136")
+
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1554159125]
 anchors_preset = 15
 anchor_right = 1.0
@@ -720,6 +751,7 @@ texture = ExtResource("27_6somp")
 expand_mode = 2
 
 [node name="HUDAlertController" type="Control" parent="CanvasLayer" unique_id=1728738171 node_paths=PackedStringArray("hud")]
+z_index = 999
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -736,6 +768,7 @@ metadata/_custom_type_script = "uid://cqbviav7362nn"
 
 [node name="MinigameDisplay" type="CenterContainer" parent="CanvasLayer" unique_id=311877957]
 unique_name_in_owner = true
+z_index = 999
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -745,6 +778,7 @@ mouse_filter = 2
 
 [node name="FadeInController" type="Control" parent="CanvasLayer" unique_id=1013303939]
 visible = false
+z_index = 999
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -789,6 +823,7 @@ material = ExtResource("21_g4wkh")
 metadata/_custom_type_script = "uid://chylwlcgsjwqc"
 
 [node name="HUDExplosion" type="Control" parent="CanvasLayer" unique_id=1838389373]
+z_index = 999
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -801,6 +836,7 @@ metadata/_custom_type_script = "uid://lox87x7jj012"
 
 [node name="HUDDefeated" type="Control" parent="CanvasLayer" unique_id=488903484]
 modulate = Color(1, 1, 1, 0)
+z_index = 999
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -823,6 +859,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=885276249]
+z_index = 999
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -840,20 +877,17 @@ main_menu_button = NodePath("MainMenu")
 
 [node name="Resume" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1084901872]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_t6dfd")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("63_3bgn1")
 text = "Resume"
 
 [node name="Restart" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=856577736]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_t6dfd")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("63_3bgn1")
 text = "Restart"
 
 [node name="MainMenu" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1006699646]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_t6dfd")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("63_3bgn1")
 text = "Main Menu"
 
 [node name="StartTimescale" type="Node" parent="." unique_id=1436585676]

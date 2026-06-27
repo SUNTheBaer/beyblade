@@ -41,13 +41,14 @@ func pulse(to: float, transition: float = 0.0) -> Signal:
 	return tween.finished
 
 
-func play_sound(audio: AudioStream, bus: String = "sfx") -> Signal:
+func play_sound(audio: AudioStream, bus: String = "sfx", volume: float = 1.0) -> Signal:
 	if null == audio:
 		return no_signal
 	var sfx_stream_player := AudioStreamPlayer.new()
 	sfx_stream_player.pitch_scale = randf_range(0.9, 1.1)
 	sfx_stream_player.stream = audio
 	sfx_stream_player.bus = bus
+	sfx_stream_player.volume_linear = volume
 	sfx_stream_player.finished.connect(sfx_stream_player.queue_free)
 	add_child(sfx_stream_player)
 	sfx_stream_player.play()
@@ -114,4 +115,4 @@ func _process(dt: float) -> void:
 	
 	music_stream_player.volume_linear = music_volume
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("world_sfx"), Data.get_time())
-	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("alarm_sfx"), Data.get_time())
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("alarm_sfx"), Data.get_time() / 2.0)

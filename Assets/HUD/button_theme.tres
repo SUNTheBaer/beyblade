@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://b0aecj8upn15l"]
+
+[ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="1_2efwa"]
+[ext_resource type="StyleBox" uid="uid://eqch6qedb7he" path="res://Assets/HUD/button_disabled.tres" id="2_tgnpe"]
+[ext_resource type="StyleBox" uid="uid://qcgregk3286x" path="res://Assets/HUD/button_hover.tres" id="3_xd1iq"]
+[ext_resource type="StyleBox" uid="uid://bhtmu25gvhsyg" path="res://Assets/HUD/button_normal.tres" id="4_53avh"]
+[ext_resource type="StyleBox" uid="uid://wcqetj7qupi5" path="res://Assets/HUD/button_pressed.tres" id="5_uk5c0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dpe67"]
+
+[resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_2efwa")
+Button/styles/disabled = ExtResource("2_tgnpe")
+Button/styles/focus = SubResource("StyleBoxEmpty_dpe67")
+Button/styles/hover = ExtResource("3_xd1iq")
+Button/styles/normal = ExtResource("4_53avh")
+Button/styles/pressed = ExtResource("5_uk5c0")

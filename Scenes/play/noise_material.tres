@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_hh1f6")
-shader_parameter/color_base = 0.025
-shader_parameter/color_power = 2.105
+shader_parameter/color_base = 0.05
+shader_parameter/color_power = 2.0
 shader_parameter/color_strength = 0.25
 shader_parameter/color_radius = 1.414213
