@@ -201,7 +201,7 @@ func _finish_leap() -> void:
 
 
 func _should_leap() -> bool:
-	if randf() > 0.001:
+	if randf() > 0.005:
 		return false
 	var d := global_position.distance_to(player.global_position)
 	return d > 0 and d < 1800
