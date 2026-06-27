@@ -29,6 +29,7 @@ func _physics_process(dt: float) -> void:
 		select_bar_direction *= -1
 	
 	if Input.is_action_just_pressed("accept"):
+		AudioManager.play_sound(load("res://Assets/sfx/mini game 2 hit.mp3"), "minigame_sfx")
 		if select_bar.position.x > target_bar.position.x - select_bar_offset and select_bar.position.x < target_bar.position.x + target_bar.size.x + select_bar_offset:
 			_update_score()
 			target_bar.position.x = randf_range(0, timing_meter.size.x)

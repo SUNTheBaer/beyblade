@@ -84,7 +84,7 @@ func collapse_me(node: Node2D) -> void:
 	collapsing = true
 	for i in sprites_.size():
 		velocities_[i] = (velocity + Vector2(randf_range(-128.0, 128.0), randf_range(-128.0, 128.0))) * i / 10.0
-	AudioManager.play_sound(COLLISION_SFX.pick_random())
+	AudioManager.play_sound(COLLISION_SFX.pick_random(), "world_sfx")
 	_set_disabled.call_deferred()
 
 

@@ -20,7 +20,7 @@ func _on_skill_pressed() -> void:
 		return
 	
 	ability_clicked.emit()
-	var instance = minigame_scene.instantiate()
+	var instance = minigame_scene.instantiate() as Minigame
 	instance.minigame_complete.connect(_on_minigame_complete)
 	minigame_display.add_child(instance)
 	minigame_display.mouse_filter = Control.MOUSE_FILTER_STOP

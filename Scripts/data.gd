@@ -11,14 +11,16 @@ extends Node
 
 func _set_victory(value: bool) -> void:
 	victory = value
-	AudioManager.stop_all_sounds()
-	AudioManager.switch_music(null, 1.0)
+	if victory:
+		AudioManager.stop_all_sounds()
+		AudioManager.switch_music(null, 1.0)
 
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
-	AudioManager.stop_all_sounds()
-	AudioManager.switch_music(null, 1.0)
+	if disabled:
+		AudioManager.stop_all_sounds()
+		AudioManager.switch_music(null, 1.0)
 
 
 func get_time() -> float:

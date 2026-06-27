@@ -61,6 +61,7 @@
 [ext_resource type="Material" uid="uid://csptbwqahhjxp" path="res://Scenes/main menu/arena_greyscale_material.tres" id="46_ul8bc"]
 [ext_resource type="Script" uid="uid://dxgdfven2qbbm" path="res://Scenes/play/start_timescale.gd" id="48_bca0g"]
 [ext_resource type="Script" uid="uid://p7632fk2v5er" path="res://Scenes/play/pause_menu.gd" id="48_olwfp"]
+[ext_resource type="AudioStream" uid="uid://c18007jkvh2ia" path="res://Assets/alarm 2.mp3" id="49_1pwt1"]
 [ext_resource type="Script" uid="uid://cqj6qxbng0611" path="res://Scenes/play/reset_data.gd" id="50_w62nu"]
 [ext_resource type="Texture2D" uid="uid://cbw4v02u4gi5f" path="res://Assets/Military/Tank.png" id="58_na5w4"]
 
@@ -689,6 +690,7 @@ offset_bottom = 40.0
 script = ExtResource("27_xolvv")
 player = NodePath("../../../PlayerMech")
 alert_display_text = "SURFACE NOT SOLID"
+alert_audio = ExtResource("49_1pwt1")
 metadata/_custom_type_script = "uid://lj8iixijv6ml"
 
 [node name="MonsterView" type="TextureRect" parent="CanvasLayer/HUD" unique_id=349684889]
