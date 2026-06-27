@@ -3,6 +3,8 @@
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="1_1fp7o"]
 [ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="1_pyhgl"]
 [ext_resource type="Script" uid="uid://iuakld2qua0p" path="res://Scripts/delayed_scene_transition.gd" id="3_o3goa"]
+[ext_resource type="Script" uid="uid://ty4fwj46877h" path="res://Scripts/play_sound.gd" id="4_slr2v"]
+[ext_resource type="AudioStream" uid="uid://dl0n1uj82v7x6" path="res://Assets/victory.mp3" id="5_f34f5"]
 
 [node name="Victory" type="Control" unique_id=1709937895]
 layout_mode = 3
@@ -58,4 +60,10 @@ vertical_alignment = 1
 
 [node name="DelayedSceneTransition" type="Node" parent="." unique_id=1895058335]
 script = ExtResource("3_o3goa")
+delay = 10.76
 metadata/_custom_type_script = "uid://iuakld2qua0p"
+
+[node name="UtilPlaySound" type="Node" parent="." unique_id=721503309]
+script = ExtResource("4_slr2v")
+sound = ExtResource("5_f34f5")
+metadata/_custom_type_script = "uid://ty4fwj46877h"

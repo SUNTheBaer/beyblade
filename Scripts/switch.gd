@@ -1,6 +1,12 @@
 class_name Switch
 extends TextureRect
 
+static var SFX: Dictionary[String, AudioStream] = {
+	"down": load("res://Assets/sfx/mini game 1 switch down.mp3"),
+	"neutral": load("res://Assets/sfx/mini game 1 switch middle.mp3"),
+	"up": load("res://Assets/sfx/mini game 1 switch up.mp3")
+}
+
 signal set_switch_position
 
 @onready var result_light: TextureRect = $"../ResultLight"
@@ -35,6 +41,7 @@ func _on_down_button_pressed() -> void:
 			_set_switch_position("down")
 
 func _set_switch_position(position: String) -> void:
+	AudioManager.play_sound(SFX[position], "minigame_sfx")
 	current_position = position
 	texture = possible_positions[position]
 	if current_position == correct_position_key:

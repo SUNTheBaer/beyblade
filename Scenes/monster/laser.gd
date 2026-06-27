@@ -33,6 +33,7 @@ func cancel() -> void:
 
 func _ready() -> void:
 	EntityManager.subscribe_line(self, width)
+	AudioManager.play_sound(load("res://Assets/laser 3 seconds.mp3"), "world_sfx")
 	var s := RectangleShape2D.new()
 	s.size = Vector2(length, real_width_)
 	collision_shape.shape = s

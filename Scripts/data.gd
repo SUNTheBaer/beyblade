@@ -11,10 +11,16 @@ extends Node
 
 func _set_victory(value: bool) -> void:
 	victory = value
+	if victory:
+		AudioManager.stop_all_sounds()
+		AudioManager.switch_music(null, 1.0)
 
 
 func _set_disabled(value: bool) -> void:
 	disabled = value
+	if disabled:
+		AudioManager.stop_all_sounds()
+		AudioManager.switch_music(null, 1.0)
 
 
 func get_time() -> float:
@@ -38,6 +44,6 @@ func _process(dt: float) -> void:
 	sun_direction = sun_direction.rotated(TAU / 60.0 * dt)
 	# if Input.is_action_just_pressed("mecha_launch"):
 	# 	disabled = true
-	# if Input.is_action_just_pressed("auto_win"):
-	#	victory = true
+	if Input.is_action_just_pressed("auto_win"):
+		victory = true
 	pass

@@ -35,11 +35,12 @@ func _set_shooting_laser(value: bool) -> void:
 	shooting_laser = value
 	if shooting_laser:
 		print("Initiate laser shot")
-		AudioManager.play_sound(load("res://Assets/KK roar.wav"))
+		AudioManager.play_sound(load("res://Assets/KK roar.wav"), "world_sfx")
 		body.play("laser")
 		body.animation_finished.connect(_shoot_laser)
 	else:
-		body.animation_finished.disconnect(_shoot_laser)
+		if body.animation_finished.is_connected(_shoot_laser):
+			body.animation_finished.disconnect(_shoot_laser)
 		if null != laser_:
 			laser_.cancel()
 

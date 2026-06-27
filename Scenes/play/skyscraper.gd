@@ -3,11 +3,11 @@ extends Node2D
 
 static var IMPACT_CURVE: Curve = load("res://Scenes/play/skyscraper_impact_curve.tres")
 static var COLLISION_SFX: Array[AudioStream] = [
-	# load("res://Assets/boom 1.mp3"),
-	# load("res://Assets/boom 2.mp3"),
-	# load("res://Assets/boom 3.mp3"),
-	# load("res://Assets/boom 4.mp3"),
-	# load("res://Assets/boom 5.mp3")
+	load("res://Assets/boom 1.mp3"),
+	load("res://Assets/boom 2.mp3"),
+	load("res://Assets/boom 3.mp3"),
+	load("res://Assets/boom 4.mp3"),
+	load("res://Assets/boom 5.mp3")
 ]
 
 @export var height: int = 1
@@ -84,7 +84,7 @@ func collapse_me(node: Node2D) -> void:
 	collapsing = true
 	for i in sprites_.size():
 		velocities_[i] = (velocity + Vector2(randf_range(-128.0, 128.0), randf_range(-128.0, 128.0))) * i / 10.0
-	AudioManager.play_sound(COLLISION_SFX.pick_random())
+	AudioManager.play_sound(COLLISION_SFX.pick_random(), "world_sfx")
 	_set_disabled.call_deferred()
 
 
