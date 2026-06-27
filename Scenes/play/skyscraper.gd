@@ -3,11 +3,11 @@ extends Node2D
 
 static var IMPACT_CURVE: Curve = load("res://Scenes/play/skyscraper_impact_curve.tres")
 static var COLLISION_SFX: Array[AudioStream] = [
-	# load("res://Assets/boom 1.mp3"),
-	# load("res://Assets/boom 2.mp3"),
-	# load("res://Assets/boom 3.mp3"),
-	# load("res://Assets/boom 4.mp3"),
-	# load("res://Assets/boom 5.mp3")
+	load("res://Assets/boom 1.mp3"),
+	load("res://Assets/boom 2.mp3"),
+	load("res://Assets/boom 3.mp3"),
+	load("res://Assets/boom 4.mp3"),
+	load("res://Assets/boom 5.mp3")
 ]
 
 @export var height: int = 1

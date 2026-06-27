@@ -24,7 +24,7 @@ func _ready() -> void:
 func _route() -> void:
 	var scene := battle_scene.instantiate()
 	get_tree().root.add_child(scene)
-	# get_tree().current_scene = scene
+	get_tree().current_scene = scene
 	visible = false
 	await get_tree().create_timer(30.0).timeout
 	queue_free()

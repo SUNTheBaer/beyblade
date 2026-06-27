@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bxju5l0sr4klf" path="res://Scenes/fadein.gd" id="1_g61i6"]
 [ext_resource type="FontFile" uid="uid://bry2sbeq826lj" path="res://Assets/fonts/BoldPixels.ttf" id="2_ms7ji"]
 [ext_resource type="Script" uid="uid://iuakld2qua0p" path="res://Scripts/delayed_scene_transition.gd" id="3_ms7ji"]
+[ext_resource type="Script" uid="uid://ty4fwj46877h" path="res://Scripts/play_sound.gd" id="4_g201e"]
+[ext_resource type="AudioStream" uid="uid://bgllnba4cax1v" path="res://Assets/defeat.mp3" id="5_dcqoj"]
 
 [node name="Defeat" type="Control" unique_id=1709937895]
 layout_mode = 3
@@ -60,4 +62,10 @@ vertical_alignment = 1
 
 [node name="DelayedSceneTransition" type="Node" parent="." unique_id=1417260275]
 script = ExtResource("3_ms7ji")
+delay = 10.19
 metadata/_custom_type_script = "uid://iuakld2qua0p"
+
+[node name="UtilPlaySound" type="Node" parent="." unique_id=632477824]
+script = ExtResource("4_g201e")
+sound = ExtResource("5_dcqoj")
+metadata/_custom_type_script = "uid://ty4fwj46877h"

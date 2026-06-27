@@ -49,7 +49,10 @@
 [ext_resource type="Script" uid="uid://chylwlcgsjwqc" path="res://Scenes/player/hud/random_noise.gd" id="23_d0qwu"]
 [ext_resource type="Shortcut" uid="uid://oxbs6km644a6" path="res://Scenes/minigames/velocity_minigame_shortcut.tres" id="25_xoutb"]
 [ext_resource type="Texture2D" uid="uid://7dacngo750p8" path="res://Assets/New Ui.png" id="27_6somp"]
+[ext_resource type="AudioStream" uid="uid://2xbjv70d3lp7" path="res://Assets/alarm 3.mp3" id="27_kel27"]
 [ext_resource type="Script" uid="uid://lj8iixijv6ml" path="res://Scenes/player/hud/oob_alert.gd" id="27_xolvv"]
+[ext_resource type="AudioStream" uid="uid://bawaxi4vld8oy" path="res://Assets/alarm 1.mp3" id="29_1pwt1"]
+[ext_resource type="AudioStream" uid="uid://ct2h2l6rk4kjo" path="res://Assets/alarm 5.mp3" id="29_egipg"]
 [ext_resource type="Script" uid="uid://bvvahonhtcxne" path="res://Scenes/player/hud/defeat.gd" id="34_qeiqt"]
 [ext_resource type="Script" uid="uid://dqmwcrgynqtqn" path="res://Scenes/monster/monster_camera.gd" id="41_ukgc8"]
 [ext_resource type="Script" uid="uid://dbgoknfelnur6" path="res://Scenes/monster/tv_noise.gd" id="43_uiqm4"]
@@ -163,7 +166,7 @@ position = Vector2(4800, 0)
 rotation = 3.1415927
 player = NodePath("../PlayerMech")
 
-[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster", "dust") instance=ExtResource("1_8ndor")]
+[node name="PlayerMech" parent="." unique_id=2034114962 node_paths=PackedStringArray("map", "monster") instance=ExtResource("1_8ndor")]
 position = Vector2(-867, -1)
 map = NodePath("../Cityscape")
 monster = NodePath("../Monster")
@@ -173,7 +176,6 @@ angular_velocity = 1.571
 linear_acceleration = 192.0
 linear_velocity = Vector2(128, 0)
 tilt_acceleration = 256.0
-dust = [null, null, null, null]
 
 [node name="MonserCameraViewport" type="SubViewport" parent="." unique_id=297163106]
 disable_3d = true
@@ -263,13 +265,13 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_f1x7d")
 player = NodePath("../../PlayerMech")
-progress = NodePath("Control/AngularVelocity")
-potential_progress = NodePath("Control/PotentialAngularVelocity")
+progress = NodePath("Velocity/AngularVelocity")
+potential_progress = NodePath("Velocity/PotentialAngularVelocity")
 
-[node name="Control" type="Control" parent="CanvasLayer/HUD" unique_id=528012616]
+[node name="Velocity" type="Control" parent="CanvasLayer/HUD" unique_id=528012616]
 anchors_preset = 0
 
-[node name="PotentialAngularVelocity" type="Control" parent="CanvasLayer/HUD/Control" unique_id=693602558]
+[node name="PotentialAngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=693602558]
 anchors_preset = 0
 offset_left = 43.0
 offset_top = 24.0
@@ -280,7 +282,7 @@ progress = 0.8
 color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 metadata/_custom_type_script = "uid://qbalepf37i73"
 
-[node name="AngularVelocity" type="Control" parent="CanvasLayer/HUD/Control" unique_id=1126095835]
+[node name="AngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=1126095835]
 anchors_preset = 0
 offset_left = 43.0
 offset_top = 24.0
@@ -289,16 +291,17 @@ offset_bottom = 73.0
 script = ExtResource("6_sqf1t")
 metadata/_custom_type_script = "uid://qbalepf37i73"
 
-[node name="HUDMaxAngularVelocity" type="Control" parent="CanvasLayer/HUD/Control" unique_id=556723371 node_paths=PackedStringArray("player")]
+[node name="HUDMaxAngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=556723371 node_paths=PackedStringArray("player")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("13_4ynrk")
 player = NodePath("../../../../PlayerMech")
 alert_display_text = "CENTRIFUGAL THRESHOLD EXEEDED SLOW DOWN"
+alert_audio = ExtResource("27_kel27")
 metadata/_custom_type_script = "uid://csix81n57lrx7"
 
-[node name="HUDMinAngularVelocity" type="Control" parent="CanvasLayer/HUD/Control" unique_id=1713154734 node_paths=PackedStringArray("player")]
+[node name="HUDMinAngularVelocity" type="Control" parent="CanvasLayer/HUD/Velocity" unique_id=1713154734 node_paths=PackedStringArray("player")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -307,6 +310,7 @@ player = NodePath("../../../../PlayerMech")
 capacity = 0.5
 grace_time = 4.0
 alert_display_text = "ANGULAR MOMENTUM BELOW THRESHOLD "
+alert_audio = ExtResource("29_1pwt1")
 metadata/_custom_type_script = "uid://byecnvoar2g8c"
 
 [node name="Panel" type="Panel" parent="CanvasLayer/HUD" unique_id=2018671470]
@@ -330,6 +334,7 @@ player_icon = NodePath("PlayerSideView")
 alert_notifier = NodePath("VBoxContainer/Label")
 fall_progress = NodePath("VBoxContainer/ProgressBar")
 alert_display_text = "SAFE AXIAL TILT EXCEEDED SLOW DOWN"
+alert_audio = ExtResource("29_egipg")
 metadata/_custom_type_script = "uid://b6aq7te8xv2ju"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/HUDPrecession" unique_id=626557790]
