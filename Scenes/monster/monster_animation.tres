@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://o4bsen0wkvvs" path="res://Assets/Kaijuzilla.png" id="1_yjdv5"]
 [ext_resource type="Texture2D" uid="uid://cfaaio51vlru5" path="res://Assets/Godzilla/Kaiju laser.png" id="2_1i6u8"]
 [ext_resource type="Texture2D" uid="uid://cdt3f7iia0tws" path="res://Assets/Godzilla/Kaiju Walk.png" id="2_n3bdt"]
+[ext_resource type="Texture2D" uid="uid://rfhk6lr7b1ir" path="res://Assets/Godzilla/Kaiju Charge.png" id="3_1i6u8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jp4d"]
 atlas = ExtResource("2_1i6u8")
@@ -90,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_yjdv5")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -113,7 +114,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3rirw")
 }],
-"loop": 0,
+"loop": false,
 "name": &"laser",
 "speed": 8.0
 }, {
@@ -136,9 +137,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2qx16")
 }],
-"loop": 0,
+"loop": false,
 "name": &"laser_finish",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1i6u8")
+}],
+"loop": false,
+"name": &"leap",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -165,7 +174,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7c3iw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walk",
 "speed": 4.0
 }]

@@ -8,6 +8,8 @@ extends StaticBody2D
 @export var impact_velocity: Vector2
 @export var rotation_speed: float = PI / 4.0
 @export var shooting_laser: bool = false: set = _set_shooting_laser
+@export var leap: bool = false: set = _set_leap
+@export var leap_distance: float = 100.0
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
@@ -44,6 +46,17 @@ func _set_shooting_laser(value: bool) -> void:
 		if null != laser_:
 			laser_.cancel()
 
+func _set_leap(value: bool) -> void:
+	if leap == value:
+		return
+	if value and not is_zero_approx(impact_velocity.length()):
+		return
+	leap = value
+	if leap:
+		print("Initiating leap")
+		body.play("leap")
+		body.animation_finished.connect(_leap)
+
 
 func impact(velocity: Vector2) -> void:
 	impact_velocity = velocity
@@ -61,6 +74,9 @@ func _process(dt: float) -> void:
 	
 	if _should_fire_laser():
 		shooting_laser = true
+	
+	if _should_leap():
+		leap = true
 	
 	dt *= Data.get_time()
 	body.speed_scale = Data.get_time()
@@ -130,7 +146,37 @@ func _finish_laser() -> void:
 
 
 func _should_fire_laser() -> bool:
-	if randf() > 0.005:
+	if randf() > 0.000:
 		return false
 	var d := global_position.distance_to(player.global_position)
 	return d > 1800 and d < 4000
+
+
+func _leap() -> void:
+	if not leap:
+		return
+	
+	print("Leaping!")
+	body.animation_finished.disconnect(_leap)
+	var leap_vector = (player.global_position - global_position).normalized()
+	print(leap_vector)
+	var target_position = leap_vector * leap_distance
+	print(target_position) 
+	var t = 1.5
+	global_position = global_position.lerp(target_position, t)
+
+
+func _finish_leap() -> void:
+	if not shooting_laser:
+		return
+	
+	print("Back to business")
+	body.animation_finished.disconnect(_finish_laser)
+	shooting_laser = false
+
+
+func _should_leap() -> bool:
+	if randf() > 1:
+		return false
+	var d := global_position.distance_to(player.global_position)
+	return d > 400 and d < 1800
