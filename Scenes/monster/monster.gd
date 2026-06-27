@@ -10,7 +10,7 @@ extends StaticBody2D
 @export var shooting_laser: bool = false: set = _set_shooting_laser
 @export var can_shoot_laser: bool = false
 @export var leap: bool = false: set = _set_leap
-@export var leap_distance: float = 2000.0
+@export var leap_distance: float = 5000.0
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
@@ -72,6 +72,7 @@ func _ready() -> void:
 
 
 func _process(dt: float) -> void:
+	print(leap)
 	if not active:
 		return
 	
@@ -205,4 +206,4 @@ func _should_leap() -> bool:
 	if randf() > 0.005:
 		return false
 	var d := global_position.distance_to(player.global_position)
-	return d > 0 and d < 1800
+	return d > 0 and d < 500
