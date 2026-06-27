@@ -9,11 +9,12 @@ extends StaticBody2D
 @export var rotation_speed: float = PI / 4.0
 @export var shooting_laser: bool = false: set = _set_shooting_laser
 @export var leap: bool = false: set = _set_leap
-@export var leap_distance: float = 100.0
+@export var leap_distance: float = 5.0
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
 @export var shadow: AnimatedSprite2D
+@export var collision: CollisionShape2D
 @export var laser_scene: PackedScene
 
 var monster_speed: float = 128.0
@@ -89,6 +90,8 @@ func _process(dt: float) -> void:
 	elif shooting_laser:
 		_target_player(dt, 500.0 / global_position.distance_to(player.global_position))
 		target_velocity = Vector2()
+	elif leap:
+		pass
 	else:
 		_target_player(dt)
 		target_velocity = Vector2.from_angle(rotation) * monster_speed
@@ -146,7 +149,7 @@ func _finish_laser() -> void:
 
 
 func _should_fire_laser() -> bool:
-	if randf() > 0.000:
+	if randf() > 0.001:
 		return false
 	var d := global_position.distance_to(player.global_position)
 	return d > 1800 and d < 4000
@@ -158,25 +161,34 @@ func _leap() -> void:
 	
 	print("Leaping!")
 	body.animation_finished.disconnect(_leap)
+	collision.disabled = true
 	var leap_vector = (player.global_position - global_position).normalized()
-	print(leap_vector)
 	var target_position = leap_vector * leap_distance
-	print(target_position) 
-	var t = 1.5
-	global_position = global_position.lerp(target_position, t)
+	var t = 3.0
+	get_tree().create_tween().tween_property(self, "global_position", target_position, t)
+	get_tree().create_tween().tween_property(self, "scale", scale * 1.5, t/2)
+	await get_tree().create_timer(t/2).timeout
+	get_tree().create_tween().tween_property(self, "scale", scale / 1.5, t/2)
+	await get_tree().create_timer(t/2).timeout
+	if not leap:
+		return
+	print("Leap done, winding down")
+	body.play_backwards("leap")
+	body.animation_finished.connect(_finish_leap)
 
 
 func _finish_leap() -> void:
-	if not shooting_laser:
+	if not leap:
 		return
 	
 	print("Back to business")
-	body.animation_finished.disconnect(_finish_laser)
-	shooting_laser = false
+	body.animation_finished.disconnect(_finish_leap)
+	collision.disabled = false
+	leap = false
 
 
 func _should_leap() -> bool:
-	if randf() > 1:
+	if randf() > 0.001:
 		return false
 	var d := global_position.distance_to(player.global_position)
 	return d > 400 and d < 1800
