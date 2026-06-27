@@ -8,11 +8,16 @@ extends StaticBody2D
 @export var impact_velocity: Vector2
 @export var rotation_speed: float = PI / 4.0
 @export var shooting_laser: bool = false: set = _set_shooting_laser
+@export var leap: bool = false: set = _set_leap
+@export var leap_distance: float = 2000.0
 
 @export_group("Internal")
 @export var body: AnimatedSprite2D
 @export var shadow: AnimatedSprite2D
+@export var collision: CollisionShape2D
 @export var laser_scene: PackedScene
+
+@onready var cityscape: RandomizedCityscape = $"../Cityscape"
 
 var monster_speed: float = 128.0
 var monster_stun_multiplier: float = 5.0
@@ -44,6 +49,17 @@ func _set_shooting_laser(value: bool) -> void:
 		if null != laser_:
 			laser_.cancel()
 
+func _set_leap(value: bool) -> void:
+	if leap == value:
+		return
+	if value and not is_zero_approx(impact_velocity.length()):
+		return
+	leap = value
+	if leap:
+		print("Initiating leap")
+		body.play("leap")
+		body.animation_finished.connect(_leap)
+
 
 func impact(velocity: Vector2) -> void:
 	impact_velocity = velocity
@@ -62,6 +78,9 @@ func _process(dt: float) -> void:
 	if _should_fire_laser():
 		shooting_laser = true
 	
+	if _should_leap():
+		leap = true
+	
 	dt *= Data.get_time()
 	body.speed_scale = Data.get_time()
 	shadow.speed_scale = Data.get_time()
@@ -73,6 +92,8 @@ func _process(dt: float) -> void:
 	elif shooting_laser:
 		_target_player(dt, 500.0 / global_position.distance_to(player.global_position))
 		target_velocity = Vector2()
+	elif leap:
+		pass
 	else:
 		_target_player(dt)
 		target_velocity = Vector2.from_angle(rotation) * monster_speed
@@ -130,7 +151,57 @@ func _finish_laser() -> void:
 
 
 func _should_fire_laser() -> bool:
-	if randf() > 0.005:
+	if randf() > 0.001:
 		return false
 	var d := global_position.distance_to(player.global_position)
 	return d > 1800 and d < 4000
+
+
+func _leap() -> void:
+	if not leap:
+		return
+	
+	print("Leaping!")
+	body.animation_finished.disconnect(_leap)
+	collision.disabled = true
+	var leap_vector = (player.global_position - global_position).normalized()
+	var target_position = leap_vector * leap_distance + global_position
+	if target_position.x > cityscape.width * 160 / 2:
+		target_position.x = cityscape.width * 160 / 2
+	elif target_position.x < -cityscape.width * 160 / 2:
+		target_position.x = -cityscape.width * 160 / 2
+	elif target_position.y > cityscape.height * 160 / 2:
+		target_position.y = cityscape.height * 160 / 2
+	elif target_position.y < -cityscape.height * 160 / 2:
+		target_position.y = -cityscape.height * 160 / 2
+	var t = 3.0
+	var target_rotation := (player.global_position - global_position).angle()
+	var diff := angle_difference(target_rotation, rotation)
+	get_tree().create_tween().tween_property(self, "global_position", target_position, t)
+	get_tree().create_tween().tween_property(self, "scale", scale * 1.5, t/2)
+	get_tree().create_tween().tween_property(self, "rotation", abs(diff), t/2)
+	await get_tree().create_timer(t/2).timeout
+	get_tree().create_tween().tween_property(self, "scale", scale / 1.5, t/2)
+	await get_tree().create_timer(t/2).timeout
+	if not leap:
+		return
+	print("Leap done, winding down")
+	body.play_backwards("leap")
+	body.animation_finished.connect(_finish_leap)
+
+
+func _finish_leap() -> void:
+	if not leap:
+		return
+	
+	print("Back to business")
+	body.animation_finished.disconnect(_finish_leap)
+	collision.disabled = false
+	leap = false
+
+
+func _should_leap() -> bool:
+	if randf() > 0.005:
+		return false
+	var d := global_position.distance_to(player.global_position)
+	return d > 0 and d < 1800
